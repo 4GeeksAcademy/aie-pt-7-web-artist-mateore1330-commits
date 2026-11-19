@@ -205,17 +205,21 @@
       <div class="wrap site-header__inner">
         <a class="site-header__logo" href="#inicio">Iron Wolf</a>
         <nav class="nav" aria-label="Navegación principal">
-          <details class="nav__menu">
-            <summary class="nav__toggle">
-              <svg class="nav__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true" focusable="false"><path class="nav__icon-line nav__icon-line--top" d="M3 6h18"/><path class="nav__icon-line nav__icon-line--middle" d="M3 12h18"/><path class="nav__icon-line nav__icon-line--bottom" d="M3 18h18"/></svg>
-              Menú
-            </summary>
+          <a class="nav__toggle nav__toggle--open" href="#menu">
+            <svg class="nav__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>
+            Menú
+          </a>
+          <div class="nav__panel" id="menu">
+            <a class="nav__toggle nav__toggle--close" href="#inicio" aria-label="Cerrar menú">
+              <svg class="nav__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M5 5l14 14"/><path d="M19 5L5 19"/></svg>
+              Cerrar
+            </a>
             <ul class="nav__list">
               <li><a class="nav__link" href="#sobre-mi">Sobre mí</a></li>
               <li><a class="nav__link" href="#trayectoria">Trayectoria</a></li>
               <li><a class="nav__link" href="#presentaciones">Próximas presentaciones</a></li>
             </ul>
-          </details>
+          </div>
         </nav>
       </div>
     </header>
