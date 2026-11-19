@@ -1,7 +1,7 @@
 ---
 name: progress
 description: Registro por fase — qué se hizo, decisiones, problemas y cómo se verificó
-last_verified: 2026-11-19 (sobre el commit 2dfeb1f, cierre de la fase 1)
+last_verified: 2026-11-19 (sobre el commit 5dd02fd, cierre de la fase 2)
 ---
 
 # Progreso
@@ -44,7 +44,7 @@ y versionados los documentos, la maqueta, las fotos originales, las texturas y e
 **A tener en cuenta:** `core.hooksPath` es local; en un clon nuevo hay que ejecutar
 `git config core.hooksPath .githooks` (regla GD-03).
 
-## Fase 1 — Archivos para el agente (rama `docs/phase-1-agent-harness`)
+## Fase 1 — Archivos para el agente (PR #2, fusionado el 19-11-2026)
 
 **Qué se hizo:**
 
@@ -90,3 +90,46 @@ señaló ya estaba documentado o se resuelve al abrir el PR:
 - La contradicción de colores de `DESIGN.md`.
 - El README de la plantilla con Tailwind.
 - La excepción de Git frente a las reglas globales de Mateo.
+
+## Fase 2 — Imágenes (rama `feat/phase-2-images`)
+
+**Qué se hizo:** las 4 fotos en WebP con `cwebp`, en color (el blanco y negro lo pone el CSS), la
+imagen para redes `og.jpg` y el favicon. Los originales siguen en `assets/images/originals/`.
+
+**Medidas y pesos reales** (son los `width` y `height` que usa la fase 3):
+
+| Archivo | Ancho × alto | Calidad | Peso | Objetivo |
+|---|---|---|---|---|
+| `assets/images/hero.webp` | 1600 × 2400 | 75 | 178 758 B (175 KB) | < 250 KB ✅ |
+| `assets/images/about.webp` | 1200 × 801 | 75 | 40 534 B (40 KB) | < 150 KB ✅ |
+| `assets/images/live-1.webp` | 1200 × 1801 | 75 | 20 342 B (20 KB) | < 200 KB ✅ |
+| `assets/images/live-2.webp` | 1200 × 802 | 75 | 11 854 B (12 KB) | < 150 KB ✅ |
+| `assets/images/og.jpg` | 1200 × 630 | JPEG 80 (`sips`) | 150 224 B (147 KB) | < 200 KB ✅ |
+| `assets/favicon.svg` | 32 × 32 (vectorial) | — | 185 B | < 1 KB ✅ |
+
+Comandos:
+
+```bash
+cwebp -q 75 -resize 1600 0 assets/images/originals/hero.jpg -o assets/images/hero.webp
+cwebp -q 75 -resize 1200 0 assets/images/originals/<foto>.jpg -o assets/images/<foto>.webp
+sips -s format jpeg -s formatOptions 80 --resampleWidth 1200 assets/images/originals/hero.jpg --out hero-1200.jpg   # 1200 × 1800
+sips -c 630 1200 --cropOffset 540 0 hero-1200.jpg --out assets/images/og.jpg
+```
+
+**Decisiones:**
+
+- Las 4 fotos entraron en el peso con la calidad inicial (75), así que no hizo falta bajarla.
+- **Recorte de `og.jpg`:** el plan proponía el equivalente a `center 28%` (desplazamiento de 328 px
+  sobre 1800). Con él se veía la cabeza y los hombros, pero la guitarra quedaba fuera. Mateo eligió
+  un recorte más bajo (desplazamiento de 540 px, ≈ `center 46%`), con el guitarrista y la guitarra.
+- **Favicon:** propuesta del plan, aprobada por Mateo: rombo `#E0692F` sobre cuadrado `#0E0E0E`,
+  el mismo rombo que marca los hitos. Sin texto.
+- `live-2` ya es en blanco y negro en el original: se deja tal cual.
+
+**Verificación:**
+
+- Las 4 fotos se revisaron a ojo (convertidas a PNG), también con recortes a tamaño real de
+  `live-1` y `live-2`, que son las que menos pesan. No hay artefactos visibles.
+- `og.jpg` se abrió para comprobar el encuadre.
+- El favicon se renderizó a 256 px.
+- `CREDITS.md` sigue siendo correcto: los nombres de archivo no cambian.
