@@ -60,6 +60,11 @@
 }
 
 html {
+  /* Hueco para la cabecera fija (arriba) y el botón "Volver al inicio"
+     (abajo): al saltar a un ancla o moverse con el teclado, el navegador
+     no deja nada debajo de ellos (WCAG 2.2, 2.4.11) */
+  scroll-padding-top: var(--header-height);
+  scroll-padding-bottom: 84px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -139,9 +144,6 @@ address {
 .section {
   position: relative;
   min-height: 100svh;
-  /* La cabecera es fija: al saltar a una sección, el título queda debajo de
-     ella y no tapado */
-  scroll-margin-top: var(--header-height);
 }
 
 
@@ -1371,9 +1373,20 @@ html:has(#menu:target) {
     column-gap: 40px;
   }
 
+  /* El botón va dentro del margen lateral de 64px: no tapa el contenido */
   .to-top {
-    right: 32px;
+    right: 6px;
     bottom: 32px;
+  }
+
+  /* Y aparece al final de la portada, no solo en la recta final. "body"
+     sube la especificidad para ganar a la regla de móvil del bloque 8, que
+     va después en el archivo. */
+  @supports (animation-timeline: scroll()) {
+    body .to-top {
+      animation-timeline: scroll(root);
+      animation-range: 60svh 80svh;
+    }
   }
 
   /* Escritorio: el menú se ve siempre en línea y sin botones, aunque la
@@ -1589,13 +1602,22 @@ html:has(#menu:target) {
   }
 }
 
-/* La portada mide 100svh: el botón aparece entre el 60 % y el 80 % de su
-   altura, cuando ya se está entrando en Sobre mí */
-@supports (animation-timeline: scroll()) {
+/* Móvil: el botón tapa contenido (no hay margen lateral), así que solo
+   aparece en la recta final, al llegar a Próximas presentaciones. En
+   escritorio (bloque 7) aparece al final de la portada. */
+@supports (animation-timeline: view()) and (timeline-scope: --a) {
+  html {
+    timeline-scope: --shows;
+  }
+
+  .shows {
+    view-timeline: --shows block;
+  }
+
   .to-top {
     animation: to-top-in linear both;
-    animation-timeline: scroll(root);
-    animation-range: 60svh 80svh;
+    animation-timeline: --shows;
+    animation-range: entry 40% entry 60%;
   }
 }
 
