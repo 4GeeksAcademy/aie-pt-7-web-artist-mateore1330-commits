@@ -19,6 +19,184 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700&family=Special+Elite&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "MusicGroup",
+            "@id": "#iron-wolf",
+            "name": "Iron Wolf",
+            "description": "Iron Wolf, rock desde Vallecas. Conoce su historia, su EP Howl y las fechas de la gira 2027: Barcelona, Valencia, Bilbao y Meseta Rock Festival.",
+            "genre": "Rock",
+            "foundingDate": "2022",
+            "foundingLocation": {
+              "@type": "Place",
+              "name": "Vallecas, Madrid",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Madrid",
+                "addressCountry": "ES"
+              }
+            },
+            "image": "assets/images/hero.webp",
+            "email": "booking@ironwolf.example",
+            "album": {
+              "@id": "#howl"
+            },
+            "track": [
+              {
+                "@id": "#silver-fang"
+              },
+              {
+                "@id": "#midnight-engine"
+              },
+              {
+                "@id": "#rust"
+              }
+            ]
+          },
+          {
+            "@type": "MusicAlbum",
+            "@id": "#howl",
+            "name": "Howl",
+            "albumReleaseType": "https://schema.org/EPRelease",
+            "datePublished": "2024",
+            "byArtist": {
+              "@id": "#iron-wolf"
+            }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "#silver-fang",
+            "name": "Silver Fang",
+            "datePublished": "2022",
+            "byArtist": {
+              "@id": "#iron-wolf"
+            }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "#midnight-engine",
+            "name": "Midnight Engine",
+            "datePublished": "2023",
+            "byArtist": {
+              "@id": "#iron-wolf"
+            }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "#rust",
+            "name": "Rust",
+            "datePublished": "2023",
+            "byArtist": {
+              "@id": "#iron-wolf"
+            }
+          },
+          {
+            "@type": "MusicEvent",
+            "name": "Iron Wolf · Gira 2027 · Barcelona",
+            "startDate": "2027-04-17",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "MusicVenue",
+              "name": "Razzmatazz",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "C/ Almogàvers 122",
+                "addressLocality": "Barcelona",
+                "addressCountry": "ES"
+              }
+            },
+            "performer": {
+              "@id": "#iron-wolf"
+            },
+            "image": "assets/images/hero.webp",
+            "offers": {
+              "@type": "Offer",
+              "url": "https://example.com/entradas/barcelona-2027-04-17"
+            }
+          },
+          {
+            "@type": "MusicEvent",
+            "name": "Iron Wolf · Gira 2027 · Valencia",
+            "startDate": "2027-05-15",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "MusicVenue",
+              "name": "Moon",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Calle San Vicente 200",
+                "addressLocality": "Valencia",
+                "addressCountry": "ES"
+              }
+            },
+            "performer": {
+              "@id": "#iron-wolf"
+            },
+            "image": "assets/images/hero.webp",
+            "offers": {
+              "@type": "Offer",
+              "url": "https://example.com/entradas/valencia-2027-05-15"
+            }
+          },
+          {
+            "@type": "MusicEvent",
+            "name": "Iron Wolf · Gira 2027 · Bilbao",
+            "startDate": "2027-06-12",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "MusicVenue",
+              "name": "Kafe Antzokia",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "San Vicente 2",
+                "postalCode": "48001",
+                "addressLocality": "Bilbao",
+                "addressCountry": "ES"
+              }
+            },
+            "performer": {
+              "@id": "#iron-wolf"
+            },
+            "image": "assets/images/hero.webp",
+            "offers": {
+              "@type": "Offer",
+              "url": "https://example.com/entradas/bilbao-2027-06-12"
+            }
+          },
+          {
+            "@type": "MusicEvent",
+            "name": "Meseta Rock Festival 2027",
+            "startDate": "2027-07-10",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "MusicVenue",
+              "name": "Meseta Rock Festival",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Valladolid",
+                "addressCountry": "ES"
+              }
+            },
+            "performer": {
+              "@id": "#iron-wolf"
+            },
+            "image": "assets/images/hero.webp",
+            "offers": {
+              "@type": "Offer",
+              "url": "https://example.com/entradas/valladolid-2027-07-10"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
