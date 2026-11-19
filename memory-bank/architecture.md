@@ -1,7 +1,7 @@
 ---
 name: architecture
 description: Estructura de archivos, las 6 partes de la página con su ID y fondo, los bloques de styles.css y cómo se usan texturas y fotos
-last_verified: 2026-11-19 (sobre el commit 211bfb6, cierre de la fase 5)
+last_verified: 2026-11-19 (sobre el commit b72a21e, cierre de la fase 6)
 ---
 
 # Arquitectura
@@ -23,10 +23,11 @@ last_verified: 2026-11-19 (sobre el commit 211bfb6, cierre de la fase 5)
 │   │   └── CREDITS.md
 │   └── textures/               ← noise.svg, wear-dark.svg, wear-light.svg
 ├── design/                     ← maqueta aprobada (solo referencia, no se publica) y capturas de cada fase (screenshots/)
-├── BRIEFING.md, CONTENT.md, DESIGN.md, PLAN.md, plans/
+├── BRIEFING.md, CONTENT.md, DESIGN.md, PLAN.md, plans/, verification.md
 ├── AGENTS.md, CLAUDE.md, .agents/ (rules, skills), memory-bank/
 ├── .githooks/pre-commit        ← gitleaks
-└── server.py, learn.json, README*.md, .vscode/   ← plantilla de 4Geeks (no se tocan hasta la fase 6)
+├── README.md               ← README del proyecto (fase 6)
+└── server.py, learn.json, .vscode/   ← plantilla de 4Geeks
 ```
 
 ## La página, de arriba abajo
