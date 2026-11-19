@@ -281,16 +281,27 @@ Clases BEM preparadas para la fase 4:
   - **Cabecera fija** (`position: fixed`, alto de 102px):
     - Transparente sobre la portada; el fondo de tinta aparece en los primeros 120px de scroll,
       con `animation-timeline: scroll(root)`. Sin soporte, es de tinta desde el principio.
-    - Las secciones llevan `scroll-margin-top: var(--header-height)`. Al saltar a una sección, su
-      borde queda a 102px y el título no se tapa.
+    - Al saltar a una sección, su borde queda a 102px y el título no se tapa (`scroll-padding-top`,
+      ver abajo).
     - "✕ CERRAR" apunta ahora a `#cabecera`, la propia cabecera fija: el menú se cierra sin mover
       la página. Comprobado en Chrome a 4000px; queda pendiente probarlo en Safari en un iPhone.
   - **Botón "Volver al inicio"** (aviso del lector de pantalla, añadido a `CONTENT.md`):
     - Un cuadrado naranja de 52px con una flecha ↑, fijo abajo a la derecha.
     - Lleva borde de tinta y sombra dura de papel para destacar también sobre la Galería naranja.
-    - Aparece entre el 60 % y el 80 % de la altura de la portada (`scroll(root)`, `60svh 80svh`).
-      Oculto, tiene `visibility: hidden`: no se puede pulsar ni enfocar.
+    - En escritorio aparece entre el 60 % y el 80 % de la altura de la portada (`scroll(root)`,
+      `60svh 80svh`); en móvil, ver abajo. Oculto, tiene `visibility: hidden`: no se puede
+      pulsar ni enfocar.
     - Foco: doble anillo de papel y tinta.
+  - **Para que el botón no tape el contenido** (Mateo eligió las tres medidas):
+    - **Escritorio:** el botón va dentro del margen lateral de 64px (a 6px del borde). Comprobado
+      a 861, 1440 y 1920px: no pisa ningún elemento de contenido.
+    - **Móvil y tableta:** no hay margen, así que solo aparece al llegar a Próximas
+      presentaciones (`view-timeline` de `.shows`, `entry 40%` a `entry 60%`). Ahí puede pisar el
+      lado derecho de una entrada; es lo aceptado.
+    - **Foco:** `scroll-padding-top: 102px` y `scroll-padding-bottom: 84px` en `html`. Con el
+      teclado, ningún elemento con foco queda bajo la cabecera ni detrás del botón (WCAG 2.2,
+      2.4.11). Sustituye al `scroll-margin-top` de las secciones, y los saltos siguen cayendo a
+      102px.
   - **Desplazamiento suave:** `scroll-behavior: smooth`, solo con
     `prefers-reduced-motion: no-preference`.
   - **Se adelantan a la fase 4** dos piezas de la fase 5: el bloque 8 (Animaciones) de
