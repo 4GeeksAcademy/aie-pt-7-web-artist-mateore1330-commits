@@ -47,6 +47,10 @@ Se definen como variables en `:root` y no se usa ningún color fuera de esta lis
 | `--color-label-light` | `#8C8983` | Etiquetas pequeñas y copyright sobre fondo oscuro |
 | `--color-line-dark` | `#2E2E2E` | Líneas y bordes sobre fondo oscuro |
 | `--color-line-mid` | `#3A3A3A` | Bordes de botones de redes, portadas de singles |
+| `--color-cover` | `#1C1C1C` | Fondo de las portadas de los singles (§6) |
+| `--color-outline` | `#2A2A2A` | Contorno de "IRON WOLF" gigante del pie (§8) |
+| `--color-line-stub` | `#4A4A4A` | Línea discontinua del talón de las entradas oscuras (§6) |
+| `--color-light` | `#FFE2BE` | Foco de luz cálida de la portada, al 42 % de opacidad (§7, §8) |
 
 **Contraste (aproximado; se verifica con herramienta en la fase de pruebas):**
 todas las combinaciones de texto superan 4,5:1. Las más justas son `--color-accent` sobre
