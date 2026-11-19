@@ -156,7 +156,7 @@ address {
   padding-inline: var(--gutter);
 }
 
-.visually-hidden,
+/* Separador " · " del talón: lo lee el lector de pantalla, pero no se ve */
 .ticket__sep {
   position: absolute;
   width: 1px;
