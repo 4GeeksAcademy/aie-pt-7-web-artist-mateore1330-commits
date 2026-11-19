@@ -1,13 +1,13 @@
 ---
 name: architecture
 description: Estructura de archivos, las 6 partes de la página con su ID y fondo, los bloques de styles.css y cómo se usan texturas y fotos
-last_verified: 2026-11-19 (sobre el commit c3eaf17, cierre de la fase 4)
+last_verified: 2026-11-19 (sobre el commit 211bfb6, cierre de la fase 5)
 ---
 
 # Arquitectura
 
 > Describe la estructura **prevista** por `PLAN.md` y `DESIGN.md`. A 19-11-2026 existen las
-> imágenes, el favicon, `index.html` y `styles.css` (bloques 1 a 7; las animaciones llegan en la fase 5) (ver [`current-state.md`](current-state.md)).
+> imágenes, el favicon, `index.html` y `styles.css` completo (bloques 1 a 9) (ver [`current-state.md`](current-state.md)).
 
 ## Estructura de archivos
 
@@ -52,7 +52,9 @@ Las 5 secciones tienen `min-height: 100svh`. Fuentes: `DESIGN.md` §4, §5.3 y �
 1. Variables (`:root`) · 2. Base · 3. Utilidades · 4. Texturas · 5. Componentes · 6. Secciones ·
 7. Escritorio (`@media (min-width: 861px)`) · 8. Animaciones · 9. Movimiento reducido.
 
-Primero móvil; corte en 860/861px. Reglas [CS-03 y CS-05](../.agents/rules/css.md).
+Primero móvil; corte en 860/861px. Los giros fijos usan la propiedad `rotate` y las animaciones de
+aparición, `translate`, para no pisarse. Los contenedores con animaciones de scroll dentro usan
+`overflow: clip`, nunca `hidden`. Reglas [CS-03 y CS-05](../.agents/rules/css.md).
 
 ## Texturas
 

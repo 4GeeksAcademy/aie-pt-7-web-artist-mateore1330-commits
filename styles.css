@@ -190,7 +190,7 @@ address {
 /* Tinta gastada dentro de las letras (DESIGN.md §5.2). Dos capas de fondo:
    la textura encima y el color del texto debajo. Si la textura no carga, el
    título se ve en su color liso. El texto sigue siendo texto real. */
-.hero__line,
+.hero__line-inner,
 .career .section__title,
 .discography__title,
 .site-footer__title,
@@ -208,7 +208,7 @@ address {
 }
 
 /* Títulos claros sobre fondo oscuro: arañazos oscuros */
-.hero__line,
+.hero__line-inner,
 .career .section__title,
 .discography__title,
 .site-footer__title {
@@ -488,16 +488,19 @@ address {
   color: var(--color-paper);
 }
 
+/* Giro con la propiedad "rotate" (no "transform"), para que la animación de
+   aparición de la fase 5 no lo borre */
 .ticket:nth-child(odd) {
-  transform: rotate(-0.5deg);
+  rotate: -0.5deg;
 }
 
 .ticket:nth-child(even) {
-  transform: rotate(0.5deg);
+  rotate: 0.5deg;
 }
 
 .ticket:hover {
-  transform: rotate(0) translateY(-6px);
+  rotate: 0deg;
+  transform: translateY(-6px);
   box-shadow: 0 18px 0 -6px var(--color-accent);
 }
 
@@ -907,13 +910,22 @@ html:has(#menu:target) {
   line-height: 0.82;
   letter-spacing: -0.03em;
   text-transform: uppercase;
-  transform: rotate(-2deg);
+  /* "rotate" y no "transform": el temblor de la fase 5 anima "transform"
+     y, si no, borraría el giro */
+  rotate: -2deg;
   transform-origin: left bottom;
 }
 
 .hero__line {
   display: block;
+  /* Máscara para la subida del nombre (fase 5): la línea recorta lo que
+     sobresale y el span interior sube desde abajo */
+  overflow: hidden;
   padding-bottom: 0.04em;
+}
+
+.hero__line-inner {
+  display: block;
 }
 
 .hero__tagline {
@@ -1051,7 +1063,9 @@ html:has(#menu:target) {
 
 /* Galería */
 .gallery {
-  overflow: hidden;
+  /* "clip" y no "hidden": hidden crea un contenedor de scroll y las
+     animaciones de scroll de dentro dejarían de seguir la página */
+  overflow: clip;
   background: var(--color-accent);
   color: var(--color-ink);
 }
@@ -1086,7 +1100,9 @@ html:has(#menu:target) {
 .shot__frame {
   position: relative;
   aspect-ratio: 4 / 5;
-  overflow: hidden;
+  /* "clip" y no "hidden": hidden crea un contenedor de scroll y las
+     animaciones de scroll de dentro dejarían de seguir la página */
+  overflow: clip;
   background: var(--color-ink);
 }
 
@@ -1174,6 +1190,8 @@ html:has(#menu:target) {
 
 /* Trayectoria */
 .career {
+  /* El sello empieza grande (fase 5) y sobresaldría por la derecha en móvil */
+  overflow-x: clip;
   background: var(--color-ink);
   color: var(--color-paper);
 }
@@ -1306,7 +1324,9 @@ html:has(#menu:target) {
 /* Pie */
 .site-footer {
   position: relative;
-  overflow: hidden;
+  /* "clip" y no "hidden": hidden crea un contenedor de scroll y las
+     animaciones de scroll de dentro dejarían de seguir la página */
+  overflow: clip;
   background: var(--color-ink);
   color: var(--color-paper);
 }
@@ -1631,5 +1651,516 @@ html:has(#menu:target) {
   to {
     opacity: 1;
     visibility: visible;
+  }
+}
+
+/* --- Transiciones al pasar el ratón (DESIGN.md §6) ---------------------- */
+
+.nav__link::after {
+  transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.btn {
+  transition: transform 0.15s, background-color 0.2s, color 0.2s, box-shadow 0.15s;
+}
+
+.btn__arrow {
+  transition: transform 0.25s;
+}
+
+.ticket {
+  transition: rotate 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.25s;
+}
+
+.social__link {
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.mail {
+  transition: background-size 0.3s, color 0.3s;
+}
+
+.milestone__year {
+  transition: color 0.3s, -webkit-text-stroke-color 0.3s;
+}
+
+.to-top {
+  transition: background-color 0.2s;
+}
+
+/* --- Al cargar (DESIGN.md §7). Fotogramas de la maqueta. ----------------- */
+
+/* Zoom de entrada de la foto de portada */
+.hero__photo {
+  animation: iw-zoom 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Subida del nombre por líneas, desde debajo de la máscara */
+.hero__line-inner {
+  animation: iw-rise 1s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+
+.hero__line + .hero__line .hero__line-inner {
+  animation-delay: 0.12s;
+}
+
+/* Aparición del antetítulo, el lema y los botones */
+.hero__kicker,
+.hero__tagline,
+.hero__actions {
+  animation: iw-fade 0.9s 0.6s both;
+}
+
+.hero__tagline {
+  animation-delay: 0.8s;
+}
+
+.hero__actions {
+  animation-delay: 1s;
+}
+
+@keyframes iw-zoom {
+  from {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes iw-rise {
+  from {
+    transform: translateY(105%) skewY(6deg);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes iw-fade {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- Continuas (DESIGN.md §7) -------------------------------------------- */
+
+/* Grano: la capa salta de posición en 5 pasos cada 0,7 s */
+.grain {
+  animation: iw-grain 0.7s steps(5) infinite;
+}
+
+/* Foco de luz cálida que parpadea de forma irregular */
+.hero__light {
+  animation: iw-flicker 4.5s infinite;
+}
+
+/* Temblor e interferencia del nombre, cada 5 s desde 1,8 s */
+.hero__title {
+  animation: iw-shake 5s 1.8s infinite, iw-glitch 5s 1.8s infinite;
+}
+
+/* Interferencia automática de las fotos de la galería (la segunda, 3 s
+   después) */
+.shot__img::before {
+  animation: iw-autoglitch 6s infinite;
+}
+
+.shot--2 .shot__img::before {
+  animation-delay: 3s;
+}
+
+@keyframes iw-grain {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  20% {
+    transform: translate(-5%, 3%);
+  }
+
+  40% {
+    transform: translate(4%, -6%);
+  }
+
+  60% {
+    transform: translate(-3%, 7%);
+  }
+
+  80% {
+    transform: translate(6%, 2%);
+  }
+
+  100% {
+    transform: translate(-2%, -4%);
+  }
+}
+
+@keyframes iw-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  8% {
+    opacity: 0.35;
+  }
+
+  9% {
+    opacity: 1;
+  }
+
+  42% {
+    opacity: 0.85;
+  }
+
+  43% {
+    opacity: 0.2;
+  }
+
+  45% {
+    opacity: 0.95;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  71% {
+    opacity: 0.5;
+  }
+
+  72% {
+    opacity: 1;
+  }
+}
+
+@keyframes iw-shake {
+  0%,
+  90%,
+  100% {
+    transform: none;
+  }
+
+  91% {
+    transform: translate(-3px, 1px) rotate(-0.4deg);
+  }
+
+  92% {
+    transform: translate(4px, -2px) rotate(0.3deg);
+  }
+
+  93% {
+    transform: translate(-2px, 2px);
+  }
+
+  94% {
+    transform: translate(3px, 0) rotate(-0.2deg);
+  }
+
+  95% {
+    transform: none;
+  }
+}
+
+/* Desdoble del nombre en naranja y gris. Se hace con "filter: drop-shadow"
+   y no con "text-shadow" (como la maqueta): con la tinta gastada
+   (background-clip: text), Chrome pinta el text-shadow encima de las letras
+   y el nombre se veía naranja liso. La maqueta usaba un gris #6E6E6E fuera
+   de la paleta: se sustituye por --color-label-light, el más parecido de
+   DESIGN.md §2. */
+@keyframes iw-glitch {
+  0%,
+  86%,
+  100% {
+    filter: none;
+  }
+
+  88% {
+    filter: drop-shadow(7px 0 0 var(--color-accent)) drop-shadow(-7px 0 0 var(--color-label-light));
+  }
+
+  90% {
+    filter: drop-shadow(-9px 0 0 var(--color-accent)) drop-shadow(5px 0 0 var(--color-paper));
+  }
+
+  92% {
+    filter: drop-shadow(4px 0 0 var(--color-accent));
+  }
+
+  94% {
+    filter: none;
+  }
+}
+
+@keyframes iw-autoglitch {
+  0%,
+  92%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0);
+    transform: none;
+  }
+
+  93% {
+    opacity: 0.95;
+    clip-path: inset(12% 0 64% 0);
+    transform: translateX(-16px);
+  }
+
+  95% {
+    opacity: 0.95;
+    clip-path: inset(58% 0 18% 0);
+    transform: translateX(14px);
+  }
+
+  97% {
+    opacity: 0.95;
+    clip-path: inset(34% 0 46% 0);
+    transform: translateX(-8px);
+  }
+}
+
+/* --- Galería al pasar el ratón (DESIGN.md §7) ---------------------------- */
+
+/* La foto usa "transform" para el zoom con giro; la profundidad del scroll
+   usa "scale" y "translate", así que no se pisan */
+.shot__img {
+  transition: filter 0.3s, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.shot:hover .shot__img {
+  filter: grayscale(1) contrast(1.8);
+  transform: scale(1.06) rotate(-0.6deg);
+}
+
+/* Franjas cortadas continuas: la copia naranja y la copia en negativo */
+.shot:hover .shot__img::before {
+  opacity: 0.95;
+  animation: iw-slice 0.45s steps(1) infinite;
+}
+
+.shot:hover .shot__img::after {
+  opacity: 0.6;
+  animation: iw-slice 0.45s 0.12s steps(1) infinite reverse;
+}
+
+/* Flash blanco */
+.shot:hover .shot__flash {
+  animation: iw-flash 0.5s ease-out;
+}
+
+@keyframes iw-slice {
+  0% {
+    clip-path: inset(8% 0 72% 0);
+    transform: translateX(-14px);
+  }
+
+  20% {
+    clip-path: inset(55% 0 22% 0);
+    transform: translateX(12px);
+  }
+
+  40% {
+    clip-path: inset(30% 0 52% 0);
+    transform: translateX(-8px);
+  }
+
+  60% {
+    clip-path: inset(78% 0 6% 0);
+    transform: translateX(16px);
+  }
+
+  80% {
+    clip-path: inset(0 0 86% 0);
+    transform: translateX(-10px);
+  }
+
+  100% {
+    clip-path: inset(44% 0 40% 0);
+    transform: translateX(6px);
+  }
+}
+
+@keyframes iw-flash {
+  0% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* --- Ligadas al scroll (DESIGN.md §7). Sin soporte, todo se ve quieto y
+   completo: los estados iniciales "ocultos" solo existen aquí dentro. ----- */
+
+@supports (animation-timeline: view()) {
+  /* Deslizamiento de los títulos de sección */
+  .section__title,
+  .site-footer__title {
+    animation: iw-slide linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+
+  /* Aparición al bajar: bloques, hitos, discos y entradas */
+  .polaroid,
+  .about__text,
+  .milestone,
+  .release,
+  .ticket {
+    animation: iw-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 25%;
+  }
+
+  /* Relleno de los años al cruzar el centro de la pantalla */
+  .milestone__year {
+    animation: iw-fill linear both;
+    animation-timeline: view();
+    animation-range: cover 35% cover 55%;
+  }
+
+  /* Caída del sello "SOLD OUT" */
+  .stamp {
+    animation: iw-stamp linear both;
+    animation-timeline: view();
+    animation-range: entry 60% cover 40%;
+  }
+
+  /* Cortina negra que se retira de las fotos de la galería */
+  .shot__curtain {
+    animation: iw-curtain linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 45%;
+  }
+
+  /* Profundidad de las fotos de la galería */
+  .shot__img {
+    animation: iw-parallax linear both;
+    animation-timeline: view();
+    animation-range: cover;
+  }
+
+  /* Deriva horizontal de "LIVE" */
+  .gallery__word {
+    animation: iw-drift linear both;
+    animation-timeline: view();
+    animation-range: cover;
+  }
+}
+
+@keyframes iw-slide {
+  from {
+    opacity: 0.2;
+    transform: translateX(-12%) rotate(-3deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Con "translate" y no "transform": no borra los giros de la foto pegada
+   ni de las entradas */
+@keyframes iw-reveal {
+  from {
+    opacity: 0;
+    translate: 0 60px;
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@keyframes iw-fill {
+  from {
+    color: transparent;
+  }
+
+  to {
+    color: var(--color-accent);
+    -webkit-text-stroke-color: var(--color-accent);
+  }
+}
+
+@keyframes iw-stamp {
+  0% {
+    opacity: 0;
+    transform: rotate(-12deg) scale(2.4);
+  }
+
+  60% {
+    opacity: 1;
+    transform: rotate(-12deg) scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotate(-12deg) scale(1);
+  }
+}
+
+@keyframes iw-curtain {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes iw-parallax {
+  from {
+    scale: 1.25;
+    translate: 0 -6%;
+  }
+
+  to {
+    scale: 1;
+    translate: 0 6%;
+  }
+}
+
+@keyframes iw-drift {
+  from {
+    transform: translateX(18%);
+  }
+
+  to {
+    transform: translateX(-22%);
+  }
+}
+
+
+/* 9. Movimiento reducido ================================================== */
+/* Si la persona pide reducir el movimiento, no se mueve nada (DESIGN.md §1 y
+   §7): se apagan todas las animaciones y transiciones, y cada elemento se ve
+   en su estado final (visible y quieto). Es el único sitio con !important
+   (CS-06). Excepción aprobada por Mateo: el fondo de la cabecera y la
+   aparición del botón "Volver al inicio" siguen, porque solo cambian el
+   color y la opacidad, no mueven nada, y sin ellas el botón taparía el texto
+   en móvil. El desplazamiento suave ya solo se activa sin esta preferencia
+   (bloque 2). */
+
+@media (prefers-reduced-motion: reduce) {
+  *:not(.site-header, .to-top),
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

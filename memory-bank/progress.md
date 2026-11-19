@@ -1,7 +1,7 @@
 ---
 name: progress
 description: Registro por fase — qué se hizo, decisiones, problemas y cómo se verificó
-last_verified: 2026-11-19 (sobre el commit c3eaf17, cierre de la fase 4)
+last_verified: 2026-11-19 (sobre el commit 211bfb6, cierre de la fase 5)
 ---
 
 # Progreso
@@ -204,7 +204,7 @@ Clases BEM preparadas para la fase 4:
 - Claude in Chrome no tiene permiso para leer `validator.schema.org` ni las webs de las salas.
   Se usó `curl` en su lugar.
 
-## Fase 4 — Estilos sin animaciones (rama `feat/phase-4-css`)
+## Fase 4 — Estilos sin animaciones (PR #5, fusionado el 19-11-2026)
 
 **Qué se hizo:** `styles.css` completo y quieto. No lleva `@keyframes`, `transition` ni
 `animation`.
@@ -355,3 +355,56 @@ Clases BEM preparadas para la fase 4:
 - En el bloque de movimiento reducido harán falta `!important`; CS-06 lo permite solo ahí.
 - El bloque 8 ya tiene `header-fill` y `to-top-in`. Al apagar las animaciones con movimiento
   reducido, la cabecera queda de tinta y el botón visible, que es su estado seguro. Comprobarlo.
+
+## Fase 5 — Animaciones y efectos (rama `feat/phase-5-animations`)
+
+**Qué se hizo:** las 15 animaciones de `DESIGN.md` §7, solo con CSS, en el bloque 8 de
+`styles.css`, y el bloque 9 (Movimiento reducido). Las tres de la fase 4 (fondo de la cabecera,
+aparición del botón ↑ y desplazamiento suave) se mantienen.
+
+| Grupo | Animaciones |
+|---|---|
+| Transiciones (ratón) | Barra del menú, botones, flecha, entradas, redes, email, años, botón ↑ |
+| Al cargar | Zoom de la foto (`iw-zoom`), subida del nombre por líneas (`iw-rise`), aparición del antetítulo, el lema y los botones (`iw-fade`) |
+| Continuas | Grano (`iw-grain`), foco (`iw-flicker`), temblor e interferencia del nombre (`iw-shake`, `iw-glitch`), interferencia automática de las fotos (`iw-autoglitch`) |
+| Galería con el ratón | Contraste, zoom con giro, franjas (`iw-slice`) y flash (`iw-flash`) |
+| Scroll (`@supports (animation-timeline: view())`) | Títulos (`iw-slide`), aparición de bloques (`iw-reveal`), relleno de años (`iw-fill`), sello (`iw-stamp`), cortina (`iw-curtain`), profundidad (`iw-parallax`), deriva de "LIVE" (`iw-drift`) |
+
+**Decisiones de Mateo:**
+
+- **`span` interior en cada línea del `h1`** (`hero__line-inner`): la línea hace de máscara y el
+  span sube desde debajo. La tinta gastada pasa al span interior; el texto no cambia.
+- **Excepción en movimiento reducido:** se apaga todo
+  (`*:not(.site-header, .to-top), *::before, *::after { animation: none !important; transition:
+  none !important }`) salvo el fondo de la cabecera y la aparición del botón ↑, que solo cambian el
+  color y la opacidad. Sin ellas, el botón taparía el texto en móvil.
+- **Firefox y Safari los prueba Mateo a mano** (lista en el PR). No se descargaron los navegadores
+  de Playwright.
+
+**Fallos de la maqueta encontrados y corregidos:**
+
+- **Giros fijos borrados:** el temblor y la aparición animan `transform`, y en la maqueta borraban
+  el −2° del título y el ±0,5° de las entradas. Los giros pasan a la propiedad `rotate`, la
+  aparición al bajar usa `translate` y la profundidad usa `scale` y `translate`, así que no se pisan
+  (`54d7de7`).
+- **Nombre naranja liso:** con la tinta gastada (`background-clip: text`), Chrome pinta el
+  `text-shadow` encima de las letras. El desdoble se hace con `filter: drop-shadow` (`d83c40f`).
+  El gris `#6E6E6E` de la maqueta, que no está en la paleta, pasa a `--color-label-light`.
+- **Animaciones de scroll paradas:** `overflow: hidden` crea un contenedor de scroll. La cortina,
+  la profundidad, "LIVE" y el título del pie seguían el scroll de su contenedor (que no se mueve) y
+  se quedaban fijas. La Galería, `.shot__frame` y el pie pasan a `overflow: clip` (`b2d1d85`).
+- **Scroll horizontal en móvil:** el sello empieza a escala 2,4 y sobresalía por la derecha.
+  Trayectoria lleva `overflow-x: clip`.
+
+**Verificación (19-11-2026, Chrome con Playwright):**
+
+| Comprobación | Resultado |
+|---|---|
+| Animaciones activas en Chrome | ✅ Las 15 de §7, más `header-fill` y `to-top-in`. Al recorrer la página entera no queda ningún contenido oculto |
+| El título no pierde el giro | ✅ `rotate: -2deg`, también en pleno temblor |
+| Sin animaciones de scroll (CSS con los `@supports` falsos, como Firefox o WebKit) | ✅ Sin hacer scroll, ningún contenido oculto, a 1440 y a 375px |
+| Movimiento reducido (`reducedMotion: 'reduce'`) | ✅ `getAnimations()` solo devuelve `header-fill` y `to-top-in` (la excepción), al cargar y tras el scroll. Todo visible y el título con su giro |
+| Rendimiento (3 s de scroll suave) | ✅ 179 fotogramas, 16,7 ms de media y ninguno de más de 50 ms. Las animaciones solo usan `transform`, `rotate`, `scale`, `translate`, `opacity`, `filter`, `clip-path` y colores |
+| Regresión de fases anteriores | ✅ W3C 0 errores; sin scroll horizontal en 16 anchos; títulos dentro de su caja; foco visible; zoom al 200 % sin solapes; antetítulo 4,94–5,77:1; botón ↑ y menú igual que en la fase 4 |
+| `grep` | ✅ Un solo `<script>` (JSON-LD), sin `on*=`, sin `style=`, sin archivos `.js`; `!important` solo en el bloque 9; sin colores fuera de `:root` |
+| Fotogramas clave | ✅ `design/screenshots/fase-5/` (no se grabó vídeo: Playwright pedía descargar su `ffmpeg`) |

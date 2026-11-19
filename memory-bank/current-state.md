@@ -1,7 +1,7 @@
 ---
 name: current-state
 description: Qué hay hoy en el repositorio, qué falta y cuál es la siguiente fase
-last_verified: 2026-11-19 (sobre el commit c3eaf17, cierre de la fase 4)
+last_verified: 2026-11-19 (sobre el commit 211bfb6, cierre de la fase 5)
 ---
 
 # Estado actual
@@ -17,8 +17,9 @@ last_verified: 2026-11-19 (sobre el commit c3eaf17, cierre de la fase 4)
 | 1 — Archivos para el agente | Hecha (PR #2 fusionado) |
 | 2 — Imágenes | Hecha (PR #3 fusionado) |
 | 3 — HTML, SEO y Schema.org | Hecha (PR #4 fusionado) |
-| 4 — Estilos | En revisión (rama `feat/phase-4-css`, PR a `main` sin fusionar) |
-| 5 y 6 | Pendientes |
+| 4 — Estilos | Hecha (PR #5 fusionado) |
+| 5 — Animaciones | En revisión (rama `feat/phase-5-animations`, PR a `main` sin fusionar) |
+| 6 | Pendiente |
 
 La tabla que manda es la de [`PLAN.md`](../PLAN.md) §4; lo que decide si una fase está terminada
 es la fusión en `main`.
@@ -40,12 +41,11 @@ es la fusión en `main`.
 | `index.html` | ✅ Completo: W3C 0 errores, schema.org 0 errores, teclado correcto (ver `progress.md`, fase 3) |
 | Prueba de resultados enriquecidos de Google | ✅ 4 eventos válidos, solo avisos no críticos (la pasó Mateo) |
 | `styles.css` | ✅ Estilos estáticos, móvil y escritorio: sin scroll horizontal en 16 anchos, contraste ≥ 4,5:1, foco visible (ver `progress.md`, fase 4) |
-| Animaciones | ❌ Fase 5 |
+| Animaciones | ✅ Las 15 de `DESIGN.md` §7, con movimiento reducido y sin JavaScript (ver `progress.md`, fase 5). Firefox y Safari: pendientes de que los pruebe Mateo |
 
 ## Carencias conocidas
 
-- La página no tiene animaciones todavía (fase 5).
-- Aspecto pendiente de que Mateo lo compare con la maqueta (capturas en `design/screenshots/fase-4/`).
+- Pendiente probar en Safari (iPhone) y Firefox: menú de móvil, cabecera fija y animaciones.
 - `og:image` y las `image` del JSON-LD son rutas relativas: pasan a absolutas solo si se publica (fase 6).
 - El `README.md` es todavía el de la plantilla y sugiere el CDN de Tailwind, que está **prohibido**
   (HT-01). Se sustituye en la fase 6 si Mateo lo aprueba (`PLAN.md` §7).
@@ -53,5 +53,6 @@ es la fusión en `main`.
 
 ## Siguiente fase
 
-Fase 5 — Animaciones ([`plans/phase-5-animations.md`](../plans/phase-5-animations.md)), cuando la
-fase 4 esté fusionada en `main`.
+Fase 6 — Verificación final y entrega ([`plans/phase-6-verification.md`](../plans/phase-6-verification.md)),
+cuando la fase 5 esté fusionada en `main`. Empieza con dos preguntas a Mateo: publicar en GitHub
+Pages y sustituir los README de la plantilla.
