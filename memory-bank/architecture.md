@@ -1,13 +1,13 @@
 ---
 name: architecture
 description: Estructura de archivos, las 6 partes de la página con su ID y fondo, los bloques de styles.css y cómo se usan texturas y fotos
-last_verified: 2026-11-19 (sobre el commit 2dfeb1f, cierre de la fase 1)
+last_verified: 2026-11-19 (sobre el commit 5dd02fd, cierre de la fase 2)
 ---
 
 # Arquitectura
 
-> Describe la estructura **prevista** por `PLAN.md` y `DESIGN.md`. A 19-11-2026 todavía no existen
-> `index.html`, `styles.css`, los WebP ni el favicon (ver [`current-state.md`](current-state.md)).
+> Describe la estructura **prevista** por `PLAN.md` y `DESIGN.md`. A 19-11-2026 ya existen las
+> imágenes y el favicon, pero todavía no `index.html` ni `styles.css` (ver [`current-state.md`](current-state.md)).
 
 ## Estructura de archivos
 
@@ -16,7 +16,7 @@ last_verified: 2026-11-19 (sobre el commit 2dfeb1f, cierre de la fase 1)
 ├── index.html                  ← la página (fase 3)
 ├── styles.css                  ← todos los estilos (fases 4 y 5)
 ├── assets/
-│   ├── favicon.svg             ← fase 2
+│   ├── favicon.svg             ← rombo naranja sobre tinta (fase 2)
 │   ├── images/
 │   │   ├── hero.webp, about.webp, live-1.webp, live-2.webp, og.jpg   ← fase 2
 │   │   ├── originals/          ← JPEG originales (se conservan para regenerar)
@@ -71,7 +71,7 @@ Los bordes rasgados no son archivo: son una tira de 44px con `clip-path` (`DESIG
 | `hero.webp` | `<img>` con `fetchpriority="high"`, `object-position: center 28%` | Contenido y LCP |
 | `about.webp` | `<img>` en `figure`, `loading="lazy"` | Contenido |
 | `live-1.webp`, `live-2.webp` | **Fondo CSS** de un `div role="img" aria-label="…"` | Los efectos de interferencia necesitan copias (`::before`, `::after`) |
-| `og.jpg` | Solo en `og:image` | Imagen al compartir |
+| `og.jpg` | Solo en `og:image` | Imagen al compartir: recorte 1200 × 630 de `hero`, con el guitarrista y la guitarra (≈ `center 46%`) |
 
 Todas se pasan a blanco y negro **con CSS** (`grayscale(1)`); los archivos quedan en color.
 Fuente: `DESIGN.md` §10. Ojo: en la maqueta, `.p-live1` y `.p-live2` están cruzadas
