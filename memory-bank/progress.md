@@ -240,18 +240,25 @@ Clases BEM preparadas para la fase 4:
   la portada. Sin él, "ROCK · MADRID" (naranja sobre el humo) se quedaba en ≈ 2,8:1 y el menú en
   móvil en 4,35:1. La foto y los colores no cambian (`49f544a`).
 
-- **Menú hamburguesa en móvil** (pedido por Mateo al revisar el PR #5).
+- **Menú hamburguesa en móvil a pantalla completa** (pedido por Mateo al revisar el PR #5; lo
+  hablamos antes de implementarlo).
 
-  - **Técnica:** `<details>` y `<summary>`, sin JavaScript.
-  - **Botón:** "MENÚ", con un icono de tres rayas que pasa a X al abrirse. El texto se añadió a
-    `CONTENT.md` §1 y el diseño, a `DESIGN.md` §6 y §9 (`dc181ff`).
-  - **Panel:** al abrirse, los enlaces aparecen en un panel de tinta a todo el ancho, debajo de la
-    cabecera.
-  - **Escritorio:** `::details-content { content-visibility: visible }` muestra siempre los enlaces
-    y oculta el botón. Va dentro de `@supports selector(::details-content)`: si el navegador no lo
-    entiende, se queda el botón y el menú sigue funcionando.
-  - **Limitación:** sin JavaScript, el panel no se cierra solo al tocar un enlace. Como la cabecera
-    no es fija, se queda arriba al bajar y no tapa nada.
+  - **Primer intento** (`d3c5e80`): `<details>` y `<summary>`. Se descartó porque el panel no se
+    cerraba al pulsar una sección.
+  - **Versión final:** técnica `:target`, sin JavaScript.
+    - "MENÚ" es un enlace a `#menu`, y el panel (`id="menu"`) se muestra a pantalla completa con
+      `#menu:target`.
+    - Al pulsar una sección, la dirección cambia, el panel desaparece y la página baja a esa
+      sección.
+    - "✕ CERRAR" lleva a `#inicio`, que es la portada, y se anuncia como "Cerrar menú".
+    - Con `html:has(#menu:target)`, la página no hace scroll mientras el menú está abierto.
+  - **Lo que se pierde**, aceptado por Mateo y anotado en `DESIGN.md` §6:
+    - El lector de pantalla oye "enlace" en vez de "botón, expandido o contraído".
+    - Esc no cierra el menú.
+    - La dirección muestra `#menu` mientras está abierto.
+  - **Textos nuevos en `CONTENT.md` §1:** "Menú", "Cerrar" y "Cerrar menú".
+  - **Prettier:** al guardar en VS Code, reformateaba `index.html` (`/>` en las etiquetas vacías,
+    líneas partidas). Mateo eligió descartar ese formato, y el `.prettierignore` lo evita.
 
 **Otros ajustes sin cambio de diseño** (`a8870ec`, `49f544a`):
 
@@ -282,13 +289,13 @@ Clases BEM preparadas para la fase 4:
 | `grep`: colores fuera de `:root`, `!important`, `@keyframes`, `transition`, `animation`, `_blob` | ✅ Ninguno |
 | Zoom al 200 % (720 × 450 CSS): solapes de texto | ✅ Ninguno |
 | Foco visible con Tab en los 15 elementos (escritorio) | ✅ Contorno de 3px: naranja, y tinta en la entrada del festival |
-| Menú en móvil (375px) | ✅ Cerrado, los enlaces están ocultos. El botón "MENÚ" mide 44px de alto y tiene un contraste de 11,1:1 sobre la foto. Se abre y se cierra con Enter y con Espacio, y el siguiente Tab va a "Sobre mí". Cada enlace del panel mide 51px. W3C sigue con 0 errores. En 861 y 1440px, el botón está oculto y se ven los 3 enlaces |
+| Menú en móvil (375px, táctil) | ✅ Cerrado, los enlaces están ocultos. Al tocar "MENÚ", la dirección pasa a `#menu` y el panel ocupa 375 × 812; el logo queda encima y "CERRAR" ocupa el sitio de "MENÚ" (mismo borde derecho y la misma altura). Con el menú abierto, la rueda no mueve la página. "Trayectoria" cierra el menú y lleva a la sección. "CERRAR" cierra y deja en la portada. "Atrás" vuelve a abrirlo y otro "Atrás" lo cierra. Con teclado: Enter en "MENÚ" lo abre y Tab recorre "Cerrar menú" → Sobre mí → Trayectoria → Próximas presentaciones. En escritorio, incluso con `#menu`, no hay botones y la página hace scroll. W3C: 0 errores. El botón tiene un contraste de 11,1:1 sobre la foto |
 | `index.html` sin cambios y sin `style=""` | ✅ |
 | Capturas a 1440, 768 y 375px, por sección | ✅ En `design/screenshots/fase-4/`. Las compara Mateo con la maqueta |
 
 **A tener en cuenta en la fase 5:**
 
-- Fase 6: comprobar con VoiceOver cómo se anuncia el botón "Menú" (abierto o cerrado).
+- Fase 6: comprobar con VoiceOver el menú de móvil: "Menú, enlace", "Cerrar menú, enlace" y que el panel cerrado no se lee.
 
 - La subida del nombre por líneas (`iw-rise`) necesita una máscara: en la maqueta, cada línea
   lleva un `span` dentro de otro con `overflow: hidden`. En `index.html`, cada línea es un solo
