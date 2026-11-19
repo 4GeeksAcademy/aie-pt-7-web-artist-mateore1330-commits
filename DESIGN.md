@@ -188,10 +188,10 @@ Próximas presentaciones → tinta.
 
 ## 7. Animaciones
 
-Todas en CSS. Las ligadas al scroll usan `animation-timeline: view()` dentro de
+Todas en CSS. Los contenedores que recortan algo con animaciones de scroll dentro (Galería, marco de las fotos, pie) usan `overflow: clip` y no `hidden`: `hidden` crea un contenedor de scroll y las animaciones dejarían de seguir la página (fase 5). Las ligadas al scroll usan `animation-timeline: view()` dentro de
 `@supports (animation-timeline: view())`: si el navegador no lo admite, el contenido aparece
 quieto y completo. **Con `prefers-reduced-motion: reduce` se apagan todas las animaciones y
-transiciones.**
+transiciones.** Excepción aprobada por Mateo (fase 5): el fondo de la cabecera y la aparición del botón "Volver al inicio" siguen, porque solo cambian el color y la opacidad, y sin ellas el botón taparía el texto en móvil.
 
 | Animación | Dónde | Disparo | Detalle |
 |---|---|---|---|
@@ -199,7 +199,7 @@ transiciones.**
 | Zoom de entrada | Foto de la portada | Al cargar | Escala de 1,12 a 1 en 2,4 s |
 | Foco parpadeante | Portada | Siempre | Un foco de luz cálida (degradado radial, `mix-blend-mode: screen`) parpadea de forma irregular cada 4,5 s |
 | Subida del nombre | `h1` | Al cargar | Cada línea sube desde abajo, oculta por una máscara, con una ligera inclinación (1 s; "WOLF" con 0,12 s de retraso) |
-| Temblor + interferencia | `h1` | Cada 5 s, desde 1,8 s | Una sacudida breve y un desdoble del texto en naranja y gris (`text-shadow`) |
+| Temblor + interferencia | `h1` | Cada 5 s, desde 1,8 s | Una sacudida breve y un desdoble del texto en naranja y gris. Se hace con `filter: drop-shadow` (no con `text-shadow`, que con la tinta gastada pintaba el nombre naranja liso) y el gris es `--color-label-light` (fase 5) |
 | Aparición | Lema y botones | Al cargar | Suben 24px y aparecen (0,6 s, 0,8 s y 1 s de retraso) |
 | Deslizamiento de títulos | Todos los `h2` | Scroll | Entran desde la izquierda, girados −3° y casi transparentes |
 | Aparición al bajar | Bloques, hitos, entradas | Scroll | Suben 60px y aparecen |
