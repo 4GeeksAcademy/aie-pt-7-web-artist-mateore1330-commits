@@ -183,6 +183,10 @@ address {
 .about .section__title,
 .shows .section__title,
 .gallery .section__title {
+  /* La textura solo se pinta dentro de la caja: se amplía arriba y abajo
+     para que no se corten las tildes ni la coma, sin mover el texto. */
+  margin-block: -0.14em -0.08em;
+  padding-block: 0.14em 0.08em;
   color: transparent;
   background-size: 500px 500px, auto;
   -webkit-background-clip: text;
@@ -368,6 +372,10 @@ address {
 /* Foto pegada con cinta (Sobre mí) */
 .polaroid {
   position: relative;
+  /* Móvil y tableta: centrada, con sitio para que la foto girada y los trozos
+     de cinta no se salgan de la pantalla */
+  width: min(100% - 48px, 520px);
+  margin-inline: auto;
   padding: 14px 14px 56px;
   background: var(--color-white);
   box-shadow: 0 20px 40px -18px color-mix(in srgb, var(--color-ink) 45%, transparent);
@@ -523,7 +531,8 @@ address {
 
 .ticket__city {
   font-family: var(--font-display);
-  font-size: 44px;
+  /* Móvil: "VALLADOLID" cabe en la entrada a 320px. Escritorio: 44px. */
+  font-size: clamp(1.75rem, calc(14vw - 14px), 2.75rem);
   font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
@@ -697,6 +706,7 @@ address {
   align-items: end;
   gap: 32px 40px;
   padding-top: 200px;
+  padding-right: calc(var(--gutter) + 28px);
   padding-bottom: 110px;
 }
 
@@ -769,7 +779,9 @@ address {
 
 .section__title {
   font-family: var(--font-display);
-  font-size: clamp(3.25rem, 8vw, 7.5rem);
+  /* Móvil: la palabra más larga ("TRAYECTORIA") cabe en 320px. Escritorio:
+     el tamaño de DESIGN.md, en el bloque 7. */
+  font-size: clamp(2rem, 11vw, 3.25rem);
   font-weight: 400;
   line-height: 0.88;
   letter-spacing: -0.02em;
@@ -777,7 +789,8 @@ address {
 }
 
 .section__title--long {
-  font-size: clamp(3rem, 7vw, 6.5rem);
+  /* "PRESENTACIONES" cabe en 320px */
+  font-size: clamp(1.75rem, 8.5vw, 3rem);
 }
 
 .section__head {
@@ -1183,6 +1196,7 @@ address {
   .hero__content {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     padding-top: 160px;
+    padding-right: var(--gutter);
   }
 
   .hero__kicker,
@@ -1197,6 +1211,31 @@ address {
   .hero__actions {
     grid-column: 7 / span 6;
     justify-content: flex-end;
+  }
+
+  .section__title {
+    font-size: clamp(3.25rem, 8vw, 7.5rem);
+  }
+
+  /* En 8 columnas, "TRAYECTORIA" y "PRESENTACIONES" no caben con el tamaño
+     de DESIGN.md: se reduce lo justo (aprobado por Mateo, fase 4). */
+  .career .section__title {
+    font-size: clamp(3.25rem, calc(8.6vw - 16px), 6.7rem);
+  }
+
+  .section__title--long {
+    font-size: clamp(2.5rem, calc(6.7vw - 12px), 5.25rem);
+  }
+
+  /* 44px en cuanto cabe; entre 861 y ~1100px, la columna central es
+     estrecha y la ciudad escala */
+  .ticket__city {
+    font-size: clamp(1.75rem, calc(14vw - 92px), 2.75rem);
+  }
+
+  .polaroid {
+    width: auto;
+    margin-inline: 0;
   }
 
   /* Títulos con entradilla: 8 + 4 columnas */
