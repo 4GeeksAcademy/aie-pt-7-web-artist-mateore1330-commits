@@ -12,7 +12,7 @@ documento del propio repositorio: `PLAN.md`, `BRIEFING.md`, `CONTENT.md`, `DESIG
 
 ## UR-01 · Lee las reglas que correspondan antes de editar
 
-**Regla:** Antes de modificar un archivo, lee siempre [`git-and-docs.md`](git-and-docs.md) y,
+**Regla:** Antes de analizar o modificar un archivo, lee siempre [`git-and-docs.md`](git-and-docs.md) y,
 además, los archivos de reglas que correspondan a lo que vas a tocar:
 
 | Si vas a tocar… | Lee también |

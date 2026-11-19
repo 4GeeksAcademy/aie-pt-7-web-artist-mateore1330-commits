@@ -35,6 +35,11 @@ márgenes, relleno de sección). Fuera de `:root`, los colores se usan **solo** 
 ningún `#…`, `rgb(…)` ni nombre de color. Las transparencias se derivan de una variable, por
 ejemplo `color-mix(in srgb, var(--color-paper) 90%, transparent)`.
 
+**Cambiar el valor de un color o añadir uno nuevo** no se hace solo en `styles.css`: primero se
+cambia la tabla de `DESIGN.md` §2, con la aprobación de Mateo, y después la variable de `:root`.
+Cambiar **qué** variable usa un componente (por ejemplo, un botón) sí se hace solo en
+`styles.css`, siempre que la combinación esté permitida en `DESIGN.md` §2 y §6 y cumpla A11Y-06.
+
 Si `DESIGN.md` usa un color que no está en la tabla de §2 (hoy, `#1C1C1C` de las portadas de los
 singles en §6 y `#2A2A2A` del contorno de "IRON WOLF" en §8), también se declara como variable en
 `:root` y se avisa en el PR.

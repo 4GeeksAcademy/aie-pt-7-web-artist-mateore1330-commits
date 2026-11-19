@@ -33,7 +33,10 @@ Si algo no está en estos documentos, **se pregunta a Mateo**. No se inventa (re
 
 El plan está en [`PLAN.md`](PLAN.md) y cada fase en [`plans/`](plans/). Para saber qué fase toca:
 
-1. Mira la tabla de fases de `PLAN.md` §4: la primera que no esté **Hecha**.
+1. Mira la tabla de fases de `PLAN.md` §4: la primera que no esté **Hecha**. Si está **En
+   revisión**, su PR espera a que Mateo lo fusione: no se empieza la siguiente hasta entonces (el
+   estado se cambia en la propia rama antes de pedir la revisión, así que lo que manda es la
+   fusión, no la tabla).
 2. Comprueba que la anterior está fusionada en `main`: `git log origin/main` y
    `gh pr list --state merged`. Si no lo está, no empieces.
 3. Contrasta con [`memory-bank/current-state.md`](memory-bank/current-state.md) § "Siguiente fase".
