@@ -1,5 +1,156 @@
 /* =========================================================================
    Iron Wolf — styles.css
-   Todos los estilos de la web. Se rellena en la fase 4 (estilos) y en la
-   fase 5 (animaciones). Reglas: .agents/rules/css.md
+   Todos los estilos de la web. Reglas: .agents/rules/css.md
+   Valores: DESIGN.md (manda) y design/mockup-propuesta-2.html (referencia).
+   Primero móvil: la base es para móvil y el bloque 7 añade el escritorio.
    ========================================================================= */
+
+
+/* 1. Variables ============================================================ */
+
+:root {
+  /* Colores (DESIGN.md §2). No se usa ningún color fuera de esta lista. */
+  --color-ink: #0E0E0E;
+  --color-ink-2: #161616;
+  --color-paper: #F2F0EC;
+  --color-white: #FFFFFF;
+  --color-accent: #E0692F;
+  --color-accent-ink: #A04A20;
+  --color-text-dark: #111111;
+  --color-muted-dark: #3D3B38;
+  --color-label-dark: #55534F;
+  --color-muted-light: #BDBAB4;
+  --color-label-light: #8C8983;
+  --color-line-dark: #2E2E2E;
+  --color-line-mid: #3A3A3A;
+  --color-cover: #1C1C1C;
+  --color-outline: #2A2A2A;
+  --color-line-stub: #4A4A4A;
+  --color-light: #FFE2BE;
+
+  /* Fuentes (DESIGN.md §3) */
+  --font-display: "Archivo Black", "Arial Black", sans-serif;
+  --font-body: "Archivo", system-ui, sans-serif;
+  --font-type: "Special Elite", ui-monospace, monospace;
+
+  /* Medidas (DESIGN.md §4) */
+  --max-width: 1440px;
+  --gutter: 20px;
+  --section-pad-top: 112px;
+  --section-pad-bottom: 140px;
+  --tear-height: 44px;
+
+  /* Texturas (DESIGN.md §5) */
+  --texture-noise: url("assets/textures/noise.svg");
+  --texture-wear-dark: url("assets/textures/wear-dark.svg");
+  --texture-wear-light: url("assets/textures/wear-light.svg");
+}
+
+
+/* 2. Base ================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+dl,
+dd {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+cite {
+  font-style: normal;
+}
+
+small {
+  font-size: inherit;
+}
+
+address {
+  font-style: normal;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -80px;
+  left: 16px;
+  z-index: 60;
+  padding: 12px 20px;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+.hero,
+.section {
+  position: relative;
+  min-height: 100svh;
+  /* La cabecera no es fija, así que no tapa nada al saltar a una sección:
+     el título ya queda separado por el relleno superior de 112px. */
+  scroll-margin-top: 0;
+}
+
+
+/* 3. Utilidades =========================================================== */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden,
+.ticket__sep {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
