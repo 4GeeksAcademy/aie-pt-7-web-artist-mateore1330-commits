@@ -752,3 +752,228 @@ address {
   font-size: 12px;
   writing-mode: vertical-rl;
 }
+
+/* Partes comunes de las secciones */
+.section > .wrap {
+  position: relative;
+  z-index: 1;
+  padding-top: var(--section-pad-top);
+  padding-bottom: var(--section-pad-bottom);
+}
+
+.section__num {
+  margin-bottom: 8px;
+  font-family: var(--font-type);
+  font-size: 18px;
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 8vw, 7.5rem);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.section__title--long {
+  font-size: clamp(3rem, 7vw, 6.5rem);
+}
+
+.section__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+  gap: 24px 40px;
+}
+
+.section__lead {
+  font-family: var(--font-type);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+/* Sobre mí */
+.about {
+  background: var(--color-paper);
+  color: var(--color-text-dark);
+}
+
+.about .section__num {
+  color: var(--color-accent-ink);
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 48px;
+  margin-top: 64px;
+}
+
+.about__text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.about__text strong {
+  padding: 0 6px;
+  background: var(--color-text-dark);
+  color: var(--color-paper);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+  padding-top: 32px;
+  border-top: 4px solid var(--color-text-dark);
+}
+
+.facts dt {
+  color: var(--color-label-dark);
+  font-family: var(--font-type);
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.facts dd {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.facts__item:nth-child(3) dd {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Galería */
+.gallery {
+  overflow: hidden;
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.gallery > .wrap {
+  padding-bottom: 150px;
+}
+
+.gallery__word {
+  position: absolute;
+  top: 64px;
+  right: -2vw;
+  z-index: 0;
+  color: transparent;
+  font-family: var(--font-display);
+  font-size: 26vw;
+  line-height: 0.8;
+  text-transform: uppercase;
+  white-space: nowrap;
+  -webkit-text-stroke: 2px color-mix(in srgb, var(--color-ink) 35%, transparent);
+  pointer-events: none;
+}
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 40px 32px;
+  margin-top: 64px;
+}
+
+.shot__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--color-ink);
+}
+
+.shot--2 .shot__frame {
+  aspect-ratio: 4 / 3;
+}
+
+.shot__img {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  filter: grayscale(1) contrast(1.25);
+}
+
+.shot__img--live-1 {
+  background-image: url("assets/images/live-1.webp");
+}
+
+.shot__img--live-2 {
+  background-image: url("assets/images/live-2.webp");
+}
+
+/* Copias de la foto para la interferencia: preparadas, pero ocultas hasta la
+   fase 5 (DESIGN.md §6 y §7). */
+.shot__img::before,
+.shot__img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shot__img::before {
+  filter: sepia(1) saturate(7) hue-rotate(-18deg) brightness(1.05);
+  mix-blend-mode: screen;
+}
+
+.shot__img::after {
+  filter: invert(1) contrast(1.4);
+  mix-blend-mode: difference;
+}
+
+.shot__flash,
+.shot__curtain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.shot__flash {
+  background: var(--color-white);
+  opacity: 0;
+}
+
+.shot__curtain {
+  background: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+.shot__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  margin-top: 18px;
+}
+
+.shot--1 .tape {
+  transform: rotate(-2deg);
+}
+
+.shot--2 .tape {
+  transform: rotate(1.5deg);
+}
+
+.shot__credit {
+  font-family: var(--font-type);
+  font-size: 13px;
+}
