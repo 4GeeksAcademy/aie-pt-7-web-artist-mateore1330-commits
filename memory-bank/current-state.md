@@ -31,9 +31,9 @@ La web está completa. El detalle de cada comprobación está en [`verification.
 | Accesibilidad | ✅ Teclado, foco, contraste ≥ 4,5:1, `aria-hidden` en lo decorativo, menú de móvil que oculta la página de detrás, movimiento reducido |
 | Responsive | ✅ Sin scroll horizontal en 16 anchos (320–1920px) |
 | Restricciones | ✅ 0 JavaScript (salvo JSON-LD), 0 `style=""`, 0 "hard rock", colores solo en `:root` |
-| Lighthouse | ⏳ Pendiente: lo pasa Mateo |
-| VoiceOver | ⏳ Pendiente: lo prueba Mateo |
-| Firefox, Safari (Mac e iPhone) | ⏳ Pendiente: los prueba Mateo |
+| Lighthouse | ✅ Accesibilidad 100 y SEO 100 (modo Navigation, Mateo); Rendimiento y Buenas prácticas sin medir |
+| VoiceOver | ➖ No se hizo (decisión de Mateo) |
+| Firefox, Safari (Mac e iPhone) | ✅ Todo visible; menú y cabecera fija bien en el iPhone; scroll algo lento en Firefox y Safari (Mac), aceptado |
 
 ## Carencias conocidas
 
@@ -44,6 +44,6 @@ La web está completa. El detalle de cada comprobación está en [`verification.
 
 ## Siguiente paso
 
-Cuando Mateo añada sus resultados a `verification.md` §4 y fusione la fase 6, `main` es la entrega.
+Cuando Mateo fusione la fase 6, `main` es la entrega.
 La entrega en 4Geeks la hace **Mateo**, normalmente pegando la URL del repositorio en la
 plataforma.

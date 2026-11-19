@@ -443,3 +443,10 @@ aparición del botón ↑ y desplazamiento suave) se mantienen.
   plantilla y el antiguo menú en varias líneas.
 - **Todo lo demás:** sin cambios respecto a la fase 5 (W3C HTML, schema.org, teclado, contraste,
   16 anchos, movimiento reducido, `grep` y textos).
+- **Pruebas de Mateo:**
+  - Lighthouse (Navigation): Accesibilidad 100 y SEO 100. Rendimiento y Buenas prácticas no se
+    midieron.
+  - Firefox y Safari (Mac): todo visible, con el scroll algo lento. Decidió no optimizarlo (causa
+    probable en `verification.md` §3.6).
+  - iPhone: menú, cabecera fija y botón ↑ bien.
+  - VoiceOver: no se hizo, por decisión suya.
