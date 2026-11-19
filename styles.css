@@ -1863,29 +1863,33 @@ html:has(#menu:target) {
   }
 }
 
-/* La maqueta usaba un gris #6E6E6E fuera de la paleta: se sustituye por
-   --color-label-light, el más parecido de DESIGN.md §2 */
+/* Desdoble del nombre en naranja y gris. Se hace con "filter: drop-shadow"
+   y no con "text-shadow" (como la maqueta): con la tinta gastada
+   (background-clip: text), Chrome pinta el text-shadow encima de las letras
+   y el nombre se veía naranja liso. La maqueta usaba un gris #6E6E6E fuera
+   de la paleta: se sustituye por --color-label-light, el más parecido de
+   DESIGN.md §2. */
 @keyframes iw-glitch {
   0%,
   86%,
   100% {
-    text-shadow: none;
+    filter: none;
   }
 
   88% {
-    text-shadow: 7px 0 var(--color-accent), -7px 0 var(--color-label-light);
+    filter: drop-shadow(7px 0 0 var(--color-accent)) drop-shadow(-7px 0 0 var(--color-label-light));
   }
 
   90% {
-    text-shadow: -9px 0 var(--color-accent), 5px 0 var(--color-paper);
+    filter: drop-shadow(-9px 0 0 var(--color-accent)) drop-shadow(5px 0 0 var(--color-paper));
   }
 
   92% {
-    text-shadow: 4px 0 var(--color-accent);
+    filter: drop-shadow(4px 0 0 var(--color-accent));
   }
 
   94% {
-    text-shadow: none;
+    filter: none;
   }
 }
 
