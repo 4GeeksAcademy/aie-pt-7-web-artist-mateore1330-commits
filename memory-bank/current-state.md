@@ -1,7 +1,7 @@
 ---
 name: current-state
 description: Qué hay hoy en el repositorio, qué falta y cuál es la siguiente fase
-last_verified: 2026-11-19 (sobre el commit 5dd02fd, cierre de la fase 2)
+last_verified: 2026-11-19 (sobre el commit 748bb32, cierre de la fase 3)
 ---
 
 # Estado actual
@@ -15,8 +15,9 @@ last_verified: 2026-11-19 (sobre el commit 5dd02fd, cierre de la fase 2)
 |---|---|
 | 0 — Preparación del repositorio | Hecha (PR #1 fusionado) |
 | 1 — Archivos para el agente | Hecha (PR #2 fusionado) |
-| 2 — Imágenes | En revisión (rama `feat/phase-2-images`, PR a `main` sin fusionar) |
-| 3 a 6 | Pendientes |
+| 2 — Imágenes | Hecha (PR #3 fusionado) |
+| 3 — HTML, SEO y Schema.org | En revisión (rama `feat/phase-3-html`, PR a `main` sin fusionar) |
+| 4 a 6 | Pendientes |
 
 La tabla que manda es la de [`PLAN.md`](../PLAN.md) §4; lo que decide si una fase está terminada
 es la fusión en `main`.
@@ -35,11 +36,14 @@ es la fusión en `main`.
 | `og.jpg` | ✅ 1200 × 630, 147 KB |
 | `favicon.svg` | ✅ 185 B, aprobado por Mateo |
 | Texturas | ✅ `noise.svg`, `wear-dark.svg`, `wear-light.svg` |
-| `index.html`, `styles.css` | ❌ No existen (fases 3 y 4) |
+| `index.html` | ✅ Completo: W3C 0 errores, schema.org 0 errores, teclado correcto (ver `progress.md`, fase 3) |
+| Prueba de resultados enriquecidos de Google | ⚠️ Pendiente: la pasa Mateo |
+| `styles.css` | ❌ Vacío (fase 4) |
 
 ## Carencias conocidas
 
-- No hay web todavía: ni HTML ni CSS.
+- La página no tiene estilos todavía (fase 4) ni animaciones (fase 5).
+- `og:image` y las `image` del JSON-LD son rutas relativas: pasan a absolutas solo si se publica (fase 6).
 - `DESIGN.md` usa `#1C1C1C` y `#2A2A2A` fuera de su tabla de colores (ver `progress.md`, fase 1).
 - El `README.md` es todavía el de la plantilla y sugiere el CDN de Tailwind, que está **prohibido**
   (HT-01). Se sustituye en la fase 6 si Mateo lo aprueba (`PLAN.md` §7).
@@ -47,5 +51,5 @@ es la fusión en `main`.
 
 ## Siguiente fase
 
-Fase 3 — Estructura HTML, SEO y Schema.org ([`plans/phase-3-html.md`](../plans/phase-3-html.md)),
-cuando la fase 2 esté fusionada en `main`.
+Fase 4 — Estilos ([`plans/phase-4-css.md`](../plans/phase-4-css.md)), cuando la fase 3 esté
+fusionada en `main`.

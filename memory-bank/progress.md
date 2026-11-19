@@ -1,7 +1,7 @@
 ---
 name: progress
 description: Registro por fase — qué se hizo, decisiones, problemas y cómo se verificó
-last_verified: 2026-11-19 (sobre el commit 5dd02fd, cierre de la fase 2)
+last_verified: 2026-11-19 (sobre el commit 748bb32, cierre de la fase 3)
 ---
 
 # Progreso
@@ -91,7 +91,7 @@ señaló ya estaba documentado o se resuelve al abrir el PR:
 - El README de la plantilla con Tailwind.
 - La excepción de Git frente a las reglas globales de Mateo.
 
-## Fase 2 — Imágenes (rama `feat/phase-2-images`)
+## Fase 2 — Imágenes (PR #3, fusionado el 19-11-2026)
 
 **Qué se hizo:** las 4 fotos en WebP con `cwebp`, en color (el blanco y negro lo pone el CSS), la
 imagen para redes `og.jpg` y el favicon. Los originales siguen en `assets/images/originals/`.
@@ -133,3 +133,73 @@ sips -c 630 1200 --cropOffset 540 0 hero-1200.jpg --out assets/images/og.jpg
 - `og.jpg` se abrió para comprobar el encuadre.
 - El favicon se renderizó a 256 px.
 - `CREDITS.md` sigue siendo correcto: los nombres de archivo no cambian.
+
+## Fase 3 — Estructura HTML, SEO y Schema.org (rama `feat/phase-3-html`)
+
+**Qué se hizo:**
+
+- `index.html` completo, con la estructura de `plans/phase-3-html.md`: enlace de salto, `header`,
+  `nav`, `main` con 5 `section` y `aria-labelledby`, `footer` y la capa de grano.
+- Todos los textos copiados de `CONTENT.md`.
+- `<head>` con la lista de SEO-01.
+- JSON-LD en `@graph` (SEO-03).
+- `styles.css` vacío, con un comentario de cabecera.
+
+Clases BEM preparadas para la fase 4:
+
+| Parte | Clases |
+|---|---|
+| Cabecera y menú | `site-header`, `nav` |
+| Portada | `hero` |
+| Secciones (comunes) | `section__num`, `section__title`, `section__lead` |
+| Sobre mí | `polaroid`, `facts` |
+| Galería | `shot`, `shot__img--live-1`/`--live-2` |
+| Trayectoria | `timeline`, `milestone`, `stamp` |
+| Discografía | `discography`, `release` |
+| Próximas presentaciones | `tickets`, `ticket`, `ticket--festival` |
+| Pie | `site-footer`, `social`, `mail` |
+| Comunes | `tape`, `tear--paper`/`--accent`/`--ink`, `btn--primary`/`--ghost`/`--ticket`/`--ticket-dark` |
+
+**Decisiones:**
+
+- **Direcciones de las salas** (Mateo eligió buscarlas en la web oficial, SEO-04):
+
+  | Sala | `streetAddress` | `postalCode` | Fuente oficial |
+  |---|---|---|---|
+  | Razzmatazz | C/ Almogàvers 122 | — (la web no lo da junto a esa dirección) | https://www.salarazzmatazz.com/info/ ("C/ Almogàvers 122", acceso principal) |
+  | Moon | Calle San Vicente 200 | — (la web no lo da) | https://www.moonvalencia.es/web/contacto/ ("Calle San Vicente 200, València") |
+  | Kafe Antzokia | San Vicente 2 | 48001 | https://www.kafeantzokia.eus/es/contacto/ ("Done Bikendi / San Vicente 2, 48001 Bilbao") |
+
+  Comprobadas el 19-11-2026 descargando cada página. El Meseta Rock Festival es ficticio: solo
+  `addressLocality: "Valladolid"`.
+- **Fecha del talón:** el texto de `CONTENT.md` "17 · Sáb · Abr 2027" va en tres `span` (`ticket__day`,
+  `ticket__sep` con " · " y `ticket__date`), para que la fase 4 pueda separar el día grande sin
+  perder el texto.
+- **Discografía:** el tipo y el año de la tabla de `CONTENT.md` se muestran como "EP · 2024".
+- **Sin `canonical`, `og:url` ni URL absolutas** hasta la decisión de publicar (fase 6). Por eso
+  `og:image` y las `image` del JSON-LD son relativas.
+- El `h1` lleva un espacio entre sus dos `span`, para que el lector de pantalla lea "Iron Wolf" y no
+  "IronWolf".
+
+**Verificación (19-11-2026):**
+
+| Comprobación | Resultado |
+|---|---|
+| Validador Nu de W3C (`curl … validator.w3.org/nu/?out=json`) | ✅ 0 errores y 0 avisos |
+| Esquema de títulos | ✅ 1 `h1`; `h2` en Sobre mí, Galería, Trayectoria, Próximas presentaciones y el pie; `h3` en los 6 hitos, Discografía y las 4 ciudades; sin saltos |
+| Validador de schema.org (servicio `validator.schema.org/validate`) | ✅ 0 errores y 0 avisos. Detecta `MusicGroup`, `MusicAlbum`, `MusicRecording`, `MusicEvent` ×4, `MusicVenue`, `PostalAddress`, `Place` y `Offer` |
+| Prueba de resultados enriquecidos de Google | ⚠️ No se pudo pasar: con Claude in Chrome, Google devolvió "Se ha producido un error. Si el problema persiste, vuelve a intentarlo dentro de unas horas". Queda para Mateo (instrucciones en el PR #4) |
+| `grep`: `<script` | ✅ Solo el `application/ld+json` |
+| `grep`: `on…=`, `style=`, `<style`, `javascript:`, "hard rock", tabuladores, archivos `.js` | ✅ Ninguno |
+| Anclas | ✅ Cada `href="#…"` tiene su `id` |
+| Imágenes | ✅ Las 2 `<img>` con `alt` de `CONTENT.md`, `width` y `height` reales; la portada con `fetchpriority="high"`, la otra con `loading="lazy"` |
+| Textos frente a `CONTENT.md` (script) | ✅ Los 119 textos y todos los `alt`/`aria-label` están en `CONTENT.md`; solo "EP ·" y "Single ·" son combinaciones de la tabla |
+| Teclado sin CSS (Chrome, Tab real) | ✅ 15 elementos en orden lógico; "Saltar al contenido" lleva a `#contenido` |
+| Skills `accessibility` y `seo` | ✅ Nada que corregir en el HTML. Quedan para otras fases: contraste, foco y objetivos táctiles (4), movimiento (5), `robots.txt`, sitemap, `canonical`, HTTPS y VoiceOver (6) |
+
+**Problemas:**
+
+- El puerto 8000 estaba ocupado por Docker en este equipo. La vista previa se hizo con
+  `python3 -m http.server 8080 --bind 127.0.0.1`.
+- Claude in Chrome no tiene permiso para leer `validator.schema.org` ni las webs de las salas.
+  Se usó `curl` en su lugar.
