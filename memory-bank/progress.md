@@ -188,7 +188,7 @@ Clases BEM preparadas para la fase 4:
 | Validador Nu de W3C (`curl … validator.w3.org/nu/?out=json`) | ✅ 0 errores y 0 avisos |
 | Esquema de títulos | ✅ 1 `h1`; `h2` en Sobre mí, Galería, Trayectoria, Próximas presentaciones y el pie; `h3` en los 6 hitos, Discografía y las 4 ciudades; sin saltos |
 | Validador de schema.org (servicio `validator.schema.org/validate`) | ✅ 0 errores y 0 avisos. Detecta `MusicGroup`, `MusicAlbum`, `MusicRecording`, `MusicEvent` ×4, `MusicVenue`, `PostalAddress`, `Place` y `Offer` |
-| Prueba de resultados enriquecidos de Google | ⚠️ No se pudo pasar: con Claude in Chrome, Google devolvió "Se ha producido un error. Si el problema persiste, vuelve a intentarlo dentro de unas horas". Queda para Mateo (instrucciones en el PR #4) |
+| Prueba de resultados enriquecidos de Google | ✅ La pasó Mateo el 19-11-2026, pegando el bloque JSON-LD (el agente lo intentó con Claude in Chrome y Google respondió "vuelve a intentarlo dentro de unas horas"). Resultado: "Se han detectado 4 elementos válidos", **Eventos** con 4 elementos válidos y "Detectados problemas no críticos": avisos de campos recomendados que no se rellenan porque no hay datos (SEO-04). 0 errores |
 | `grep`: `<script` | ✅ Solo el `application/ld+json` |
 | `grep`: `on…=`, `style=`, `<style`, `javascript:`, "hard rock", tabuladores, archivos `.js` | ✅ Ninguno |
 | Anclas | ✅ Cada `href="#…"` tiene su `id` |

@@ -37,7 +37,7 @@ es la fusión en `main`.
 | `favicon.svg` | ✅ 185 B, aprobado por Mateo |
 | Texturas | ✅ `noise.svg`, `wear-dark.svg`, `wear-light.svg` |
 | `index.html` | ✅ Completo: W3C 0 errores, schema.org 0 errores, teclado correcto (ver `progress.md`, fase 3) |
-| Prueba de resultados enriquecidos de Google | ⚠️ Pendiente: la pasa Mateo |
+| Prueba de resultados enriquecidos de Google | ✅ 4 eventos válidos, solo avisos no críticos (la pasó Mateo) |
 | `styles.css` | ❌ Vacío (fase 4) |
 
 ## Carencias conocidas
