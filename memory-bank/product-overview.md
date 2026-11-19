@@ -1,7 +1,7 @@
 ---
 name: product-overview
 description: Qué es el ejercicio, qué se entrega, con qué restricciones, cómo se evalúa y qué decide cada documento
-last_verified: 2026-11-19 (sobre el commit 1defd93, fase 1)
+last_verified: 2026-11-19 (sobre el commit 2dfeb1f, cierre de la fase 1)
 ---
 
 # Descripción del producto

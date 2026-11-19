@@ -1,7 +1,7 @@
 ---
 name: current-state
 description: Qué hay hoy en el repositorio, qué falta y cuál es la siguiente fase
-last_verified: 2026-11-19 (sobre el commit 1defd93, fase 1)
+last_verified: 2026-11-19 (sobre el commit 2dfeb1f, cierre de la fase 1)
 ---
 
 # Estado actual
@@ -14,7 +14,7 @@ last_verified: 2026-11-19 (sobre el commit 1defd93, fase 1)
 | Fase | Estado |
 |---|---|
 | 0 — Preparación del repositorio | Hecha (PR #1 fusionado) |
-| 1 — Archivos para el agente | En curso |
+| 1 — Archivos para el agente | En revisión (PR pendiente de fusionar) |
 | 2 a 6 | Pendientes |
 
 La tabla que manda es la de [`PLAN.md`](../PLAN.md) §4.
@@ -29,7 +29,7 @@ La tabla que manda es la de [`PLAN.md`](../PLAN.md) §4.
 | Maqueta | ✅ `design/mockup-propuesta-2.html` (solo referencia) |
 | Fotos originales | ✅ 4 JPEG en `assets/images/originals/`, con `CREDITS.md` |
 | Texturas | ✅ `noise.svg`, `wear-dark.svg`, `wear-light.svg` |
-| Reglas, memory bank, skills, `AGENTS.md` | En esta fase (rama `docs/phase-1-agent-harness`) |
+| Reglas, memory bank, skills, `AGENTS.md`, `CLAUDE.md` | ✅ En la rama `docs/phase-1-agent-harness` (PR a `main`, sin fusionar). Prueba en frío superada (ver `progress.md`) |
 | `index.html`, `styles.css` | ❌ No existen (fases 3 y 4) |
 | WebP, `og.jpg`, `favicon.svg` | ❌ No existen (fase 2) |
 

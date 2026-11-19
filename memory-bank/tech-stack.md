@@ -1,7 +1,7 @@
 ---
 name: tech-stack
 description: Tecnologías de la web, cómo previsualizarla y herramientas de trabajo y validación
-last_verified: 2026-11-19 (sobre el commit 1defd93, fase 1)
+last_verified: 2026-11-19 (sobre el commit 2dfeb1f, cierre de la fase 1)
 ---
 
 # Stack tecnológico

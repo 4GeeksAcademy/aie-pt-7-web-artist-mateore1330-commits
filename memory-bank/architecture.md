@@ -1,7 +1,7 @@
 ---
 name: architecture
 description: Estructura de archivos, las 6 partes de la página con su ID y fondo, los bloques de styles.css y cómo se usan texturas y fotos
-last_verified: 2026-11-19 (sobre el commit 1defd93, fase 1)
+last_verified: 2026-11-19 (sobre el commit 2dfeb1f, cierre de la fase 1)
 ---
 
 # Arquitectura
