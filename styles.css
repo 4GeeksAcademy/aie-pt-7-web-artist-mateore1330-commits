@@ -231,3 +231,374 @@ address {
 .tear--ink {
   background: var(--color-ink);
 }
+
+
+/* 5. Componentes ========================================================== */
+
+/* Enlace del menú: barra naranja inclinada debajo al pasar el ratón */
+.nav__link {
+  position: relative;
+  display: inline-block;
+  padding: 15px 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  left: 0;
+  height: 3px;
+  background: var(--color-accent);
+  transform: scaleX(0) skewX(-20deg);
+  transform-origin: left;
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1) skewX(-20deg);
+}
+
+/* Botones (DESIGN.md §6). Alto mínimo de 52px. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 28px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.btn__arrow {
+  flex: none;
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(6px);
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-ink);
+  box-shadow: 6px 6px 0 var(--color-paper);
+}
+
+.btn--primary:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--color-paper);
+}
+
+.btn--ghost {
+  border: 2px solid var(--color-paper);
+  color: var(--color-paper);
+}
+
+.btn--ghost:hover {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Botón de las entradas oscuras */
+.btn--ticket {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.btn--ticket:hover {
+  background: var(--color-accent);
+}
+
+/* Botón de la entrada naranja del festival */
+.btn--ticket-dark {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.btn--ticket-dark:hover {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Sobre fondo naranja, el foco naranja no se vería: pasa a tinta */
+.ticket--festival :focus-visible {
+  outline-color: var(--color-ink);
+}
+
+/* Cinta adhesiva */
+.tape {
+  display: inline-block;
+  padding: 7px 16px;
+  background: color-mix(in srgb, var(--color-paper) 90%, transparent);
+  color: var(--color-text-dark);
+  font-family: var(--font-type);
+  font-size: 15px;
+  clip-path: polygon(2% 0, 98% 6%, 100% 48%, 97% 100%, 3% 94%, 0 52%);
+}
+
+.tape--ink {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* Sello "SOLD OUT" */
+.stamp {
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  padding: 4px 10px;
+  border: 4px double var(--color-accent);
+  background: color-mix(in srgb, var(--color-ink) 60%, transparent);
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-12deg);
+}
+
+/* Foto pegada con cinta (Sobre mí) */
+.polaroid {
+  position: relative;
+  padding: 14px 14px 56px;
+  background: var(--color-white);
+  box-shadow: 0 20px 40px -18px color-mix(in srgb, var(--color-ink) 45%, transparent);
+  transform: rotate(-2.5deg);
+}
+
+.polaroid__tape {
+  position: absolute;
+  top: 6px;
+  z-index: 3;
+  width: 130px;
+  height: 36px;
+  background: color-mix(in srgb, var(--color-paper) 78%, transparent);
+  clip-path: polygon(3% 0, 97% 8%, 100% 50%, 96% 100%, 4% 92%, 0 46%);
+}
+
+.polaroid__tape--left {
+  left: -30px;
+  transform: rotate(-38deg);
+}
+
+.polaroid__tape--right {
+  right: -30px;
+  transform: rotate(36deg);
+}
+
+.polaroid__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 40% center;
+  filter: grayscale(1) contrast(1.3);
+}
+
+.polaroid__caption {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  left: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--color-muted-dark);
+  font-family: var(--font-type);
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+/* Portada de disco */
+.release__cover {
+  display: flex;
+  flex: 0 0 108px;
+  align-items: flex-end;
+  height: 108px;
+  padding: 10px;
+  border: 2px solid var(--color-line-mid);
+  background: var(--color-cover);
+  color: var(--color-label-light);
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.release__cover--ep {
+  border: 0;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-size: 26px;
+  box-shadow: 6px 6px 0 var(--color-paper);
+}
+
+.release:nth-child(1) .release__cover {
+  transform: rotate(-3deg);
+}
+
+.release:nth-child(2) .release__cover {
+  transform: rotate(2deg);
+}
+
+.release:nth-child(3) .release__cover {
+  transform: rotate(-2deg);
+}
+
+.release:nth-child(4) .release__cover {
+  transform: rotate(3deg);
+}
+
+/* Entrada de concierto. Móvil: talón, cuerpo y botón apilados y sin muescas
+   (DESIGN.md §9). Las tres columnas y las muescas van en el bloque 7. */
+.ticket {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--color-ink-2);
+  color: var(--color-paper);
+}
+
+.ticket:nth-child(odd) {
+  transform: rotate(-0.5deg);
+}
+
+.ticket:nth-child(even) {
+  transform: rotate(0.5deg);
+}
+
+.ticket:hover {
+  transform: rotate(0) translateY(-6px);
+  box-shadow: 0 18px 0 -6px var(--color-accent);
+}
+
+.ticket__notch {
+  display: none;
+}
+
+.ticket__stub {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 24px 24px 20px;
+  border-bottom: 2px dashed var(--color-line-stub);
+}
+
+.ticket__day {
+  font-family: var(--font-display);
+  font-size: 68px;
+  line-height: 0.9;
+}
+
+.ticket__date {
+  color: var(--color-muted-light);
+  font-family: var(--font-type);
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.ticket__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 24px 8px;
+}
+
+.ticket__small {
+  color: var(--color-label-light);
+  font-family: var(--font-type);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ticket__city {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ticket__venue {
+  color: var(--color-muted-light);
+  font-size: 18px;
+}
+
+.ticket__action {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px 24px;
+}
+
+/* La entrada del festival: naranja, con la cinta "Cabeza de cartel" */
+.ticket--festival {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.ticket--festival .ticket__stub {
+  border-color: color-mix(in srgb, var(--color-ink) 50%, transparent);
+}
+
+.ticket--festival .ticket__date {
+  color: inherit;
+}
+
+.ticket--festival .ticket__venue {
+  color: inherit;
+  font-weight: 700;
+}
+
+.ticket--festival .tape {
+  transform: rotate(-2deg);
+}
+
+/* Redes */
+.social {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--color-line-mid);
+  color: var(--color-paper);
+}
+
+.social__link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: rotate(-8deg) scale(1.08);
+}
+
+/* Email: subrayado naranja que rellena el fondo al pasar el ratón */
+.mail {
+  padding-bottom: 6px;
+  background: linear-gradient(var(--color-accent), var(--color-accent)) left bottom / 100% 4px no-repeat;
+  font-size: clamp(1.25rem, 2.4vw, 2rem);
+  font-weight: 700;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.mail:hover {
+  background-size: 100% 100%;
+  color: var(--color-ink);
+}
