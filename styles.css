@@ -602,3 +602,153 @@ address {
   background-size: 100% 100%;
   color: var(--color-ink);
 }
+
+
+/* 6. Secciones ============================================================ */
+
+/* Cabecera: encima de la portada, transparente */
+.site-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 40px;
+  padding-block: 24px;
+}
+
+.site-header__logo {
+  padding: 12px 0;
+  color: var(--color-paper);
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Portada */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: var(--color-ink);
+}
+
+.hero__photo,
+.hero__tint,
+.hero__light,
+.hero__shade {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  filter: grayscale(1) contrast(1.35) brightness(0.8);
+}
+
+.hero__tint {
+  background: var(--color-accent);
+  mix-blend-mode: multiply;
+  opacity: 0.45;
+}
+
+.hero__light {
+  background: radial-gradient(ellipse 45% 38% at 60% 16%, color-mix(in srgb, var(--color-light) 42%, transparent), transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.hero__shade {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-ink) 55%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 10%, transparent) 30%,
+    color-mix(in srgb, var(--color-ink) 75%, transparent) 72%,
+    var(--color-ink) 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+  gap: 32px 40px;
+  padding-top: 200px;
+  padding-bottom: 110px;
+}
+
+.hero__kicker {
+  margin-bottom: -12px;
+  color: var(--color-accent);
+  font-family: var(--font-type);
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 15vw, 15rem);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+  transform-origin: left bottom;
+}
+
+.hero__line {
+  display: block;
+  padding-bottom: 0.04em;
+}
+
+.hero__tagline {
+  max-width: 22ch;
+  font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero__tagline-end {
+  color: var(--color-accent);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.hero__credit {
+  position: absolute;
+  right: 20px;
+  bottom: 64px;
+  z-index: 3;
+  color: var(--color-muted-light);
+  font-family: var(--font-type);
+  font-size: 12px;
+  writing-mode: vertical-rl;
+}
