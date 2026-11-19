@@ -240,6 +240,19 @@ Clases BEM preparadas para la fase 4:
   la portada. Sin él, "ROCK · MADRID" (naranja sobre el humo) se quedaba en ≈ 2,8:1 y el menú en
   móvil en 4,35:1. La foto y los colores no cambian (`49f544a`).
 
+- **Menú hamburguesa en móvil** (pedido por Mateo al revisar el PR #5).
+
+  - **Técnica:** `<details>` y `<summary>`, sin JavaScript.
+  - **Botón:** "MENÚ", con un icono de tres rayas que pasa a X al abrirse. El texto se añadió a
+    `CONTENT.md` §1 y el diseño, a `DESIGN.md` §6 y §9 (`dc181ff`).
+  - **Panel:** al abrirse, los enlaces aparecen en un panel de tinta a todo el ancho, debajo de la
+    cabecera.
+  - **Escritorio:** `::details-content { content-visibility: visible }` muestra siempre los enlaces
+    y oculta el botón. Va dentro de `@supports selector(::details-content)`: si el navegador no lo
+    entiende, se queda el botón y el menú sigue funcionando.
+  - **Limitación:** sin JavaScript, el panel no se cierra solo al tocar un enlace. Como la cabecera
+    no es fija, se queda arriba al bajar y no tapa nada.
+
 **Otros ajustes sin cambio de diseño** (`a8870ec`, `49f544a`):
 
 - **Tildes:** la caja de los títulos con tinta gastada se amplía arriba y abajo
@@ -268,11 +281,14 @@ Clases BEM preparadas para la fase 4:
 | Contraste sobre la foto de portada (píxeles reales detrás del texto, mediana) | ✅ Menú ≥ 8,4:1; logo ≥ 13:1; antetítulo 5,45 (1440), 4,96 (375) y 5,77:1 (768); lema ≥ 16:1 |
 | `grep`: colores fuera de `:root`, `!important`, `@keyframes`, `transition`, `animation`, `_blob` | ✅ Ninguno |
 | Zoom al 200 % (720 × 450 CSS): solapes de texto | ✅ Ninguno |
-| Foco visible con Tab en los 15 elementos | ✅ Contorno de 3px: naranja, y tinta en la entrada del festival |
+| Foco visible con Tab en los 15 elementos (escritorio) | ✅ Contorno de 3px: naranja, y tinta en la entrada del festival |
+| Menú en móvil (375px) | ✅ Cerrado, los enlaces están ocultos. El botón "MENÚ" mide 44px de alto y tiene un contraste de 11,1:1 sobre la foto. Se abre y se cierra con Enter y con Espacio, y el siguiente Tab va a "Sobre mí". Cada enlace del panel mide 51px. W3C sigue con 0 errores. En 861 y 1440px, el botón está oculto y se ven los 3 enlaces |
 | `index.html` sin cambios y sin `style=""` | ✅ |
 | Capturas a 1440, 768 y 375px, por sección | ✅ En `design/screenshots/fase-4/`. Las compara Mateo con la maqueta |
 
 **A tener en cuenta en la fase 5:**
+
+- Fase 6: comprobar con VoiceOver cómo se anuncia el botón "Menú" (abierto o cerrado).
 
 - La subida del nombre por líneas (`iw-rise`) necesita una máscara: en la maqueta, cada línea
   lleva un `span` dentro de otro con `overflow: hidden`. En `index.html`, cada línea es un solo
