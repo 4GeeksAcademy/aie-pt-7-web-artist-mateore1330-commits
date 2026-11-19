@@ -47,6 +47,10 @@ Se definen como variables en `:root` y no se usa ningún color fuera de esta lis
 | `--color-label-light` | `#8C8983` | Etiquetas pequeñas y copyright sobre fondo oscuro |
 | `--color-line-dark` | `#2E2E2E` | Líneas y bordes sobre fondo oscuro |
 | `--color-line-mid` | `#3A3A3A` | Bordes de botones de redes, portadas de singles |
+| `--color-cover` | `#1C1C1C` | Fondo de las portadas de los singles (§6) |
+| `--color-outline` | `#2A2A2A` | Contorno de "IRON WOLF" gigante del pie (§8) |
+| `--color-line-stub` | `#4A4A4A` | Línea discontinua del talón de las entradas oscuras (§6) |
+| `--color-light` | `#FFE2BE` | Foco de luz cálida de la portada, al 42 % de opacidad (§7, §8) |
 
 **Contraste (aproximado; se verifica con herramienta en la fase de pruebas):**
 todas las combinaciones de texto superan 4,5:1. Las más justas son `--color-accent` sobre
@@ -74,9 +78,9 @@ Tres familias de Google Fonts, cargadas con `<link>` en el `<head>` (es CSS, no 
 | Elemento | Tamaño | Detalles |
 |---|---|---|
 | `h1` "IRON WOLF" | `clamp(4.5rem, 15vw, 15rem)` | Mayúsculas, interlineado 0,82, `letter-spacing: -.03em`, girado −2° |
-| `h2` de sección | `clamp(3.25rem, 8vw, 7.5rem)` | Mayúsculas, interlineado 0,88. "Próximas presentaciones": `clamp(3rem, 7vw, 6.5rem)` |
+| `h2` de sección | `clamp(3.25rem, 8vw, 7.5rem)` | Mayúsculas, interlineado 0,88. Ajustes aprobados por Mateo en la fase 4 para que la palabra más larga quepa: en móvil, `clamp(2rem, 11vw, 3.25rem)` ("Próximas presentaciones": `clamp(1.75rem, 8.5vw, 3rem)`); en escritorio, "Trayectoria" `clamp(3.25rem, calc(8.6vw - 16px), 6.7rem)` y "Próximas presentaciones" `clamp(2.5rem, calc(6.7vw - 12px), 5.25rem)` |
 | `h2` del pie | `clamp(2.5rem, 6vw, 5.75rem)` | Mayúsculas |
-| Ciudad en la entrada (`h3`) | 44px | Archivo Black, mayúsculas |
+| Ciudad en la entrada (`h3`) | 44px | Archivo Black, mayúsculas. Escala por debajo de ~1100px para que "VALLADOLID" quepa (fase 4): `clamp(1.75rem, calc(14vw - 14px), 2.75rem)` en móvil y `clamp(1.75rem, calc(14vw - 92px), 2.75rem)` en escritorio |
 | Año de la línea del tiempo | 56px | Solo contorno (ver §6) |
 | Día en el talón de la entrada | 68px | Archivo Black |
 | Lema de la portada | `clamp(1.4rem, 2.4vw, 2.1rem)` | Archivo 700 |
@@ -158,7 +162,9 @@ Próximas presentaciones → tinta.
 
 | Componente | Cómo es |
 |---|---|
-| **Cabecera** | Encima de la portada (`position: absolute`), transparente. Logo "IRON WOLF" a la izquierda; menú a la derecha. En móvil, el menú pasa debajo del logo y sus enlaces se reparten en varias líneas si no caben. |
+| **Cabecera** | **Fija arriba** (`position: fixed`): el logo y el menú bajan contigo al hacer scroll (pedido por Mateo en la fase 4). Logo "IRON WOLF" a la izquierda; menú a la derecha. Sobre la portada es transparente; al bajar, en los primeros 120px de scroll, aparece el fondo de tinta (§7). Si el navegador no admite las animaciones de scroll, el fondo es de tinta desde el principio. La página lleva `scroll-padding-top` con el alto de la cabecera (102px): al saltar a una sección o al moverse con el teclado, la cabecera no tapa el título ni el elemento con foco. Sin JavaScript no se puede esconder al bajar y mostrar al subir. |
+| **Menú en móvil (hamburguesa)** | Por debajo de 861px, los enlaces se recogen tras un botón "MENÚ" con el icono de tres rayas (Archivo 700, mayúsculas, borde de 2px en papel, alto de 44px o más). Al abrirlo, un fondo de tinta con grano cubre **toda la pantalla**: arriba quedan el logo y, en el sitio de "MENÚ", el botón "✕ CERRAR" (mismo marco). "CERRAR" apunta a la propia cabecera (`#cabecera`), que es fija: el menú se cierra sin mover la página. Debajo, los tres enlaces con el estilo del menú (Archivo 700, 14px, mayúsculas, papel), uno por línea, de 44px o más y separados por líneas `--color-line-dark`. **Toques de naranja** (pedidos por Mateo): delante de cada enlace, su número de sección ("01 /", "03 /", "04 /") en Special Elite naranja; a la derecha, una flecha → naranja; el botón "✕ CERRAR" relleno de naranja con el texto en tinta, y abajo del todo un borde rasgado naranja (§5.3). Los números y las flechas son decorativos (`aria-hidden="true"`) y no se ven en escritorio. Mientras está abierto, la página no hace scroll. **Se cierra** con "CERRAR", que te deja donde estabas, o al pulsar una sección, que lleva a ella. En escritorio el menú se ve siempre en línea, sin botón. Decidido por Mateo en la fase 4. |
+| **Por qué `:target`** | Sin JavaScript, es la única técnica en la que el menú se cierra solo al pulsar una sección: "MENÚ" es un enlace a `#menu` y el panel se muestra con `#menu:target`; al ir a `#trayectoria`, deja de estar apuntado y desaparece. Con `<details>`, *popover* o una casilla oculta, el panel se quedaría abierto. **Lo que se pierde:** el lector de pantalla oye "enlace" en vez de "botón, expandido o contraído"; la tecla Esc no cierra el menú; la dirección muestra `#menu` mientras está abierto, y el botón "Atrás" lo cierra. |
 | **Enlace del menú** | Archivo 700, mayúsculas. Al pasar el ratón, aparece debajo una barra naranja inclinada (−20°) que crece de izquierda a derecha. |
 | **Enlace "Saltar al contenido"** | Oculto fuera de la pantalla; al recibir el foco del teclado, aparece arriba a la izquierda con fondo naranja. |
 | **Botón principal** | Fondo naranja, texto tinta, sombra dura de 6px en papel (sin difuminar). Al pasar el ratón, el botón "se hunde" 3px y la sombra baja a 3px. Flecha que avanza 6px. |
@@ -176,6 +182,7 @@ Próximas presentaciones → tinta.
 | **Entrada de concierto** | Tres columnas: talón con la fecha (200px), cuerpo (ciudad y recinto) y botón. El talón se separa con una línea discontinua de 2px y dos muescas circulares de 28px (arriba y abajo) del color del fondo. Las entradas están giradas ±0,5° de forma alterna. Al pasar el ratón, se enderezan, suben 6px y aparece debajo una sombra naranja. Las tres de sala son oscuras (`--color-ink-2`); la del festival es naranja con la cinta "Cabeza de cartel". |
 | **Redes** | Cuadrados de 52px con borde de 2px e icono de línea de 22px. Al pasar el ratón, borde e icono naranjas, giro de −8° y escala de 1,08. |
 | **Email** | Subrayado naranja de 4px que, al pasar el ratón, sube hasta rellenar todo el fondo del enlace (el texto pasa a tinta). |
+| **Botón "Volver al inicio"** | Cuadrado naranja de 52px con una flecha ↑ en tinta, borde de tinta de 2px y sombra dura de papel de 4px, fijo abajo a la derecha. Lleva a la portada (`#inicio`). Para que **no tape el contenido**: en escritorio va dentro del margen lateral de 64px (a 6px del borde), y no pisa nada; en móvil no hay margen, así que solo aparece al llegar a Próximas presentaciones, la recta final de la página (a 20px del borde). En escritorio aparece al dejar atrás la portada (§7). Mientras está oculto no se puede pulsar ni alcanzar con el teclado. La página lleva `scroll-padding-bottom` de 84px para que un elemento con foco no quede detrás del botón (WCAG 2.2, 2.4.11). Si el navegador no admite las animaciones de scroll, se ve siempre. Foco: doble anillo de tinta y papel. Al pasar el ratón, fondo papel. Pedido por Mateo en la fase 4. |
 
 ---
 
@@ -203,6 +210,9 @@ transiciones.**
 | Deriva | "LIVE" de fondo | Scroll | Se desplaza en horizontal |
 | Interferencia automática | Fotos de la galería | Cada 6 s (la segunda, desfasada 3 s) | La copia teñida de naranja aparece cortada en franjas desplazadas durante un instante |
 | Interferencia al pasar el ratón | Fotos de la galería | Ratón encima | Flash blanco, contraste al máximo, zoom de 1,06 con giro de −0,6° y franjas cortadas continuas en naranja y en negativo |
+| Fondo de la cabecera | Cabecera fija | Scroll (0–120px) | El fondo pasa de transparente a tinta. Se adelantó a la fase 4 |
+| Aparición del botón "Volver al inicio" | Botón ↑ | Scroll: en escritorio, al final de la portada; en móvil, al llegar a Próximas presentaciones | Pasa de oculto a visible. Se adelantó a la fase 4 |
+| Desplazamiento suave | Toda la página | Al pulsar un enlace interno | `scroll-behavior: smooth`, solo si no se ha pedido reducir el movimiento. Se adelantó a la fase 4 |
 
 ---
 
@@ -222,6 +232,7 @@ transiciones.**
 ## 9. Móvil (por debajo de 860px)
 
 - Todas las rejillas a una columna; márgenes laterales de 20px.
+- El menú se recoge en un botón hamburguesa "MENÚ" (ver §6, "Menú en móvil").
 - La segunda foto de la galería no se baja (`margin-top: 0`).
 - Entradas de concierto: talón, cuerpo y botón apilados; el talón se separa con la línea
   discontinua abajo y desaparecen las muescas.

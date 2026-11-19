@@ -1,0 +1,3 @@
+# El formato de index.html lo fija .agents/rules/html.md (HT-07): Prettier
+# añade "/>" y parte líneas al guardar en VS Code.
+index.html

@@ -1,7 +1,7 @@
 ---
 name: progress
 description: Registro por fase — qué se hizo, decisiones, problemas y cómo se verificó
-last_verified: 2026-11-19 (sobre el commit 748bb32, cierre de la fase 3)
+last_verified: 2026-11-19 (sobre el commit c3eaf17, cierre de la fase 4)
 ---
 
 # Progreso
@@ -134,7 +134,7 @@ sips -c 630 1200 --cropOffset 540 0 hero-1200.jpg --out assets/images/og.jpg
 - El favicon se renderizó a 256 px.
 - `CREDITS.md` sigue siendo correcto: los nombres de archivo no cambian.
 
-## Fase 3 — Estructura HTML, SEO y Schema.org (rama `feat/phase-3-html`)
+## Fase 3 — Estructura HTML, SEO y Schema.org (PR #4, fusionado el 19-11-2026)
 
 **Qué se hizo:**
 
@@ -203,3 +203,155 @@ Clases BEM preparadas para la fase 4:
   `python3 -m http.server 8080 --bind 127.0.0.1`.
 - Claude in Chrome no tiene permiso para leer `validator.schema.org` ni las webs de las salas.
   Se usó `curl` en su lugar.
+
+## Fase 4 — Estilos sin animaciones (rama `feat/phase-4-css`)
+
+**Qué se hizo:** `styles.css` completo y quieto. No lleva `@keyframes`, `transition` ni
+`animation`.
+
+- **Bloques:** 1 Variables, 2 Base, 3 Utilidades, 4 Texturas, 5 Componentes, 6 Secciones y
+  7 Escritorio (CS-05).
+- **Primero móvil:** la base es de una columna y hay un único `@media (min-width: 861px)` (CS-03).
+- **Pendiente para la fase 5:** los bloques 8 (Animaciones) y 9 (Movimiento reducido).
+- `index.html` no ha cambiado.
+
+**Decisiones de Mateo durante la fase:**
+
+- **4 colores más en `DESIGN.md` §2**, como variables de `:root`:
+  - `--color-cover` `#1C1C1C`: portadas de los singles.
+  - `--color-outline` `#2A2A2A`: contorno de "IRON WOLF".
+  - `--color-line-stub` `#4A4A4A`: línea discontinua del talón.
+  - `--color-light` `#FFE2BE`: foco de luz de la portada.
+
+  Los 2 primeros ya los usaba `DESIGN.md` fuera de la tabla. Los 2 últimos salían de la maqueta
+  (commit `b0d72f7`).
+- **Tamaños ajustados para que quepa la palabra más larga.** Con los valores de `DESIGN.md`,
+  "TRAYECTORIA" y "PRESENTACIONES" se cortaban a 1440px (lo que sobresale de la caja no recibe
+  la textura) y se salían de la pantalla en móvil. "BARCELONA" y "VALLADOLID" se salían de la
+  entrada. Mateo eligió reducir lo justo; los valores están anotados en `DESIGN.md` §3 (`837e589`):
+
+  | Elemento | Móvil | Escritorio |
+  |---|---|---|
+  | `h2` de sección | `clamp(2rem, 11vw, 3.25rem)` | `clamp(3.25rem, 8vw, 7.5rem)`, el de `DESIGN.md` |
+  | "Próximas presentaciones" | `clamp(1.75rem, 8.5vw, 3rem)` | `clamp(2.5rem, calc(6.7vw - 12px), 5.25rem)`, unos 86px a 1440 |
+  | "Trayectoria" | Igual que el resto de `h2` | Unos 111px a 1440 y con tope a partir de ahí |
+  | Ciudad de la entrada | Hasta 44px | Escala entre 861 y ~1100px; a partir de ahí, 44px |
+- **Halo oscuro** (`text-shadow` en tinta) detrás del logo, el menú, el antetítulo y el lema de
+  la portada. Sin él, "ROCK · MADRID" (naranja sobre el humo) se quedaba en ≈ 2,8:1 y el menú en
+  móvil en 4,35:1. La foto y los colores no cambian (`49f544a`).
+
+- **Menú hamburguesa en móvil a pantalla completa** (pedido por Mateo al revisar el PR #5; lo
+  hablamos antes de implementarlo).
+
+  - **Primer intento** (`d3c5e80`): `<details>` y `<summary>`. Se descartó porque el panel no se
+    cerraba al pulsar una sección.
+  - **Versión final:** técnica `:target`, sin JavaScript.
+    - "MENÚ" es un enlace a `#menu`, y el panel (`id="menu"`) se muestra a pantalla completa con
+      `#menu:target`.
+    - Al pulsar una sección, la dirección cambia, el panel desaparece y la página baja a esa
+      sección.
+    - "✕ CERRAR" lleva a `#inicio`, que es la portada, y se anuncia como "Cerrar menú".
+    - Con `html:has(#menu:target)`, la página no hace scroll mientras el menú está abierto.
+  - **Lo que se pierde**, aceptado por Mateo y anotado en `DESIGN.md` §6:
+    - El lector de pantalla oye "enlace" en vez de "botón, expandido o contraído".
+    - Esc no cierra el menú.
+    - La dirección muestra `#menu` mientras está abierto.
+  - **Textos nuevos en `CONTENT.md` §1:** "Menú", "Cerrar" y "Cerrar menú".
+  - **Toques de naranja** (pedido por Mateo):
+    - Número de sección ("01 /", "03 /", "04 /") en Special Elite naranja delante de cada enlace, y
+      flecha → naranja a la derecha. Los dos son decorativos (`aria-hidden`): el lector de pantalla
+      sigue oyendo solo "Sobre mí", "Trayectoria" y "Próximas presentaciones".
+    - "CERRAR" relleno de naranja con el texto en tinta (5,73:1).
+    - Borde rasgado naranja abajo del todo. La forma de los dientes vive ahora en `--tear-shape`,
+      para no repetir el polígono.
+    - Nada de esto se ve en escritorio.
+  - **Ajustes para móviles estrechos:**
+    - Hueco entre el logo y el menú: 16px en móvil y 40px en escritorio. Antes, a 320px, el botón
+      bajaba a una segunda línea.
+    - Botones del menú con 12px de relleno y un espaciado de letra de 0,14em, para que "CERRAR" no
+      toque el logo.
+    - Enlaces del panel con un espaciado de 0,14em, para que "PRÓXIMAS PRESENTACIONES" quepa en una
+      línea desde 375px (a 320px se parte en dos).
+  - **Prettier:** al guardar en VS Code, reformateaba `index.html` (`/>` en las etiquetas vacías,
+    líneas partidas). Mateo eligió descartar ese formato, y el `.prettierignore` lo evita.
+
+- **Cabecera fija y botón "Volver al inicio"** (pedidos por Mateo; lo hablamos antes de
+  implementarlo).
+
+  - **Cabecera fija** (`position: fixed`, alto de 102px):
+    - Transparente sobre la portada; el fondo de tinta aparece en los primeros 120px de scroll,
+      con `animation-timeline: scroll(root)`. Sin soporte, es de tinta desde el principio.
+    - Al saltar a una sección, su borde queda a 102px y el título no se tapa (`scroll-padding-top`,
+      ver abajo).
+    - "✕ CERRAR" apunta ahora a `#cabecera`, la propia cabecera fija: el menú se cierra sin mover
+      la página. Comprobado en Chrome a 4000px; queda pendiente probarlo en Safari en un iPhone.
+  - **Botón "Volver al inicio"** (aviso del lector de pantalla, añadido a `CONTENT.md`):
+    - Un cuadrado naranja de 52px con una flecha ↑, fijo abajo a la derecha.
+    - Lleva borde de tinta y sombra dura de papel para destacar también sobre la Galería naranja.
+    - En escritorio aparece entre el 60 % y el 80 % de la altura de la portada (`scroll(root)`,
+      `60svh 80svh`); en móvil, ver abajo. Oculto, tiene `visibility: hidden`: no se puede
+      pulsar ni enfocar.
+    - Foco: doble anillo de papel y tinta.
+  - **Para que el botón no tape el contenido** (Mateo eligió las tres medidas):
+    - **Escritorio:** el botón va dentro del margen lateral de 64px (a 6px del borde). Comprobado
+      a 861, 1440 y 1920px: no pisa ningún elemento de contenido.
+    - **Móvil y tableta:** no hay margen, así que solo aparece al llegar a Próximas
+      presentaciones (`view-timeline` de `.shows`, `entry 40%` a `entry 60%`). Ahí puede pisar el
+      lado derecho de una entrada; es lo aceptado.
+    - **Foco:** `scroll-padding-top: 102px` y `scroll-padding-bottom: 84px` en `html`. Con el
+      teclado, ningún elemento con foco queda bajo la cabecera ni detrás del botón (WCAG 2.2,
+      2.4.11). Sustituye al `scroll-margin-top` de las secciones, y los saltos siguen cayendo a
+      102px.
+  - **Desplazamiento suave:** `scroll-behavior: smooth`, solo con
+    `prefers-reduced-motion: no-preference`.
+  - **Se adelantan a la fase 4** dos piezas de la fase 5: el bloque 8 (Animaciones) de
+    `styles.css` empieza con el fondo de la cabecera y la aparición del botón, y el desplazamiento
+    suave va en el bloque Base.
+  - **No se puede sin JavaScript:** esconder la cabecera al bajar y mostrarla al subir.
+
+**Otros ajustes sin cambio de diseño** (`a8870ec`, `49f544a`):
+
+- **Tildes:** la caja de los títulos con tinta gastada se amplía arriba y abajo
+  (`padding-block` y `margin-block` negativo). Sin eso, la textura no pintaba las tildes de "MÍ",
+  "RÍ" y "Ó".
+- **Foto de Sobre mí en móvil y tableta:** centrada y con un ancho máximo de 520px. Así ni la
+  foto girada ni la cinta se salen de la pantalla.
+- **Crédito vertical de la portada en móvil:** el contenido le deja 28px a la derecha para no
+  montarse sobre el botón.
+- **Enlaces del menú:** relleno vertical de 15px en vez de los 12px de la maqueta, para llegar a
+  44px de alto (A11Y-07).
+- **Foco en la entrada del festival:** pasa a tinta, porque el naranja sobre naranja no se veía.
+- **Sombra de la foto pegada:** usa la tinta al 45 % en vez del negro de la maqueta, para no
+  meter un color fuera de la paleta.
+- **"IRON WOLF" del pie:** es más ancho que la pantalla y queda recortado por los lados (igual que
+  en la maqueta).
+
+**Verificación (19-11-2026, Playwright 1.65 con el Chrome del equipo, fuera del repo):**
+
+| Comprobación | Resultado |
+|---|---|
+| Sin scroll horizontal (`scrollWidth` = `clientWidth`) en 320, 360, 375, 414, 480, 600, 720, 768, 860, 861, 900, 1024, 1100, 1280, 1440 y 1920px | ✅ En todos |
+| Ningún título más ancho que su caja (mismos 16 anchos) | ✅ En todos |
+| Cada `section` mide al menos el alto de la ventana a 1440 × 900 y a 375 × 812 | ✅ Las 5 |
+| Contraste de los colores planos (21 parejas de texto y fondo) | ✅ Todas ≥ 4,5:1; la más baja, 4,89:1 |
+| Contraste sobre la foto de portada (píxeles reales detrás del texto, mediana) | ✅ Menú ≥ 8,4:1; logo ≥ 13:1; antetítulo 5,45 (1440), 4,96 (375) y 5,77:1 (768); lema ≥ 16:1 |
+| `grep`: colores fuera de `:root`, `!important`, `@keyframes`, `transition`, `animation`, `_blob` | ✅ Ninguno |
+| Zoom al 200 % (720 × 450 CSS): solapes de texto | ✅ Ninguno |
+| Foco visible con Tab en los 15 elementos (escritorio) | ✅ Contorno de 3px: naranja, y tinta en la entrada del festival |
+| Menú en móvil (375px, táctil) | ✅ Cerrado, los enlaces están ocultos. Al tocar "MENÚ", la dirección pasa a `#menu` y el panel ocupa 375 × 812; el logo queda encima y "CERRAR" ocupa el sitio de "MENÚ" (mismo borde derecho y la misma altura). Con el menú abierto, la rueda no mueve la página. "Trayectoria" cierra el menú y lleva a la sección. "CERRAR" cierra y deja en la portada. "Atrás" vuelve a abrirlo y otro "Atrás" lo cierra. Con teclado: Enter en "MENÚ" lo abre y Tab recorre "Cerrar menú" → Sobre mí → Trayectoria → Próximas presentaciones. En escritorio, incluso con `#menu`, no hay botones y la página hace scroll. W3C: 0 errores. El botón tiene un contraste de 11,1:1 sobre la foto |
+| `index.html` sin cambios y sin `style=""` | ✅ |
+| Capturas a 1440, 768 y 375px, por sección | ✅ En `design/screenshots/fase-4/`. Las compara Mateo con la maqueta |
+
+**A tener en cuenta en la fase 5:**
+
+- Fase 6: comprobar con VoiceOver el menú de móvil: "Menú, enlace", "Cerrar menú, enlace" y que el panel cerrado no se lee.
+
+- La subida del nombre por líneas (`iw-rise`) necesita una máscara: en la maqueta, cada línea
+  lleva un `span` dentro de otro con `overflow: hidden`. En `index.html`, cada línea es un solo
+  `span`. Habrá que añadir el `span` interior (con aviso en el PR) o hacer la máscara con
+  `clip-path`.
+- El flash blanco de la galería usa `--color-white`, que `DESIGN.md` §2 reserva para el marco de
+  la foto. §6 describe el flash blanco, así que se mantiene.
+- En el bloque de movimiento reducido harán falta `!important`; CS-06 lo permite solo ahí.
+- El bloque 8 ya tiene `header-fill` y `to-top-in`. Al apagar las animaciones con movimiento
+  reducido, la cabecera queda de tinta y el botón visible, que es su estado seguro. Comprobarlo.

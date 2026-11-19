@@ -1,7 +1,7 @@
 ---
 name: tech-stack
 description: Tecnologías de la web, cómo previsualizarla y herramientas de trabajo y validación
-last_verified: 2026-11-19 (sobre el commit 748bb32, cierre de la fase 3)
+last_verified: 2026-11-19 (sobre el commit c3eaf17, cierre de la fase 4)
 ---
 
 # Stack tecnológico
@@ -42,7 +42,7 @@ El `server.py` de la plantilla también vale, pero necesita Flask (`pip3 install
 | Lighthouse | Accesibilidad 100, SEO | Chrome DevTools |
 | Validador de schema.org | JSON-LD: 0 errores | https://validator.schema.org |
 | Prueba de resultados enriquecidos | Que detecte los eventos | https://search.google.com/test/rich-results |
-| Playwright | Capturas y pruebas en el navegador (skill `rx-test-web`) | Fases 4–6 |
+| Playwright | Capturas y medidas en el navegador (skill `rx-test-web`) | `playwright-core` 1.65 instalado con npm **fuera del repo** (scratchpad de la sesión), con `channel: "chrome"` (el Chrome del equipo). El repo sigue sin dependencias |
 | VoiceOver | Prueba real con lector de pantalla | macOS |
 | Python 3.14 | Servidor de vista previa | Sistema |
 

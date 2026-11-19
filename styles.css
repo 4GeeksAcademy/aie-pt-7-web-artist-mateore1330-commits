@@ -1,5 +1,1635 @@
 /* =========================================================================
    Iron Wolf — styles.css
-   Todos los estilos de la web. Se rellena en la fase 4 (estilos) y en la
-   fase 5 (animaciones). Reglas: .agents/rules/css.md
+   Todos los estilos de la web. Reglas: .agents/rules/css.md
+   Valores: DESIGN.md (manda) y design/mockup-propuesta-2.html (referencia).
+   Primero móvil: la base es para móvil y el bloque 7 añade el escritorio.
    ========================================================================= */
+
+
+/* 1. Variables ============================================================ */
+
+:root {
+  /* Colores (DESIGN.md §2). No se usa ningún color fuera de esta lista. */
+  --color-ink: #0E0E0E;
+  --color-ink-2: #161616;
+  --color-paper: #F2F0EC;
+  --color-white: #FFFFFF;
+  --color-accent: #E0692F;
+  --color-accent-ink: #A04A20;
+  --color-text-dark: #111111;
+  --color-muted-dark: #3D3B38;
+  --color-label-dark: #55534F;
+  --color-muted-light: #BDBAB4;
+  --color-label-light: #8C8983;
+  --color-line-dark: #2E2E2E;
+  --color-line-mid: #3A3A3A;
+  --color-cover: #1C1C1C;
+  --color-outline: #2A2A2A;
+  --color-line-stub: #4A4A4A;
+  --color-light: #FFE2BE;
+
+  /* Fuentes (DESIGN.md §3) */
+  --font-display: "Archivo Black", "Arial Black", sans-serif;
+  --font-body: "Archivo", system-ui, sans-serif;
+  --font-type: "Special Elite", ui-monospace, monospace;
+
+  /* Medidas (DESIGN.md §4) */
+  --max-width: 1440px;
+  --gutter: 20px;
+  --section-pad-top: 112px;
+  --section-pad-bottom: 140px;
+  --tear-height: 44px;
+  /* Alto de la cabecera fija: 24px + fila de 54px + 24px */
+  --header-height: 102px;
+  /* Dientes del borde rasgado (DESIGN.md §5.3) */
+  --tear-shape: polygon(0 100%, 0 55%, 4% 72%, 8% 34%, 13% 62%, 17% 40%, 22% 76%, 27% 30%, 31% 58%, 36% 44%, 41% 80%, 45% 38%, 50% 66%, 55% 26%, 59% 60%, 64% 42%, 69% 78%, 73% 36%, 78% 64%, 83% 32%, 87% 70%, 92% 44%, 96% 68%, 100% 40%, 100% 100%);
+
+  /* Texturas (DESIGN.md §5) */
+  --texture-noise: url("assets/textures/noise.svg");
+  --texture-wear-dark: url("assets/textures/wear-dark.svg");
+  --texture-wear-light: url("assets/textures/wear-light.svg");
+}
+
+
+/* 2. Base ================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Hueco para la cabecera fija (arriba) y el botón "Volver al inicio"
+     (abajo): al saltar a un ancla o moverse con el teclado, el navegador
+     no deja nada debajo de ellos (WCAG 2.2, 2.4.11) */
+  scroll-padding-top: var(--header-height);
+  scroll-padding-bottom: 84px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Desplazamiento suave en los enlaces internos, salvo si se ha pedido
+   reducir el movimiento (DESIGN.md §7 y §12) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+dl,
+dd {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+cite {
+  font-style: normal;
+}
+
+small {
+  font-size: inherit;
+}
+
+address {
+  font-style: normal;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -80px;
+  left: 16px;
+  z-index: 60;
+  padding: 12px 20px;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+.hero,
+.section {
+  position: relative;
+  min-height: 100svh;
+}
+
+
+/* 3. Utilidades =========================================================== */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden,
+.ticket__sep {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* 4. Texturas ============================================================= */
+
+/* Grano de película (DESIGN.md §5.1). Se anima en la fase 5. */
+.grain {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  z-index: 50;
+  width: 200%;
+  height: 200%;
+  background: var(--texture-noise) repeat;
+  background-size: 300px 300px;
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Tinta gastada dentro de las letras (DESIGN.md §5.2). Dos capas de fondo:
+   la textura encima y el color del texto debajo. Si la textura no carga, el
+   título se ve en su color liso. El texto sigue siendo texto real. */
+.hero__line,
+.career .section__title,
+.discography__title,
+.site-footer__title,
+.about .section__title,
+.shows .section__title,
+.gallery .section__title {
+  /* La textura solo se pinta dentro de la caja: se amplía arriba y abajo
+     para que no se corten las tildes ni la coma, sin mover el texto. */
+  margin-block: -0.14em -0.08em;
+  padding-block: 0.14em 0.08em;
+  color: transparent;
+  background-size: 500px 500px, auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Títulos claros sobre fondo oscuro: arañazos oscuros */
+.hero__line,
+.career .section__title,
+.discography__title,
+.site-footer__title {
+  background-image: var(--texture-wear-dark), linear-gradient(var(--color-paper), var(--color-paper));
+}
+
+/* Títulos oscuros sobre fondo claro: arañazos claros */
+.about .section__title,
+.shows .section__title {
+  background-image: var(--texture-wear-light), linear-gradient(var(--color-text-dark), var(--color-text-dark));
+}
+
+/* "Galería": tinta sobre naranja, con arañazos claros */
+.gallery .section__title {
+  background-image: var(--texture-wear-light), linear-gradient(var(--color-ink), var(--color-ink));
+}
+
+/* Bordes rasgados (DESIGN.md §5.3): del color de la sección siguiente */
+.tear {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  z-index: 4;
+  height: var(--tear-height);
+  clip-path: var(--tear-shape);
+  pointer-events: none;
+}
+
+.tear--paper {
+  background: var(--color-paper);
+}
+
+.tear--accent {
+  background: var(--color-accent);
+}
+
+.tear--ink {
+  background: var(--color-ink);
+}
+
+
+/* 5. Componentes ========================================================== */
+
+/* Enlace del menú: barra naranja inclinada debajo al pasar el ratón */
+.nav__link {
+  position: relative;
+  display: inline-block;
+  padding: 15px 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  left: 0;
+  height: 3px;
+  background: var(--color-accent);
+  transform: scaleX(0) skewX(-20deg);
+  transform-origin: left;
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1) skewX(-20deg);
+}
+
+/* Botones (DESIGN.md §6). Alto mínimo de 52px. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 28px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.btn__arrow {
+  flex: none;
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(6px);
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-ink);
+  box-shadow: 6px 6px 0 var(--color-paper);
+}
+
+.btn--primary:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--color-paper);
+}
+
+.btn--ghost {
+  border: 2px solid var(--color-paper);
+  color: var(--color-paper);
+}
+
+.btn--ghost:hover {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Botón de las entradas oscuras */
+.btn--ticket {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.btn--ticket:hover {
+  background: var(--color-accent);
+}
+
+/* Botón de la entrada naranja del festival */
+.btn--ticket-dark {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.btn--ticket-dark:hover {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Sobre fondo naranja, el foco naranja no se vería: pasa a tinta */
+.ticket--festival :focus-visible {
+  outline-color: var(--color-ink);
+}
+
+/* Cinta adhesiva */
+.tape {
+  display: inline-block;
+  padding: 7px 16px;
+  background: color-mix(in srgb, var(--color-paper) 90%, transparent);
+  color: var(--color-text-dark);
+  font-family: var(--font-type);
+  font-size: 15px;
+  clip-path: polygon(2% 0, 98% 6%, 100% 48%, 97% 100%, 3% 94%, 0 52%);
+}
+
+.tape--ink {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* Sello "SOLD OUT" */
+.stamp {
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  padding: 4px 10px;
+  border: 4px double var(--color-accent);
+  background: color-mix(in srgb, var(--color-ink) 60%, transparent);
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-12deg);
+}
+
+/* Foto pegada con cinta (Sobre mí) */
+.polaroid {
+  position: relative;
+  /* Móvil y tableta: centrada, con sitio para que la foto girada y los trozos
+     de cinta no se salgan de la pantalla */
+  width: min(100% - 48px, 520px);
+  margin-inline: auto;
+  padding: 14px 14px 56px;
+  background: var(--color-white);
+  box-shadow: 0 20px 40px -18px color-mix(in srgb, var(--color-ink) 45%, transparent);
+  transform: rotate(-2.5deg);
+}
+
+.polaroid__tape {
+  position: absolute;
+  top: 6px;
+  z-index: 3;
+  width: 130px;
+  height: 36px;
+  background: color-mix(in srgb, var(--color-paper) 78%, transparent);
+  clip-path: polygon(3% 0, 97% 8%, 100% 50%, 96% 100%, 4% 92%, 0 46%);
+}
+
+.polaroid__tape--left {
+  left: -30px;
+  transform: rotate(-38deg);
+}
+
+.polaroid__tape--right {
+  right: -30px;
+  transform: rotate(36deg);
+}
+
+.polaroid__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 40% center;
+  filter: grayscale(1) contrast(1.3);
+}
+
+.polaroid__caption {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  left: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--color-muted-dark);
+  font-family: var(--font-type);
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+/* Portada de disco */
+.release__cover {
+  display: flex;
+  flex: 0 0 108px;
+  align-items: flex-end;
+  height: 108px;
+  padding: 10px;
+  border: 2px solid var(--color-line-mid);
+  background: var(--color-cover);
+  color: var(--color-label-light);
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.release__cover--ep {
+  border: 0;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-size: 26px;
+  box-shadow: 6px 6px 0 var(--color-paper);
+}
+
+.release:nth-child(1) .release__cover {
+  transform: rotate(-3deg);
+}
+
+.release:nth-child(2) .release__cover {
+  transform: rotate(2deg);
+}
+
+.release:nth-child(3) .release__cover {
+  transform: rotate(-2deg);
+}
+
+.release:nth-child(4) .release__cover {
+  transform: rotate(3deg);
+}
+
+/* Entrada de concierto. Móvil: talón, cuerpo y botón apilados y sin muescas
+   (DESIGN.md §9). Las tres columnas y las muescas van en el bloque 7. */
+.ticket {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--color-ink-2);
+  color: var(--color-paper);
+}
+
+.ticket:nth-child(odd) {
+  transform: rotate(-0.5deg);
+}
+
+.ticket:nth-child(even) {
+  transform: rotate(0.5deg);
+}
+
+.ticket:hover {
+  transform: rotate(0) translateY(-6px);
+  box-shadow: 0 18px 0 -6px var(--color-accent);
+}
+
+.ticket__notch {
+  display: none;
+}
+
+.ticket__stub {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 24px 24px 20px;
+  border-bottom: 2px dashed var(--color-line-stub);
+}
+
+.ticket__day {
+  font-family: var(--font-display);
+  font-size: 68px;
+  line-height: 0.9;
+}
+
+.ticket__date {
+  color: var(--color-muted-light);
+  font-family: var(--font-type);
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.ticket__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 24px 8px;
+}
+
+.ticket__small {
+  color: var(--color-label-light);
+  font-family: var(--font-type);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ticket__city {
+  font-family: var(--font-display);
+  /* Móvil: "VALLADOLID" cabe en la entrada a 320px. Escritorio: 44px. */
+  font-size: clamp(1.75rem, calc(14vw - 14px), 2.75rem);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ticket__venue {
+  color: var(--color-muted-light);
+  font-size: 18px;
+}
+
+.ticket__action {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px 24px;
+}
+
+/* La entrada del festival: naranja, con la cinta "Cabeza de cartel" */
+.ticket--festival {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.ticket--festival .ticket__stub {
+  border-color: color-mix(in srgb, var(--color-ink) 50%, transparent);
+}
+
+.ticket--festival .ticket__date {
+  color: inherit;
+}
+
+.ticket--festival .ticket__venue {
+  color: inherit;
+  font-weight: 700;
+}
+
+.ticket--festival .tape {
+  transform: rotate(-2deg);
+}
+
+/* Redes */
+.social {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--color-line-mid);
+  color: var(--color-paper);
+}
+
+.social__link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: rotate(-8deg) scale(1.08);
+}
+
+/* Botón "Volver al inicio": cuadrado naranja fijo abajo a la derecha. Queda
+   por debajo de la cabecera, así que el menú abierto lo tapa. */
+.to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  /* Borde de tinta y sombra dura de papel: destaca sobre tinta, papel y
+     también sobre el naranja de la Galería */
+  border: 2px solid var(--color-ink);
+  background: var(--color-accent);
+  color: var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-paper);
+}
+
+.to-top:hover {
+  background: var(--color-paper);
+}
+
+/* Doble anillo de tinta y papel: se ve sobre cualquier fondo, también
+   sobre el naranja de la Galería */
+.to-top:focus-visible {
+  outline: 3px solid var(--color-paper);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--color-ink);
+}
+
+/* Email: subrayado naranja que rellena el fondo al pasar el ratón */
+.mail {
+  padding-bottom: 6px;
+  background: linear-gradient(var(--color-accent), var(--color-accent)) left bottom / 100% 4px no-repeat;
+  font-size: clamp(1.25rem, 2.4vw, 2rem);
+  font-weight: 700;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.mail:hover {
+  background-size: 100% 100%;
+  color: var(--color-ink);
+}
+
+
+/* 6. Secciones ============================================================ */
+
+/* Cabecera fija (DESIGN.md §6). El fondo de tinta es la opción segura; si
+   el navegador admite las animaciones de scroll, el bloque 8 lo hace
+   transparente sobre la portada. */
+.site-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  background-color: var(--color-ink);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 16px;
+  padding-block: 24px;
+}
+
+.site-header__logo {
+  padding: 12px 0;
+  color: var(--color-paper);
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/* Menú en móvil a pantalla completa, sin JavaScript (DESIGN.md §6, "Menú en
+   móvil" y "Por qué :target"). "MENÚ" es un enlace a #menu y el panel se
+   muestra con #menu:target. Al ir a una sección o a #inicio ("CERRAR"), el
+   panel deja de estar apuntado y desaparece. */
+.nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  /* Relleno y espaciado justos para que "CERRAR" no toque el logo a 320px */
+  padding: 0 12px;
+  border: 2px solid var(--color-paper);
+  color: var(--color-paper);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+  /* Sin el recuadro azul de Chrome al tocar: el foco ya es visible */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav__icon {
+  flex: none;
+}
+
+.nav__panel {
+  display: none;
+}
+
+.nav__panel:target {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  overflow-y: auto;
+  padding: 0 var(--gutter) 32px;
+  background: var(--color-ink);
+}
+
+/* Borde rasgado naranja abajo del todo del menú abierto */
+.nav__panel:target::after {
+  content: "";
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--tear-height);
+  background: var(--color-accent);
+  clip-path: var(--tear-shape);
+  pointer-events: none;
+}
+
+/* El logo queda por encima del panel */
+.site-header__logo {
+  position: relative;
+  z-index: 2;
+}
+
+/* "CERRAR" ocupa el sitio de "MENÚ": la misma altura de la cabecera
+   (24px de relleno + 54px de fila) y alineado a la derecha */
+.nav__toggle--close {
+  display: flex;
+  width: max-content;
+  margin: 29px 0 0 auto;
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* Sin el halo oscuro de la cabecera: sobre el naranja emborrona el texto */
+.nav .nav__toggle--close {
+  text-shadow: none;
+}
+
+/* Con el menú abierto, la página de detrás no hace scroll */
+html:has(#menu:target) {
+  overflow: hidden;
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__list li + li {
+  border-top: 1px solid var(--color-line-dark);
+}
+
+.nav__list .nav__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* Algo menos de espaciado que en escritorio, para que "PRÓXIMAS
+     PRESENTACIONES" quepa en una línea a partir de 375px */
+  letter-spacing: 0.14em;
+}
+
+/* Número de sección y flecha, en naranja (decorativos; solo en móvil) */
+.nav__num {
+  flex: none;
+  color: var(--color-accent);
+  font-family: var(--font-type);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  /* La letra de máquina de escribir queda alta: se alinea con el texto */
+  position: relative;
+  top: 1px;
+}
+
+.nav__arrow {
+  flex: none;
+  margin-left: auto;
+  color: var(--color-accent);
+}
+
+/* Textos sobre la foto: halo oscuro suave para que se lean sobre el humo
+   (contraste de 4,5:1 o más; aprobado por Mateo, fase 4) */
+.site-header__logo,
+.nav__toggle,
+.nav__link,
+.hero__kicker,
+.hero__tagline {
+  text-shadow:
+    0 0 8px var(--color-ink),
+    0 0 18px var(--color-ink),
+    0 0 32px color-mix(in srgb, var(--color-ink) 80%, transparent);
+}
+
+/* Portada */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: var(--color-ink);
+}
+
+.hero__photo,
+.hero__tint,
+.hero__light,
+.hero__shade {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  filter: grayscale(1) contrast(1.35) brightness(0.8);
+}
+
+.hero__tint {
+  background: var(--color-accent);
+  mix-blend-mode: multiply;
+  opacity: 0.45;
+}
+
+.hero__light {
+  background: radial-gradient(ellipse 45% 38% at 60% 16%, color-mix(in srgb, var(--color-light) 42%, transparent), transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.hero__shade {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-ink) 55%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 10%, transparent) 30%,
+    color-mix(in srgb, var(--color-ink) 75%, transparent) 72%,
+    var(--color-ink) 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+  gap: 32px 40px;
+  padding-top: 200px;
+  padding-right: calc(var(--gutter) + 28px);
+  padding-bottom: 110px;
+}
+
+.hero__kicker {
+  margin-bottom: -12px;
+  /* El naranja sobre el humo necesita un halo más denso que el resto */
+  text-shadow:
+    0 0 2px var(--color-ink),
+    0 0 4px var(--color-ink),
+    0 0 8px var(--color-ink),
+    0 0 12px var(--color-ink),
+    0 0 20px var(--color-ink),
+    0 0 32px var(--color-ink);
+  color: var(--color-accent);
+  font-family: var(--font-type);
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 15vw, 15rem);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+  transform-origin: left bottom;
+}
+
+.hero__line {
+  display: block;
+  padding-bottom: 0.04em;
+}
+
+.hero__tagline {
+  max-width: 22ch;
+  font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero__tagline-end {
+  color: var(--color-accent);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.hero__credit {
+  position: absolute;
+  right: 20px;
+  bottom: 64px;
+  z-index: 3;
+  color: var(--color-muted-light);
+  font-family: var(--font-type);
+  font-size: 12px;
+  writing-mode: vertical-rl;
+}
+
+/* Partes comunes de las secciones */
+.section > .wrap {
+  position: relative;
+  z-index: 1;
+  padding-top: var(--section-pad-top);
+  padding-bottom: var(--section-pad-bottom);
+}
+
+.section__num {
+  margin-bottom: 8px;
+  font-family: var(--font-type);
+  font-size: 18px;
+}
+
+.section__title {
+  font-family: var(--font-display);
+  /* Móvil: la palabra más larga ("TRAYECTORIA") cabe en 320px. Escritorio:
+     el tamaño de DESIGN.md, en el bloque 7. */
+  font-size: clamp(2rem, 11vw, 3.25rem);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.section__title--long {
+  /* "PRESENTACIONES" cabe en 320px */
+  font-size: clamp(1.75rem, 8.5vw, 3rem);
+}
+
+.section__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+  gap: 24px 40px;
+}
+
+.section__lead {
+  font-family: var(--font-type);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+/* Sobre mí */
+.about {
+  background: var(--color-paper);
+  color: var(--color-text-dark);
+}
+
+.about .section__num {
+  color: var(--color-accent-ink);
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 48px;
+  margin-top: 64px;
+}
+
+.about__text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.about__text strong {
+  padding: 0 6px;
+  background: var(--color-text-dark);
+  color: var(--color-paper);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+  padding-top: 32px;
+  border-top: 4px solid var(--color-text-dark);
+}
+
+.facts dt {
+  color: var(--color-label-dark);
+  font-family: var(--font-type);
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.facts dd {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.facts__item:nth-child(3) dd {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Galería */
+.gallery {
+  overflow: hidden;
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.gallery > .wrap {
+  padding-bottom: 150px;
+}
+
+.gallery__word {
+  position: absolute;
+  top: 64px;
+  right: -2vw;
+  z-index: 0;
+  color: transparent;
+  font-family: var(--font-display);
+  font-size: 26vw;
+  line-height: 0.8;
+  text-transform: uppercase;
+  white-space: nowrap;
+  -webkit-text-stroke: 2px color-mix(in srgb, var(--color-ink) 35%, transparent);
+  pointer-events: none;
+}
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 40px 32px;
+  margin-top: 64px;
+}
+
+.shot__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--color-ink);
+}
+
+.shot--2 .shot__frame {
+  aspect-ratio: 4 / 3;
+}
+
+.shot__img {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  filter: grayscale(1) contrast(1.25);
+}
+
+.shot__img--live-1 {
+  background-image: url("assets/images/live-1.webp");
+}
+
+.shot__img--live-2 {
+  background-image: url("assets/images/live-2.webp");
+}
+
+/* Copias de la foto para la interferencia: preparadas, pero ocultas hasta la
+   fase 5 (DESIGN.md §6 y §7). */
+.shot__img::before,
+.shot__img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shot__img::before {
+  filter: sepia(1) saturate(7) hue-rotate(-18deg) brightness(1.05);
+  mix-blend-mode: screen;
+}
+
+.shot__img::after {
+  filter: invert(1) contrast(1.4);
+  mix-blend-mode: difference;
+}
+
+.shot__flash,
+.shot__curtain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.shot__flash {
+  background: var(--color-white);
+  opacity: 0;
+}
+
+.shot__curtain {
+  background: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+.shot__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  margin-top: 18px;
+}
+
+.shot--1 .tape {
+  transform: rotate(-2deg);
+}
+
+.shot--2 .tape {
+  transform: rotate(1.5deg);
+}
+
+.shot__credit {
+  font-family: var(--font-type);
+  font-size: 13px;
+}
+
+/* Trayectoria */
+.career {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.career .section__num {
+  color: var(--color-accent);
+}
+
+.career .section__lead {
+  color: var(--color-muted-light);
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px 24px;
+  margin: 72px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.milestone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 28px;
+  border-top: 3px solid var(--color-line-dark);
+}
+
+.milestone__mark {
+  position: absolute;
+  top: -9px;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  background: var(--color-accent);
+  transform: rotate(45deg);
+}
+
+/* El año va solo con contorno; se rellena de naranja al pasar el ratón */
+.milestone__year {
+  color: transparent;
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 1;
+  -webkit-text-stroke: 1.5px var(--color-paper);
+}
+
+.milestone:hover .milestone__year {
+  color: var(--color-accent);
+  -webkit-text-stroke-color: var(--color-accent);
+}
+
+.milestone__title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.milestone__text {
+  color: var(--color-muted-light);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.milestone__text cite {
+  font-style: italic;
+}
+
+.discography__title {
+  margin: 88px 0 28px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.discography {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.release {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.release__meta {
+  color: var(--color-muted-light);
+  font-family: var(--font-type);
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.release__name {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+
+/* Próximas presentaciones */
+.shows {
+  background: var(--color-paper);
+  color: var(--color-text-dark);
+}
+
+.shows .section__num {
+  color: var(--color-accent-ink);
+}
+
+.shows .section__lead {
+  color: var(--color-muted-dark);
+}
+
+.tickets {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 64px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Pie */
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.site-footer > .wrap {
+  position: relative;
+  z-index: 1;
+  padding-top: 120px;
+  padding-bottom: 40px;
+}
+
+.site-footer__title {
+  max-width: 16ch;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5.75rem);
+  font-weight: 400;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.site-footer__accent {
+  color: var(--color-accent);
+}
+
+.site-footer__contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 56px;
+}
+
+.site-footer__copy {
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-line-dark);
+  color: var(--color-label-light);
+  font-family: var(--font-type);
+  font-size: 14px;
+}
+
+.site-footer__word {
+  padding-bottom: 8px;
+  color: transparent;
+  font-family: var(--font-display);
+  font-size: 17vw;
+  line-height: 0.8;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  -webkit-text-stroke: 1.5px var(--color-outline);
+}
+
+
+/* 7. Escritorio =========================================================== */
+
+@media (min-width: 861px) {
+  :root {
+    --gutter: 64px;
+  }
+
+  .site-header__inner {
+    column-gap: 40px;
+  }
+
+  /* El botón va dentro del margen lateral de 64px: no tapa el contenido */
+  .to-top {
+    right: 6px;
+    bottom: 32px;
+  }
+
+  /* Y aparece al final de la portada, no solo en la recta final. "body"
+     sube la especificidad para ganar a la regla de móvil del bloque 8, que
+     va después en el archivo. */
+  @supports (animation-timeline: scroll()) {
+    body .to-top {
+      animation-timeline: scroll(root);
+      animation-range: 60svh 80svh;
+    }
+  }
+
+  /* Escritorio: el menú se ve siempre en línea y sin botones, aunque la
+     dirección termine en #menu */
+  .nav__toggle {
+    display: none;
+  }
+
+  .nav__panel,
+  .nav__panel:target {
+    position: static;
+    display: block;
+    overflow: visible;
+    padding: 0;
+    background: none;
+  }
+
+  html:has(#menu:target) {
+    overflow: visible;
+  }
+
+  .nav__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 32px;
+    margin: 0;
+  }
+
+  .nav__list li + li {
+    border-top: 0;
+  }
+
+  .nav__list .nav__link {
+    display: inline-block;
+  }
+
+  .nav__num,
+  .nav__arrow {
+    display: none;
+  }
+
+  .nav__list .nav__link {
+    letter-spacing: 0.18em;
+  }
+
+  /* Portada: rejilla de 12 columnas */
+  .hero__content {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    padding-top: 160px;
+    padding-right: var(--gutter);
+  }
+
+  .hero__kicker,
+  .hero__title {
+    grid-column: span 12;
+  }
+
+  .hero__tagline {
+    grid-column: span 6;
+  }
+
+  .hero__actions {
+    grid-column: 7 / span 6;
+    justify-content: flex-end;
+  }
+
+  .section__title {
+    font-size: clamp(3.25rem, 8vw, 7.5rem);
+  }
+
+  /* En 8 columnas, "TRAYECTORIA" y "PRESENTACIONES" no caben con el tamaño
+     de DESIGN.md: se reduce lo justo (aprobado por Mateo, fase 4). */
+  .career .section__title {
+    font-size: clamp(3.25rem, calc(8.6vw - 16px), 6.7rem);
+  }
+
+  .section__title--long {
+    font-size: clamp(2.5rem, calc(6.7vw - 12px), 5.25rem);
+  }
+
+  /* 44px en cuanto cabe; entre 861 y ~1100px, la columna central es
+     estrecha y la ciudad escala */
+  .ticket__city {
+    font-size: clamp(1.75rem, calc(14vw - 92px), 2.75rem);
+  }
+
+  .polaroid {
+    width: auto;
+    margin-inline: 0;
+  }
+
+  /* Títulos con entradilla: 8 + 4 columnas */
+  .section__head {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .section__head .section__title {
+    grid-column: span 8;
+  }
+
+  .section__head .section__lead {
+    grid-column: span 4;
+  }
+
+  /* Sobre mí: foto (5 columnas) y texto (6 columnas) */
+  .about__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .polaroid {
+    grid-column: span 5;
+  }
+
+  .about__text {
+    grid-column: 7 / span 6;
+  }
+
+  .facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Galería: dos fotos de 6 columnas, la segunda bajada 220px */
+  .gallery__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .shot--1 {
+    grid-column: span 6;
+  }
+
+  .shot--2 {
+    grid-column: 7 / span 6;
+    margin-top: 220px;
+  }
+
+  /* Trayectoria: 6 hitos en fila y la discografía en 4 columnas */
+  .timeline {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .discography {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  /* Entradas: talón (200px), cuerpo y botón, con las muescas */
+  .ticket {
+    grid-template-columns: 200px minmax(0, 1fr) auto;
+  }
+
+  .ticket__notch {
+    position: absolute;
+    left: 186px;
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-paper);
+  }
+
+  .ticket__notch--top {
+    top: -14px;
+  }
+
+  .ticket__notch--bottom {
+    bottom: -14px;
+  }
+
+  .ticket__stub {
+    padding: 28px 32px;
+    border-right: 2px dashed var(--color-line-stub);
+    border-bottom: 0;
+  }
+
+  .ticket--festival .ticket__stub {
+    padding-block: 36px;
+  }
+
+  .ticket__body {
+    padding: 28px 36px;
+  }
+
+  .ticket--festival .ticket__body {
+    padding-block: 36px;
+  }
+
+  .ticket__action {
+    padding: 28px 32px;
+  }
+}
+
+
+/* 8. Animaciones ========================================================== */
+/* Adelantadas a la fase 4 a petición de Mateo: el fondo de la cabecera y la
+   aparición del botón "Volver al inicio", ligados al scroll (DESIGN.md §7).
+   Sin soporte, la cabecera es de tinta y el botón se ve siempre. El resto de
+   animaciones llega en la fase 5. */
+
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    animation: header-fill linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 120px;
+  }
+}
+
+@keyframes header-fill {
+  from {
+    background-color: transparent;
+  }
+
+  to {
+    background-color: var(--color-ink);
+  }
+}
+
+/* Móvil: el botón tapa contenido (no hay margen lateral), así que solo
+   aparece en la recta final, al llegar a Próximas presentaciones. En
+   escritorio (bloque 7) aparece al final de la portada. */
+@supports (animation-timeline: view()) and (timeline-scope: --a) {
+  html {
+    timeline-scope: --shows;
+  }
+
+  .shows {
+    view-timeline: --shows block;
+  }
+
+  .to-top {
+    animation: to-top-in linear both;
+    animation-timeline: --shows;
+    animation-range: entry 40% entry 60%;
+  }
+}
+
+/* Oculto (visibility: hidden) no se puede pulsar ni alcanzar con Tab */
+@keyframes to-top-in {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
