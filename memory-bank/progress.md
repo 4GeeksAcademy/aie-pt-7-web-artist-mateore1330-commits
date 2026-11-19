@@ -257,6 +257,21 @@ Clases BEM preparadas para la fase 4:
     - Esc no cierra el menú.
     - La dirección muestra `#menu` mientras está abierto.
   - **Textos nuevos en `CONTENT.md` §1:** "Menú", "Cerrar" y "Cerrar menú".
+  - **Toques de naranja** (pedido por Mateo):
+    - Número de sección ("01 /", "03 /", "04 /") en Special Elite naranja delante de cada enlace, y
+      flecha → naranja a la derecha. Los dos son decorativos (`aria-hidden`): el lector de pantalla
+      sigue oyendo solo "Sobre mí", "Trayectoria" y "Próximas presentaciones".
+    - "CERRAR" relleno de naranja con el texto en tinta (5,73:1).
+    - Borde rasgado naranja abajo del todo. La forma de los dientes vive ahora en `--tear-shape`,
+      para no repetir el polígono.
+    - Nada de esto se ve en escritorio.
+  - **Ajustes para móviles estrechos:**
+    - Hueco entre el logo y el menú: 16px en móvil y 40px en escritorio. Antes, a 320px, el botón
+      bajaba a una segunda línea.
+    - Botones del menú con 12px de relleno y un espaciado de letra de 0,14em, para que "CERRAR" no
+      toque el logo.
+    - Enlaces del panel con un espaciado de 0,14em, para que "PRÓXIMAS PRESENTACIONES" quepa en una
+      línea desde 375px (a 320px se parte en dos).
   - **Prettier:** al guardar en VS Code, reformateaba `index.html` (`/>` en las etiquetas vacías,
     líneas partidas). Mateo eligió descartar ese formato, y el `.prettierignore` lo evita.
 
