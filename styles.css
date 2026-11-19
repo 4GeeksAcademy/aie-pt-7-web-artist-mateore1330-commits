@@ -156,7 +156,7 @@ address {
   padding-inline: var(--gutter);
 }
 
-.visually-hidden,
+/* Separador " · " del talón: lo lee el lector de pantalla, pero no se ve */
 .ticket__sep {
   position: absolute;
   width: 1px;
@@ -773,6 +773,19 @@ address {
 /* Con el menú abierto, la página de detrás no hace scroll */
 html:has(#menu:target) {
   overflow: hidden;
+}
+
+/* ...y se desactiva: visibility: hidden la saca del Tab y del lector de
+   pantalla (como "inert", que sin JavaScript no se puede usar). Si no, el
+   foco saltaría a enlaces tapados por el panel (WCAG 2.2, 2.4.11). El botón
+   ↑ se quita con display: su aparición anima "visibility" y la animación
+   ganaría. Al cerrar el menú todo vuelve solo. */
+html:has(#menu:target) :is(main, .site-footer) {
+  visibility: hidden;
+}
+
+html:has(#menu:target) .to-top {
+  display: none;
 }
 
 .nav__list {
@@ -1426,6 +1439,14 @@ html:has(#menu:target) {
 
   html:has(#menu:target) {
     overflow: visible;
+  }
+
+  html:has(#menu:target) :is(main, .site-footer) {
+    visibility: visible;
+  }
+
+  html:has(#menu:target) .to-top {
+    display: flex;
   }
 
   .nav__list {

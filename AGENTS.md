@@ -46,7 +46,7 @@ El plan está en [`PLAN.md`](PLAN.md) y cada fase en [`plans/`](plans/). Para sa
 ## 5. Lo que nunca se hace
 
 - **JavaScript**, de ningún tipo: ni `<script>` (salvo el único `application/ld+json`), ni `on*=`,
-  ni frameworks, ni el CDN de Tailwind (HT-01). El `README.md` de la plantilla lo sugiere: no se
+  ni frameworks, ni el CDN de Tailwind (HT-01). La plantilla original de 4Geeks lo sugería: no se
   sigue.
 - **Inventar** textos o datos (horas, precios, direcciones, nombres) que no estén en los documentos
   (HT-06, SEO-04).

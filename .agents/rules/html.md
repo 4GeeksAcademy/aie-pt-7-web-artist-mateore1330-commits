@@ -24,11 +24,11 @@ parece necesitar JavaScript, **se pregunta a Mateo** antes de buscar una alterna
 
 **Por qué:** `PLAN.md` §3 lo marca como "Restricción bloqueante" y §5 exige "0 JavaScript en el
 proyecto (aparte del JSON-LD)". `DESIGN.md` (cabecera y §7) dice que todo se hace "con CSS y
-archivos SVG estáticos, sin JavaScript". El `README.md` de la plantilla sugiere el CDN de Tailwind:
-**no se sigue**.
+archivos SVG estáticos, sin JavaScript". El README original de la plantilla de 4Geeks sugería el
+CDN de Tailwind: **no se sigue**.
 
-**✅ Haz:** un menú que se reparte en varias líneas en móvil con CSS (`flex-wrap`), como pide
-`DESIGN.md` §6.
+**✅ Haz:** el menú de móvil con `:target` y CSS, como describe `DESIGN.md` §6 ("Menú en móvil" y
+"Por qué `:target`").
 
 **❌ Evita:** un `<script>` para un menú desplegable, un `onclick` en un botón o el
 `<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4">` de la plantilla.

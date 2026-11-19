@@ -1,7 +1,7 @@
 ---
 name: current-state
 description: Qué hay hoy en el repositorio, qué falta y cuál es la siguiente fase
-last_verified: 2026-11-19 (sobre el commit 211bfb6, cierre de la fase 5)
+last_verified: 2026-11-19 (sobre el commit b72a21e, cierre de la fase 6)
 ---
 
 # Estado actual
@@ -13,46 +13,37 @@ last_verified: 2026-11-19 (sobre el commit 211bfb6, cierre de la fase 5)
 
 | Fase | Estado |
 |---|---|
-| 0 — Preparación del repositorio | Hecha (PR #1 fusionado) |
-| 1 — Archivos para el agente | Hecha (PR #2 fusionado) |
-| 2 — Imágenes | Hecha (PR #3 fusionado) |
-| 3 — HTML, SEO y Schema.org | Hecha (PR #4 fusionado) |
-| 4 — Estilos | Hecha (PR #5 fusionado) |
-| 5 — Animaciones | En revisión (rama `feat/phase-5-animations`, PR a `main` sin fusionar) |
-| 6 | Pendiente |
+| 0 a 5 | Hechas (PR #1 a #6 fusionados) |
+| 6 — Verificación final y entrega | En revisión (rama `chore/phase-6-verification`, PR a `main` sin fusionar) |
 
 La tabla que manda es la de [`PLAN.md`](../PLAN.md) §4; lo que decide si una fase está terminada
 es la fusión en `main`.
 
 ## Qué hay (comprobado el 19-11-2026)
 
+La web está completa. El detalle de cada comprobación está en [`verification.md`](../verification.md).
+
 | Comprobación | Resultado |
 |---|---|
-| `.gitignore` | ✅ Ignora sistema, editor, `.env*` (salvo `.env.example`), `.learn/` y `__pycache__/` |
-| Hook de gitleaks | ✅ `.githooks/pre-commit`; bloquea un token falso. Requiere `git config core.hooksPath .githooks` en cada clon |
-| Documentos aprobados | ✅ `BRIEFING.md`, `CONTENT.md`, `DESIGN.md`, `PLAN.md`, `plans/` |
-| Maqueta | ✅ `design/mockup-propuesta-2.html` (solo referencia) |
-| Reglas, memory bank, skills, `AGENTS.md`, `CLAUDE.md` | ✅ Prueba en frío superada (ver `progress.md`, fase 1) |
-| Fotos originales | ✅ 4 JPEG en `assets/images/originals/`, con `CREDITS.md` |
-| Fotos WebP | ✅ `hero`, `about`, `live-1`, `live-2`, en color y dentro de su peso (medidas en `progress.md`, fase 2) |
-| `og.jpg` | ✅ 1200 × 630, 147 KB |
-| `favicon.svg` | ✅ 185 B, aprobado por Mateo |
-| Texturas | ✅ `noise.svg`, `wear-dark.svg`, `wear-light.svg` |
-| `index.html` | ✅ Completo: W3C 0 errores, schema.org 0 errores, teclado correcto (ver `progress.md`, fase 3) |
-| Prueba de resultados enriquecidos de Google | ✅ 4 eventos válidos, solo avisos no críticos (la pasó Mateo) |
-| `styles.css` | ✅ Estilos estáticos, móvil y escritorio: sin scroll horizontal en 16 anchos, contraste ≥ 4,5:1, foco visible (ver `progress.md`, fase 4) |
-| Animaciones | ✅ Las 15 de `DESIGN.md` §7, con movimiento reducido y sin JavaScript (ver `progress.md`, fase 5). Firefox y Safari: pendientes de que los pruebe Mateo |
+| HTML (W3C) | ✅ 0 errores y 0 avisos |
+| CSS (W3C) | ✅ Solo errores de propiedades de scroll que el validador no conoce (justificados) |
+| Schema.org | ✅ 0 errores; Google: 4 eventos válidos |
+| Accesibilidad | ✅ Teclado, foco, contraste ≥ 4,5:1, `aria-hidden` en lo decorativo, menú de móvil que oculta la página de detrás, movimiento reducido |
+| Responsive | ✅ Sin scroll horizontal en 16 anchos (320–1920px) |
+| Restricciones | ✅ 0 JavaScript (salvo JSON-LD), 0 `style=""`, 0 "hard rock", colores solo en `:root` |
+| Lighthouse | ✅ Accesibilidad 100 y SEO 100 (modo Navigation, Mateo); Rendimiento y Buenas prácticas sin medir |
+| VoiceOver | ➖ No se hizo (decisión de Mateo) |
+| Firefox, Safari (Mac e iPhone) | ✅ Todo visible; menú y cabecera fija bien en el iPhone; scroll algo lento en Firefox y Safari (Mac), aceptado |
 
 ## Carencias conocidas
 
-- Pendiente probar en Safari (iPhone) y Firefox: menú de móvil, cabecera fija y animaciones.
-- `og:image` y las `image` del JSON-LD son rutas relativas: pasan a absolutas solo si se publica (fase 6).
-- El `README.md` es todavía el de la plantilla y sugiere el CDN de Tailwind, que está **prohibido**
-  (HT-01). Se sustituye en la fase 6 si Mateo lo aprueba (`PLAN.md` §7).
-- Pendiente de decidir (fase 6): publicar o no en GitHub Pages (`canonical`, `og:url`).
+- La web no está publicada (decisión de Mateo). Sin `canonical` ni `og:url`; `og:image` es
+  relativa.
+- Google Fonts envía la IP del visitante a Google (nota en `verification.md` §3.5).
+- Menú de móvil sin JavaScript: el lector de pantalla oye "enlace" y no "botón"; Esc no lo cierra.
 
-## Siguiente fase
+## Siguiente paso
 
-Fase 6 — Verificación final y entrega ([`plans/phase-6-verification.md`](../plans/phase-6-verification.md)),
-cuando la fase 5 esté fusionada en `main`. Empieza con dos preguntas a Mateo: publicar en GitHub
-Pages y sustituir los README de la plantilla.
+Cuando Mateo fusione la fase 6, `main` es la entrega.
+La entrega en 4Geeks la hace **Mateo**, normalmente pegando la URL del repositorio en la
+plataforma.

@@ -1,7 +1,7 @@
 ---
 name: progress
 description: Registro por fase — qué se hizo, decisiones, problemas y cómo se verificó
-last_verified: 2026-11-19 (sobre el commit 211bfb6, cierre de la fase 5)
+last_verified: 2026-11-19 (sobre el commit b72a21e, cierre de la fase 6)
 ---
 
 # Progreso
@@ -356,7 +356,7 @@ Clases BEM preparadas para la fase 4:
 - El bloque 8 ya tiene `header-fill` y `to-top-in`. Al apagar las animaciones con movimiento
   reducido, la cabecera queda de tinta y el botón visible, que es su estado seguro. Comprobarlo.
 
-## Fase 5 — Animaciones y efectos (rama `feat/phase-5-animations`)
+## Fase 5 — Animaciones y efectos (PR #6, fusionado el 19-11-2026)
 
 **Qué se hizo:** las 15 animaciones de `DESIGN.md` §7, solo con CSS, en el bloque 8 de
 `styles.css`, y el bloque 9 (Movimiento reducido). Las tres de la fase 4 (fondo de la cabecera,
@@ -408,3 +408,45 @@ aparición del botón ↑ y desplazamiento suave) se mantienen.
 | Regresión de fases anteriores | ✅ W3C 0 errores; sin scroll horizontal en 16 anchos; títulos dentro de su caja; foco visible; zoom al 200 % sin solapes; antetítulo 4,94–5,77:1; botón ↑ y menú igual que en la fase 4 |
 | `grep` | ✅ Un solo `<script>` (JSON-LD), sin `on*=`, sin `style=`, sin archivos `.js`; `!important` solo en el bloque 9; sin colores fuera de `:root` |
 | Fotogramas clave | ✅ `design/screenshots/fase-5/` (no se grabó vídeo: Playwright pedía descargar su `ffmpeg`) |
+
+## Fase 6 — Verificación final y entrega (rama `chore/phase-6-verification`)
+
+**Qué se hizo:**
+
+- Las 16 comprobaciones del plan, registradas en [`verification.md`](../verification.md) junto
+  con los 8 criterios del enunciado.
+- Capturas de página completa a 320, 375, 768, 1024 y 1440px en `design/screenshots/fase-6/`,
+  hechas con movimiento reducido para que nada salga a medio animar.
+- `README.md` nuevo en español. Se borraron `README.es.md` y `README.cn.md` de la plantilla.
+
+**Decisiones de Mateo:**
+
+- **No publicar en GitHub Pages:** los criterios del ejercicio no lo piden. Por eso no hay
+  `canonical` ni `og:url`, y `og:image` sigue siendo relativa (`verification.md` §3.2).
+- **Sustituir los README de la plantilla.**
+- **Lighthouse, VoiceOver, Firefox y Safari (Mac e iPhone) los hace Mateo a mano**, con las guías
+  del PR. Sus resultados se añaden a `verification.md` §4.
+- Se envió `styles.css` al validador de CSS de W3C, con permiso de Mateo.
+
+**Resultados:**
+
+- **Validador de CSS:** 27 errores, todos de propiedades de animaciones de scroll que el validador
+  aún no conoce (`animation-timeline`, `animation-range`, `timeline-scope` y `view-timeline`).
+  Además, 42 avisos justificados (variables, prefijos `-webkit-` y colores iguales a propósito).
+- **Revisión `rx-review`:** 2 hallazgos, corregidos:
+  - Con el menú de móvil abierto, el foco y el lector de pantalla llegaban a la página tapada.
+    Ahora se oculta con `visibility: hidden` (`770aeea`).
+  - Clase `.visually-hidden` sin uso (`f22ff9c`). La regla CS-05 se actualizó.
+- **Nota que queda abierta:** Google Fonts envía la IP del visitante a Google. No se cambia, porque
+  `DESIGN.md` §3 lo fija.
+- **Documentación:** se actualizaron `AGENTS.md` y la regla HT-01, que citaban el README de la
+  plantilla y el antiguo menú en varias líneas.
+- **Todo lo demás:** sin cambios respecto a la fase 5 (W3C HTML, schema.org, teclado, contraste,
+  16 anchos, movimiento reducido, `grep` y textos).
+- **Pruebas de Mateo:**
+  - Lighthouse (Navigation): Accesibilidad 100 y SEO 100. Rendimiento y Buenas prácticas no se
+    midieron.
+  - Firefox y Safari (Mac): todo visible, con el scroll algo lento. Decidió no optimizarlo (causa
+    probable en `verification.md` §3.6).
+  - iPhone: menú, cabecera fija y botón ↑ bien.
+  - VoiceOver: no se hizo, por decisión suya.
