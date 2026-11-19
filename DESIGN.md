@@ -162,7 +162,8 @@ Próximas presentaciones → tinta.
 
 | Componente | Cómo es |
 |---|---|
-| **Cabecera** | Encima de la portada (`position: absolute`), transparente. Logo "IRON WOLF" a la izquierda; menú a la derecha. En móvil, el menú pasa debajo del logo y sus enlaces se reparten en varias líneas si no caben. |
+| **Cabecera** | Encima de la portada (`position: absolute`), transparente. Logo "IRON WOLF" a la izquierda; menú a la derecha. |
+| **Menú en móvil (hamburguesa)** | Por debajo de 861px, los enlaces se recogen tras un botón "MENÚ" con el icono de tres rayas (Archivo 700, mayúsculas, borde de 2px en papel, alto de 44px o más). Al abrirlo, el icono pasa a una X y los enlaces aparecen en un panel de tinta a todo el ancho, debajo de la cabecera, uno por línea y separados por líneas `--color-line-dark`. Se hace **sin JavaScript**, con `<details>` y `<summary>`. En escritorio el menú se ve siempre abierto, como antes. Decidido por Mateo en la fase 4. |
 | **Enlace del menú** | Archivo 700, mayúsculas. Al pasar el ratón, aparece debajo una barra naranja inclinada (−20°) que crece de izquierda a derecha. |
 | **Enlace "Saltar al contenido"** | Oculto fuera de la pantalla; al recibir el foco del teclado, aparece arriba a la izquierda con fondo naranja. |
 | **Botón principal** | Fondo naranja, texto tinta, sombra dura de 6px en papel (sin difuminar). Al pasar el ratón, el botón "se hunde" 3px y la sombra baja a 3px. Flecha que avanza 6px. |
@@ -226,6 +227,7 @@ transiciones.**
 ## 9. Móvil (por debajo de 860px)
 
 - Todas las rejillas a una columna; márgenes laterales de 20px.
+- El menú se recoge en un botón hamburguesa "MENÚ" (ver §6, "Menú en móvil").
 - La segunda foto de la galería no se baja (`margin-top: 0`).
 - Entradas de concierto: talón, cuerpo y botón apilados; el talón se separa con la línea
   discontinua abajo y desaparecen las muescas.

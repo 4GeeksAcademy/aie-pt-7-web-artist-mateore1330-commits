@@ -27,6 +27,7 @@
   "Saltar al contenido"
 - **Logo / nombre** (enlaza a la portada): **Iron Wolf**
 - **Nombre accesible del menú:** "Navegación principal"
+- **Botón del menú en móvil** (junto al icono de tres rayas, que va oculto al lector de pantalla): Menú
 - **Enlaces del menú:**
   1. Sobre mí → `#sobre-mi`
   2. Trayectoria → `#trayectoria`
