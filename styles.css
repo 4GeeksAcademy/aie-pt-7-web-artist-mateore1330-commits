@@ -652,6 +652,18 @@ address {
   list-style: none;
 }
 
+/* Textos sobre la foto: halo oscuro suave para que se lean sobre el humo
+   (contraste de 4,5:1 o más; aprobado por Mateo, fase 4) */
+.site-header__logo,
+.nav__link,
+.hero__kicker,
+.hero__tagline {
+  text-shadow:
+    0 0 8px var(--color-ink),
+    0 0 18px var(--color-ink),
+    0 0 32px color-mix(in srgb, var(--color-ink) 80%, transparent);
+}
+
 /* Portada */
 .hero {
   display: flex;
@@ -712,6 +724,14 @@ address {
 
 .hero__kicker {
   margin-bottom: -12px;
+  /* El naranja sobre el humo necesita un halo más denso que el resto */
+  text-shadow:
+    0 0 2px var(--color-ink),
+    0 0 4px var(--color-ink),
+    0 0 8px var(--color-ink),
+    0 0 12px var(--color-ink),
+    0 0 20px var(--color-ink),
+    0 0 32px var(--color-ink);
   color: var(--color-accent);
   font-family: var(--font-type);
   font-size: 18px;
