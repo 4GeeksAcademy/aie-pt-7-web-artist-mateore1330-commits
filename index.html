@@ -21,5 +21,45 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a class="site-header__logo" href="#inicio">Iron Wolf</a>
+        <nav class="nav" aria-label="Navegación principal">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="#sobre-mi">Sobre mí</a></li>
+            <li><a class="nav__link" href="#trayectoria">Trayectoria</a></li>
+            <li><a class="nav__link" href="#presentaciones">Próximas presentaciones</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <section class="hero" id="inicio" aria-labelledby="inicio-titulo">
+        <img class="hero__photo" src="assets/images/hero.webp" alt="Iron Wolf a contraluz tocando la guitarra entre el humo del escenario" width="1600" height="2400" fetchpriority="high">
+        <div class="hero__tint" aria-hidden="true"></div>
+        <div class="hero__light" aria-hidden="true"></div>
+        <div class="hero__shade" aria-hidden="true"></div>
+        <div class="wrap hero__content">
+          <p class="hero__kicker">Rock · Madrid</p>
+          <h1 class="hero__title" id="inicio-titulo">
+            <span class="hero__line">Iron</span>
+            <span class="hero__line">Wolf</span>
+          </h1>
+          <p class="hero__tagline">El rock no ha muerto. <span class="hero__tagline-end">Aquí sigue aullando.</span></p>
+          <p class="hero__actions">
+            <a class="btn btn--primary" href="#presentaciones">
+              Ver próximos conciertos
+              <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#sobre-mi">Conóceme</a>
+          </p>
+        </div>
+        <p class="hero__credit"><small>Foto: Daniel Sturgess / Unsplash</small></p>
+        <div class="tear tear--paper" aria-hidden="true"></div>
+      </section>
+    </main>
   </body>
 </html>
