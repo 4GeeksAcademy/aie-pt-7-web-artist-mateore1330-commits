@@ -39,6 +39,8 @@
   --section-pad-top: 112px;
   --section-pad-bottom: 140px;
   --tear-height: 44px;
+  /* Dientes del borde rasgado (DESIGN.md §5.3) */
+  --tear-shape: polygon(0 100%, 0 55%, 4% 72%, 8% 34%, 13% 62%, 17% 40%, 22% 76%, 27% 30%, 31% 58%, 36% 44%, 41% 80%, 45% 38%, 50% 66%, 55% 26%, 59% 60%, 64% 42%, 69% 78%, 73% 36%, 78% 64%, 83% 32%, 87% 70%, 92% 44%, 96% 68%, 100% 40%, 100% 100%);
 
   /* Texturas (DESIGN.md §5) */
   --texture-noise: url("assets/textures/noise.svg");
@@ -220,7 +222,7 @@ address {
   left: 0;
   z-index: 4;
   height: var(--tear-height);
-  clip-path: polygon(0 100%, 0 55%, 4% 72%, 8% 34%, 13% 62%, 17% 40%, 22% 76%, 27% 30%, 31% 58%, 36% 44%, 41% 80%, 45% 38%, 50% 66%, 55% 26%, 59% 60%, 64% 42%, 69% 78%, 73% 36%, 78% 64%, 83% 32%, 87% 70%, 92% 44%, 96% 68%, 100% 40%, 100% 100%);
+  clip-path: var(--tear-shape);
   pointer-events: none;
 }
 
@@ -629,7 +631,7 @@ address {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0 40px;
+  gap: 0 16px;
   padding-block: 24px;
 }
 
@@ -650,14 +652,15 @@ address {
 .nav__toggle {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-height: 44px;
-  padding: 0 16px;
+  /* Relleno y espaciado justos para que "CERRAR" no toque el logo a 320px */
+  padding: 0 12px;
   border: 2px solid var(--color-paper);
   color: var(--color-paper);
   font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-decoration: none;
   text-transform: uppercase;
   /* Sin el recuadro azul de Chrome al tocar: el foco ya es visible */
@@ -682,6 +685,19 @@ address {
   background: var(--color-ink);
 }
 
+/* Borde rasgado naranja abajo del todo del menú abierto */
+.nav__panel:target::after {
+  content: "";
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--tear-height);
+  background: var(--color-accent);
+  clip-path: var(--tear-shape);
+  pointer-events: none;
+}
+
 /* El logo queda por encima del panel */
 .site-header__logo {
   position: relative;
@@ -694,6 +710,14 @@ address {
   display: flex;
   width: max-content;
   margin: 29px 0 0 auto;
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* Sin el halo oscuro de la cabecera: sobre el naranja emborrona el texto */
+.nav .nav__toggle--close {
+  text-shadow: none;
 }
 
 /* Con el menú abierto, la página de detrás no hace scroll */
@@ -714,7 +738,31 @@ html:has(#menu:target) {
 }
 
 .nav__list .nav__link {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* Algo menos de espaciado que en escritorio, para que "PRÓXIMAS
+     PRESENTACIONES" quepa en una línea a partir de 375px */
+  letter-spacing: 0.14em;
+}
+
+/* Número de sección y flecha, en naranja (decorativos; solo en móvil) */
+.nav__num {
+  flex: none;
+  color: var(--color-accent);
+  font-family: var(--font-type);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  /* La letra de máquina de escribir queda alta: se alinea con el texto */
+  position: relative;
+  top: 1px;
+}
+
+.nav__arrow {
+  flex: none;
+  margin-left: auto;
+  color: var(--color-accent);
 }
 
 /* Textos sobre la foto: halo oscuro suave para que se lean sobre el humo
@@ -1274,6 +1322,10 @@ html:has(#menu:target) {
     --gutter: 64px;
   }
 
+  .site-header__inner {
+    column-gap: 40px;
+  }
+
   /* Escritorio: el menú se ve siempre en línea y sin botones, aunque la
      dirección termine en #menu */
   .nav__toggle {
@@ -1306,6 +1358,15 @@ html:has(#menu:target) {
 
   .nav__list .nav__link {
     display: inline-block;
+  }
+
+  .nav__num,
+  .nav__arrow {
+    display: none;
+  }
+
+  .nav__list .nav__link {
+    letter-spacing: 0.18em;
   }
 
   /* Portada: rejilla de 12 columnas */
