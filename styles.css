@@ -1645,3 +1645,37 @@ html:has(#menu:target) {
     visibility: visible;
   }
 }
+
+/* --- Transiciones al pasar el ratón (DESIGN.md §6) ---------------------- */
+
+.nav__link::after {
+  transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.btn {
+  transition: transform 0.15s, background-color 0.2s, color 0.2s, box-shadow 0.15s;
+}
+
+.btn__arrow {
+  transition: transform 0.25s;
+}
+
+.ticket {
+  transition: rotate 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.25s;
+}
+
+.social__link {
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.mail {
+  transition: background-size 0.3s, color 0.3s;
+}
+
+.milestone__year {
+  transition: color 0.3s, -webkit-text-stroke-color 0.3s;
+}
+
+.to-top {
+  transition: background-color 0.2s;
+}
