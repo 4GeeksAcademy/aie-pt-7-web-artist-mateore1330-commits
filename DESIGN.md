@@ -78,9 +78,9 @@ Tres familias de Google Fonts, cargadas con `<link>` en el `<head>` (es CSS, no 
 | Elemento | Tamaño | Detalles |
 |---|---|---|
 | `h1` "IRON WOLF" | `clamp(4.5rem, 15vw, 15rem)` | Mayúsculas, interlineado 0,82, `letter-spacing: -.03em`, girado −2° |
-| `h2` de sección | `clamp(3.25rem, 8vw, 7.5rem)` | Mayúsculas, interlineado 0,88. "Próximas presentaciones": `clamp(3rem, 7vw, 6.5rem)` |
+| `h2` de sección | `clamp(3.25rem, 8vw, 7.5rem)` | Mayúsculas, interlineado 0,88. Ajustes aprobados por Mateo en la fase 4 para que la palabra más larga quepa: en móvil, `clamp(2rem, 11vw, 3.25rem)` ("Próximas presentaciones": `clamp(1.75rem, 8.5vw, 3rem)`); en escritorio, "Trayectoria" `clamp(3.25rem, calc(8.6vw - 16px), 6.7rem)` y "Próximas presentaciones" `clamp(2.5rem, calc(6.7vw - 12px), 5.25rem)` |
 | `h2` del pie | `clamp(2.5rem, 6vw, 5.75rem)` | Mayúsculas |
-| Ciudad en la entrada (`h3`) | 44px | Archivo Black, mayúsculas |
+| Ciudad en la entrada (`h3`) | 44px | Archivo Black, mayúsculas. Escala por debajo de ~1100px para que "VALLADOLID" quepa (fase 4): `clamp(1.75rem, calc(14vw - 14px), 2.75rem)` en móvil y `clamp(1.75rem, calc(14vw - 92px), 2.75rem)` en escritorio |
 | Año de la línea del tiempo | 56px | Solo contorno (ver §6) |
 | Día en el talón de la entrada | 68px | Archivo Black |
 | Lema de la portada | `clamp(1.4rem, 2.4vw, 2.1rem)` | Archivo 700 |
