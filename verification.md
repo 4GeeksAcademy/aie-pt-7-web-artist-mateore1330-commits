@@ -34,7 +34,7 @@
 |---|---|---|---|
 | 1 | HTML válido | Validador Nu de W3C (`curl … validator.w3.org/nu/?out=json`) | ✅ 0 errores y 0 avisos |
 | 2 | CSS válido | Validador CSS de W3C (jigsaw), perfil CSS3 + SVG | ✅ con salvedades: 27 errores y 42 avisos, todos justificados (§3.1). No hay ningún error real |
-| 3 | Lighthouse, móvil y escritorio | Chrome DevTools | ⏳ **Pendiente (Mateo)**. Resultado: _rellenar_ |
+| 3 | Lighthouse, móvil y escritorio | Chrome DevTools | ⏳ **En curso (Mateo).** Modo *Snapshot*: Accesibilidad 25/25 y SEO 5/5 auditorías superadas. Falta el modo *Navigation* (puntuación sobre 100 y Rendimiento), en móvil y escritorio |
 | 4 | Auditoría de accesibilidad | Skill `accessibility` + pruebas de Playwright | ✅ Sin hallazgos abiertos. El de la revisión final (página de detrás del menú accesible) se corrigió en `770aeea` |
 | 5 | Auditoría de SEO | Skill `seo` | ✅ Sin hallazgos abiertos. `canonical`, `og:url`, `robots.txt` y sitemap no aplican porque la web no se publica (§3.2) |
 | 6 | Teclado | Playwright con Tab real | ✅ Los 15 elementos de escritorio en orden lógico, con contorno de 3px. "Saltar al contenido" lleva a `#contenido`. Menú de móvil: Enter abre; Tab recorre Cerrar → Sobre mí → Trayectoria → Próximas presentaciones, y con el menú abierto no cae en enlaces tapados. Ningún elemento con foco queda bajo la cabecera ni detrás del botón ↑ (`scroll-padding`) |
@@ -42,7 +42,7 @@
 | 8 | Contraste | Script con la fórmula de WCAG (colores planos) + píxeles reales detrás del texto de la portada | ✅ 21 parejas de colores planos de 4,89:1 o más. Sobre la foto (mediana): menú ≥ 8,4:1, logo ≥ 13:1, lema ≥ 16:1, antetítulo 4,94 (375px), 5,40 (1440px) y 5,77:1 (768px) |
 | 9 | Schema.org | Validador de schema.org + prueba de resultados enriquecidos de Google | ✅ 0 errores y 0 avisos; Google: "4 elementos válidos" en Eventos (PR #4). El JSON-LD no ha cambiado desde entonces |
 | 10 | Responsive | Playwright | ✅ Sin scroll horizontal en 16 anchos (320–1920px); ningún título se sale de su caja; zoom al 200 % sin solapes. Capturas de página completa a 320, 375, 768, 1024 y 1440px en [`design/screenshots/fase-6/`](design/screenshots/fase-6/) |
-| 11 | Navegadores | Chrome (automático); Firefox y Safari (Mateo) | ✅ Chrome. Sin animaciones de scroll (simulado: los `@supports` en falso), ningún contenido oculto a 1440 ni a 375px. ⏳ **Pendiente (Mateo):** Firefox, Safari en el Mac y Safari en el iPhone (menú y cabecera fija) |
+| 11 | Navegadores | Chrome (automático); Firefox y Safari (Mateo) | ✅ Chrome. Sin animaciones de scroll (simulado: los `@supports` en falso), ningún contenido oculto a 1440 ni a 375px. ✅ **Firefox y Safari (Mac), Mateo:** todo el contenido se ve; el scroll va algo lento (§3.6). ⏳ **Pendiente (Mateo):** Safari en el iPhone (menú y cabecera fija) |
 | 12 | Movimiento reducido | Playwright (`reducedMotion: 'reduce'`) | ✅ Solo quedan `header-fill` y `to-top-in`, la excepción aprobada (§3.3); todo el contenido visible |
 | 13 | Restricciones | `grep` y `find` | ✅ Un único `<script>` (`application/ld+json`); 0 `on…=`; 0 `style=""`; 0 archivos `.js`; 0 "hard rock"; ningún color fuera de `:root`; `!important` solo en el bloque 9 |
 | 14 | Textos | Script que busca cada texto de `index.html` en `CONTENT.md` | ✅ Los 124 textos y todos los `alt`/`aria-label` coinciden. "EP ·" y "Single ·" son combinaciones de la tabla de la discografía |
@@ -105,7 +105,20 @@ Las fuentes se cargan desde Google, como fija `DESIGN.md` §3, y eso envía la I
 Google. Para un ejercicio no es un problema. Para una web real en la UE, convendría alojarlas en
 `assets/fonts/`.
 
-### 3.6 Lo que mejoró respecto a la maqueta
+### 3.6 Scroll algo lento en Firefox y Safari
+
+Mateo nota el scroll algo lento en Firefox y en Safari (en Chrome va a 60 fps). Decidió dejarlo
+así. Los sospechosos, de más a menos probable:
+
+1. La capa de grano: fija, del doble de la pantalla, con `mix-blend-mode: overlay` y animada
+   7 veces por segundo. Firefox y Safari tienden a recalcular la pantalla entera en cada salto.
+2. Los halos de la portada: `text-shadow` con hasta 32px de difuminado, que se repintan bajo la
+   cabecera fija.
+3. Los filtros de blanco y negro de las fotos.
+
+Si hiciera falta mejorarlo, lo primero sería quitar la mezcla del grano o animarlo menos veces.
+
+### 3.7 Lo que mejoró respecto a la maqueta
 
 Fallos de la maqueta que se corrigieron por el camino:
 
@@ -125,8 +138,8 @@ El detalle de cada uno está en [`memory-bank/progress.md`](memory-bank/progress
 
 | Comprobación | Qué hacer | Resultado |
 |---|---|---|
-| 3. Lighthouse | Guía en el PR de la fase 6 | _Móvil: Rendimiento __ · Accesibilidad __ · Buenas prácticas __ · SEO ___ <br> _Escritorio: Rendimiento __ · Accesibilidad __ · Buenas prácticas __ · SEO ___ |
+| 3. Lighthouse | Modo **Navigation** (no Snapshot), guía en el PR de la fase 6 | Snapshot: Accesibilidad 25/25, SEO 5/5. <br> _Navigation, móvil: Rendimiento __ · Accesibilidad __ · Buenas prácticas __ · SEO ___ <br> _Navigation, escritorio: Rendimiento __ · Accesibilidad __ · Buenas prácticas __ · SEO ___ |
 | 7. VoiceOver | Guía en el PR de la fase 6 | _rellenar_ |
-| 11. Firefox | Abrir la web, recargar sin hacer scroll y bajar hasta el final: todo visible | _rellenar_ |
-| 11. Safari (Mac) | Igual que en Firefox | _rellenar_ |
+| 11. Firefox | Abrir la web, recargar sin hacer scroll y bajar hasta el final: todo visible | ✅ Todo visible; scroll algo lento (§3.6) |
+| 11. Safari (Mac) | Igual que en Firefox | ✅ Todo visible; scroll algo lento (§3.6) |
 | 11. Safari (iPhone) | Menú (abrir, ir a una sección, cerrar), cabecera fija y botón ↑ | _rellenar_ |
