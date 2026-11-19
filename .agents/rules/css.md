@@ -101,7 +101,7 @@ ID y las clases siguen el patrón `bloque(__elemento)?(--variante)?`.
 1. Variables (`:root`)
 2. Base (`box-sizing`, `body`, tipografía, enlaces, `img`, `:focus-visible`, `.skip-link`,
    `scroll-margin-top`)
-3. Utilidades (`.wrap`, rejilla, `.visually-hidden`)
+3. Utilidades (`.wrap`)
 4. Texturas (grano, tinta gastada, bordes rasgados)
 5. Componentes
 6. Secciones (portada, Sobre mí, Galería, Trayectoria, Próximas presentaciones, pie)
