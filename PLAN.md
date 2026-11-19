@@ -62,8 +62,8 @@ Si algo no está en estos documentos, **se pregunta a Mateo**. No se inventa.
 |---|---|---|---|---|
 | 0 | [`plans/phase-0-setup.md`](plans/phase-0-setup.md) | `chore/phase-0-setup` | `.gitignore`, hook de gitleaks, documentos y recursos versionados | **Hecha** |
 | 1 | [`plans/phase-1-agent-harness.md`](plans/phase-1-agent-harness.md) | `docs/phase-1-agent-harness` | `AGENTS.md`, `CLAUDE.md`, reglas, memory bank y skills | **Hecha** |
-| 2 | [`plans/phase-2-images.md`](plans/phase-2-images.md) | `feat/phase-2-images` | Fotos en WebP, imagen para redes y favicon | **En revisión** |
-| 3 | [`plans/phase-3-html.md`](plans/phase-3-html.md) | `feat/phase-3-html` | `index.html` semántico completo, SEO y Schema.org | Pendiente |
+| 2 | [`plans/phase-2-images.md`](plans/phase-2-images.md) | `feat/phase-2-images` | Fotos en WebP, imagen para redes y favicon | **Hecha** |
+| 3 | [`plans/phase-3-html.md`](plans/phase-3-html.md) | `feat/phase-3-html` | `index.html` semántico completo, SEO y Schema.org | **En revisión** |
 | 4 | [`plans/phase-4-css.md`](plans/phase-4-css.md) | `feat/phase-4-css` | `styles.css` sin animaciones, móvil y escritorio | Pendiente |
 | 5 | [`plans/phase-5-animations.md`](plans/phase-5-animations.md) | `feat/phase-5-animations` | Animaciones y efectos, con versión sin movimiento | Pendiente |
 | 6 | [`plans/phase-6-verification.md`](plans/phase-6-verification.md) | `chore/phase-6-verification` | Verificación completa, `verification.md` y README de entrega | Pendiente |

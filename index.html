@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iron Wolf · Rock desde Madrid · Gira 2027</title>
+    <meta name="description" content="Iron Wolf, rock desde Vallecas. Conoce su historia, su EP Howl y las fechas de la gira 2027: Barcelona, Valencia, Bilbao y Meseta Rock Festival.">
+    <meta name="theme-color" content="#0E0E0E">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Iron Wolf · Gira 2027">
+    <meta property="og:description" content="El rock no ha muerto. Aquí sigue aullando. Barcelona, Valencia, Bilbao y Meseta Rock Festival.">
+    <meta property="og:image" content="assets/images/og.jpg">
+    <meta property="og:locale" content="es_ES">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "MusicGroup",
+            "@id": "#iron-wolf",
+            "name": "Iron Wolf",
+            "description": "Iron Wolf, rock desde Vallecas. Conoce su historia, su EP Howl y las fechas de la gira 2027: Barcelona, Valencia, Bilbao y Meseta Rock Festival.",
+            "genre": "Rock",
+            "foundingDate": "2022",
+            "foundingLocation": {
+              "@type": "Place",
+              "name": "Vallecas, Madrid",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Madrid",
+                "addressCountry": "ES"
+              }
+            },
+            "image": "assets/images/hero.webp",
+            "email": "booking@ironwolf.example",
+            "album": {
+              "@id": "#howl"
+            },
+            "track": [
+              {
+                "@id": "#silver-fang"
+              },
+              {
+                "@id": "#midnight-engine"
+              },
+              {
+                "@id": "#rust"
+              }
+            ]
+          },
+          {
+            "@type": "MusicAlbum",
+            "@id": "#howl",
+            "name": "Howl",
+            "albumReleaseType": "https://schema.org/EPRelease",
+            "datePublished": "2024",
+            "byArtist": {
+              "@id": "#iron-wolf"
+            }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "#silver-fang",
+            "name": "Silver Fang",
+            "datePublished": "2022",
+            "byArtist": {
+              "@id": "#iron-wolf"
+            }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "#midnight-engine",
+            "name": "Midnight Engine",
+            "datePublished": "2023",
+            "byArtist": {
+              "@id": "#iron-wolf"
+            }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "#rust",
+            "name": "Rust",
+            "datePublished": "2023",
+            "byArtist": {
+              "@id": "#iron-wolf"
+            }
+          },
+          {
+            "@type": "MusicEvent",
+            "name": "Iron Wolf · Gira 2027 · Barcelona",
+            "startDate": "2027-04-17",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "MusicVenue",
+              "name": "Razzmatazz",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "C/ Almogàvers 122",
+                "addressLocality": "Barcelona",
+                "addressCountry": "ES"
+              }
+            },
+            "performer": {
+              "@id": "#iron-wolf"
+            },
+            "image": "assets/images/hero.webp",
+            "offers": {
+              "@type": "Offer",
+              "url": "https://example.com/entradas/barcelona-2027-04-17"
+            }
+          },
+          {
+            "@type": "MusicEvent",
+            "name": "Iron Wolf · Gira 2027 · Valencia",
+            "startDate": "2027-05-15",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "MusicVenue",
+              "name": "Moon",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Calle San Vicente 200",
+                "addressLocality": "Valencia",
+                "addressCountry": "ES"
+              }
+            },
+            "performer": {
+              "@id": "#iron-wolf"
+            },
+            "image": "assets/images/hero.webp",
+            "offers": {
+              "@type": "Offer",
+              "url": "https://example.com/entradas/valencia-2027-05-15"
+            }
+          },
+          {
+            "@type": "MusicEvent",
+            "name": "Iron Wolf · Gira 2027 · Bilbao",
+            "startDate": "2027-06-12",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "MusicVenue",
+              "name": "Kafe Antzokia",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "San Vicente 2",
+                "postalCode": "48001",
+                "addressLocality": "Bilbao",
+                "addressCountry": "ES"
+              }
+            },
+            "performer": {
+              "@id": "#iron-wolf"
+            },
+            "image": "assets/images/hero.webp",
+            "offers": {
+              "@type": "Offer",
+              "url": "https://example.com/entradas/bilbao-2027-06-12"
+            }
+          },
+          {
+            "@type": "MusicEvent",
+            "name": "Meseta Rock Festival 2027",
+            "startDate": "2027-07-10",
+            "eventStatus": "https://schema.org/EventScheduled",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "MusicVenue",
+              "name": "Meseta Rock Festival",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Valladolid",
+                "addressCountry": "ES"
+              }
+            },
+            "performer": {
+              "@id": "#iron-wolf"
+            },
+            "image": "assets/images/hero.webp",
+            "offers": {
+              "@type": "Offer",
+              "url": "https://example.com/entradas/valladolid-2027-07-10"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a class="site-header__logo" href="#inicio">Iron Wolf</a>
+        <nav class="nav" aria-label="Navegación principal">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="#sobre-mi">Sobre mí</a></li>
+            <li><a class="nav__link" href="#trayectoria">Trayectoria</a></li>
+            <li><a class="nav__link" href="#presentaciones">Próximas presentaciones</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <section class="hero" id="inicio" aria-labelledby="inicio-titulo">
+        <img class="hero__photo" src="assets/images/hero.webp" alt="Iron Wolf a contraluz tocando la guitarra entre el humo del escenario" width="1600" height="2400" fetchpriority="high">
+        <div class="hero__tint" aria-hidden="true"></div>
+        <div class="hero__light" aria-hidden="true"></div>
+        <div class="hero__shade" aria-hidden="true"></div>
+        <div class="wrap hero__content">
+          <p class="hero__kicker">Rock · Madrid</p>
+          <h1 class="hero__title" id="inicio-titulo">
+            <span class="hero__line">Iron</span>
+            <span class="hero__line">Wolf</span>
+          </h1>
+          <p class="hero__tagline">El rock no ha muerto. <span class="hero__tagline-end">Aquí sigue aullando.</span></p>
+          <p class="hero__actions">
+            <a class="btn btn--primary" href="#presentaciones">
+              Ver próximos conciertos
+              <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#sobre-mi">Conóceme</a>
+          </p>
+        </div>
+        <p class="hero__credit"><small>Foto: Daniel Sturgess / Unsplash</small></p>
+        <div class="tear tear--paper" aria-hidden="true"></div>
+      </section>
+
+      <section class="section about" id="sobre-mi" aria-labelledby="sobre-mi-titulo">
+        <div class="wrap">
+          <p class="section__num" aria-hidden="true">01 /</p>
+          <h2 class="section__title" id="sobre-mi-titulo">Sobre mí</h2>
+          <div class="about__grid">
+            <figure class="polaroid">
+              <span class="polaroid__tape polaroid__tape--left" aria-hidden="true"></span>
+              <span class="polaroid__tape polaroid__tape--right" aria-hidden="true"></span>
+              <img class="polaroid__img" src="assets/images/about.webp" alt="Iron Wolf con la melena al aire tocando la guitarra eléctrica" width="1200" height="801" loading="lazy">
+              <figcaption class="polaroid__caption">
+                <span>Vallecas, Madrid</span>
+                <span>Foto: Hector Bermudez / Unsplash</span>
+              </figcaption>
+            </figure>
+            <div class="about__text">
+              <p>Me crié en Vallecas. Con 14 años cogí la guitarra de mi padre en un garaje del barrio y ya no la solté. Aprendí a base de poner discos una y otra vez y de tocar hasta que se quejaban los vecinos.</p>
+              <p>En 2022 nació Iron Wolf. Empecé tocando en los garitos de Malasaña, noche tras noche, para quien quisiera escuchar. Lo mío es el rock de siempre: los riffs directos de AC/DC, la épica de Led Zeppelin y la actitud de Guns N' Roses. Canto en inglés, toco con las guitarras al frente y hago estribillos para cantarlos a gritos.</p>
+              <p>Hoy salgo al escenario con mi banda: guitarra solista, bajo y batería. Y una sola regla: <strong>que nadie se quede quieto.</strong></p>
+              <dl class="facts">
+                <div class="facts__item">
+                  <dt>Desde</dt>
+                  <dd>2022</dd>
+                </div>
+                <div class="facts__item">
+                  <dt>De</dt>
+                  <dd>Vallecas, Madrid</dd>
+                </div>
+                <div class="facts__item">
+                  <dt>Suena a</dt>
+                  <dd>AC/DC · Led Zeppelin · Guns N' Roses</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="tear tear--accent" aria-hidden="true"></div>
+      </section>
+
+      <section class="section gallery" id="galeria" aria-labelledby="galeria-titulo">
+        <p class="gallery__word" aria-hidden="true">LIVE</p>
+        <div class="wrap">
+          <p class="section__num" aria-hidden="true">02 /</p>
+          <h2 class="section__title" id="galeria-titulo">Galería</h2>
+          <div class="gallery__grid">
+            <figure class="shot shot--1">
+              <div class="shot__frame">
+                <div class="shot__img shot__img--live-1" role="img" aria-label="Iron Wolf en silueta tocando la guitarra bajo un foco"></div>
+                <span class="shot__flash" aria-hidden="true"></span>
+                <span class="shot__curtain" aria-hidden="true"></span>
+              </div>
+              <figcaption class="shot__caption">
+                <span class="tape">01 · En directo</span>
+                <span class="shot__credit">Foto: Diane Picchiottino / Unsplash</span>
+              </figcaption>
+            </figure>
+            <figure class="shot shot--2">
+              <div class="shot__frame">
+                <div class="shot__img shot__img--live-2" role="img" aria-label="Iron Wolf de rodillas con la guitarra bajo los focos del escenario"></div>
+                <span class="shot__flash" aria-hidden="true"></span>
+                <span class="shot__curtain" aria-hidden="true"></span>
+              </div>
+              <figcaption class="shot__caption">
+                <span class="tape">02 · Sobre las tablas</span>
+                <span class="shot__credit">Foto: Greyson Joralemon / Unsplash</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="tear tear--ink" aria-hidden="true"></div>
+      </section>
+
+      <section class="section career" id="trayectoria" aria-labelledby="trayectoria-titulo">
+        <div class="wrap">
+          <p class="section__num" aria-hidden="true">03 /</p>
+          <div class="section__head">
+            <h2 class="section__title" id="trayectoria-titulo">Trayectoria</h2>
+            <p class="section__lead">Del garaje a cabeza de cartel. Así ha sido el camino.</p>
+          </div>
+          <ol class="timeline">
+            <li class="milestone">
+              <span class="milestone__mark" aria-hidden="true"></span>
+              <time class="milestone__year" datetime="2015">2015</time>
+              <h3 class="milestone__title">El garaje</h3>
+              <p class="milestone__text">Con 14 años empieza a tocar la guitarra de su padre en un garaje de Vallecas.</p>
+            </li>
+            <li class="milestone">
+              <span class="milestone__mark" aria-hidden="true"></span>
+              <time class="milestone__year" datetime="2022">2022</time>
+              <h3 class="milestone__title">Nace Iron Wolf</h3>
+              <p class="milestone__text">Primeros conciertos en los garitos de Malasaña y primer single: <cite>Silver Fang</cite>.</p>
+            </li>
+            <li class="milestone">
+              <span class="milestone__mark" aria-hidden="true"></span>
+              <time class="milestone__year" datetime="2023">2023</time>
+              <h3 class="milestone__title">Se da a conocer</h3>
+              <p class="milestone__text">Salen <cite>Midnight Engine</cite> y <cite>Rust</cite>, y forma su banda de directo.</p>
+            </li>
+            <li class="milestone milestone--sold-out">
+              <span class="milestone__mark" aria-hidden="true"></span>
+              <span class="stamp" aria-hidden="true">SOLD OUT</span>
+              <time class="milestone__year" datetime="2024">2024</time>
+              <h3 class="milestone__title"><cite>Howl</cite> y el primer sold out</h3>
+              <p class="milestone__text">Presenta su EP <cite>Howl</cite> en La Riviera (Madrid) y cuelga el cartel de entradas agotadas.</p>
+            </li>
+            <li class="milestone">
+              <span class="milestone__mark" aria-hidden="true"></span>
+              <time class="milestone__year" datetime="2025">2025</time>
+              <h3 class="milestone__title">Telonero de The Black Highway</h3>
+              <p class="milestone__text">Abre en Madrid el concierto de la leyenda estadounidense del rock. Esa noche le abre las puertas de los grandes escenarios.</p>
+            </li>
+            <li class="milestone">
+              <span class="milestone__mark" aria-hidden="true"></span>
+              <time class="milestone__year" datetime="2026">2026</time>
+              <h3 class="milestone__title">Cabeza de cartel</h3>
+              <p class="milestone__text">Se anuncia como cabeza de cartel del Meseta Rock Festival 2027.</p>
+            </li>
+          </ol>
+
+          <h3 class="discography__title">Discografía</h3>
+          <ul class="discography">
+            <li class="release">
+              <div class="release__cover release__cover--ep" aria-hidden="true">Howl</div>
+              <div class="release__info">
+                <p class="release__meta">EP · <time datetime="2024">2024</time></p>
+                <p class="release__name"><cite>Howl</cite></p>
+              </div>
+            </li>
+            <li class="release">
+              <div class="release__cover" aria-hidden="true">Rust</div>
+              <div class="release__info">
+                <p class="release__meta">Single · <time datetime="2023">2023</time></p>
+                <p class="release__name"><cite>Rust</cite></p>
+              </div>
+            </li>
+            <li class="release">
+              <div class="release__cover" aria-hidden="true">Midnight Engine</div>
+              <div class="release__info">
+                <p class="release__meta">Single · <time datetime="2023">2023</time></p>
+                <p class="release__name"><cite>Midnight Engine</cite></p>
+              </div>
+            </li>
+            <li class="release">
+              <div class="release__cover" aria-hidden="true">Silver Fang</div>
+              <div class="release__info">
+                <p class="release__meta">Single · <time datetime="2022">2022</time></p>
+                <p class="release__name"><cite>Silver Fang</cite></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="tear tear--paper" aria-hidden="true"></div>
+      </section>
+      <section class="section shows" id="presentaciones" aria-labelledby="presentaciones-titulo">
+        <div class="wrap">
+          <p class="section__num" aria-hidden="true">04 /</p>
+          <div class="section__head">
+            <h2 class="section__title section__title--long" id="presentaciones-titulo">Próximas presentaciones</h2>
+            <p class="section__lead">Gira 2027. Cuatro noches para subir el volumen. La última, en lo más alto del cartel.</p>
+          </div>
+          <ol class="tickets">
+            <li class="ticket">
+              <span class="ticket__notch ticket__notch--top" aria-hidden="true"></span>
+              <span class="ticket__notch ticket__notch--bottom" aria-hidden="true"></span>
+              <time class="ticket__stub" datetime="2027-04-17"><span class="ticket__day">17</span><span class="ticket__sep"> · </span><span class="ticket__date">Sáb · Abr 2027</span></time>
+              <div class="ticket__body">
+                <p class="ticket__small">Iron Wolf · Gira 2027 · Admite uno</p>
+                <h3 class="ticket__city">Barcelona</h3>
+                <p class="ticket__venue">Razzmatazz</p>
+              </div>
+              <p class="ticket__action">
+                <a class="btn btn--ticket" href="https://example.com/entradas/barcelona-2027-04-17" aria-label="Entradas para Barcelona, Razzmatazz, 17 de abril de 2027">
+                  Entradas
+                  <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
+                </a>
+              </p>
+            </li>
+            <li class="ticket">
+              <span class="ticket__notch ticket__notch--top" aria-hidden="true"></span>
+              <span class="ticket__notch ticket__notch--bottom" aria-hidden="true"></span>
+              <time class="ticket__stub" datetime="2027-05-15"><span class="ticket__day">15</span><span class="ticket__sep"> · </span><span class="ticket__date">Sáb · May 2027</span></time>
+              <div class="ticket__body">
+                <p class="ticket__small">Iron Wolf · Gira 2027 · Admite uno</p>
+                <h3 class="ticket__city">Valencia</h3>
+                <p class="ticket__venue">Moon</p>
+              </div>
+              <p class="ticket__action">
+                <a class="btn btn--ticket" href="https://example.com/entradas/valencia-2027-05-15" aria-label="Entradas para Valencia, Moon, 15 de mayo de 2027">
+                  Entradas
+                  <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
+                </a>
+              </p>
+            </li>
+            <li class="ticket">
+              <span class="ticket__notch ticket__notch--top" aria-hidden="true"></span>
+              <span class="ticket__notch ticket__notch--bottom" aria-hidden="true"></span>
+              <time class="ticket__stub" datetime="2027-06-12"><span class="ticket__day">12</span><span class="ticket__sep"> · </span><span class="ticket__date">Sáb · Jun 2027</span></time>
+              <div class="ticket__body">
+                <p class="ticket__small">Iron Wolf · Gira 2027 · Admite uno</p>
+                <h3 class="ticket__city">Bilbao</h3>
+                <p class="ticket__venue">Kafe Antzokia</p>
+              </div>
+              <p class="ticket__action">
+                <a class="btn btn--ticket" href="https://example.com/entradas/bilbao-2027-06-12" aria-label="Entradas para Bilbao, Kafe Antzokia, 12 de junio de 2027">
+                  Entradas
+                  <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
+                </a>
+              </p>
+            </li>
+            <li class="ticket ticket--festival">
+              <span class="ticket__notch ticket__notch--top" aria-hidden="true"></span>
+              <span class="ticket__notch ticket__notch--bottom" aria-hidden="true"></span>
+              <time class="ticket__stub" datetime="2027-07-10"><span class="ticket__day">10</span><span class="ticket__sep"> · </span><span class="ticket__date">Sáb · Jul 2027</span></time>
+              <div class="ticket__body">
+                <p class="ticket__label"><span class="tape tape--ink">Cabeza de cartel</span></p>
+                <h3 class="ticket__city">Valladolid</h3>
+                <p class="ticket__venue">Meseta Rock Festival</p>
+              </div>
+              <p class="ticket__action">
+                <a class="btn btn--ticket-dark" href="https://example.com/entradas/valladolid-2027-07-10" aria-label="Entradas para Valladolid, Meseta Rock Festival, 10 de julio de 2027">
+                  Entradas
+                  <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
+                </a>
+              </p>
+            </li>
+          </ol>
+        </div>
+        <div class="tear tear--ink" aria-hidden="true"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <h2 class="site-footer__title">¿Sala, festival o prensa? <span class="site-footer__accent">Hablemos.</span></h2>
+        <div class="site-footer__contact">
+          <address class="site-footer__address">
+            <a class="mail" href="mailto:booking@ironwolf.example">booking@ironwolf.example</a>
+          </address>
+          <ul class="social">
+            <li>
+              <a class="social__link" href="https://example.com/instagram" aria-label="Iron Wolf en Instagram">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6"/></svg>
+              </a>
+            </li>
+            <li>
+              <a class="social__link" href="https://example.com/youtube" aria-label="Iron Wolf en YouTube">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a class="social__link" href="https://example.com/spotify" aria-label="Iron Wolf en Spotify">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M7 9.5c3.5-1 7-.6 10 1"/><path d="M7.5 12.8c3-.8 5.8-.4 8.3.9"/><path d="M8 15.8c2.3-.6 4.5-.3 6.4.7"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <p class="site-footer__copy"><small>© 2026 Iron Wolf. Hecho con ruido en Madrid.</small></p>
+      </div>
+      <p class="site-footer__word" aria-hidden="true">IRON WOLF</p>
+    </footer>
+
+    <div class="grain" aria-hidden="true"></div>
+  </body>
+</html>

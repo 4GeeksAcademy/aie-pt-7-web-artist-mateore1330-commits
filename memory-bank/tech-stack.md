@@ -1,7 +1,7 @@
 ---
 name: tech-stack
 description: Tecnologías de la web, cómo previsualizarla y herramientas de trabajo y validación
-last_verified: 2026-11-19 (sobre el commit 2dfeb1f, cierre de la fase 1)
+last_verified: 2026-11-19 (sobre el commit 748bb32, cierre de la fase 3)
 ---
 
 # Stack tecnológico
@@ -24,6 +24,9 @@ sirve.
 ```bash
 python3 -m http.server 8000     # en la raíz; abrir http://localhost:8000
 ```
+
+Si el puerto 8000 está ocupado (en el equipo de Mateo lo usa Docker), usa otro:
+`python3 -m http.server 8080 --bind 127.0.0.1`.
 
 El `server.py` de la plantilla también vale, pero necesita Flask (`pip3 install flask`).
 

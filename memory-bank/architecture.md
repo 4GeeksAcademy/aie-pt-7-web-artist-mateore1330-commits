@@ -1,13 +1,13 @@
 ---
 name: architecture
 description: Estructura de archivos, las 6 partes de la página con su ID y fondo, los bloques de styles.css y cómo se usan texturas y fotos
-last_verified: 2026-11-19 (sobre el commit 5dd02fd, cierre de la fase 2)
+last_verified: 2026-11-19 (sobre el commit 748bb32, cierre de la fase 3)
 ---
 
 # Arquitectura
 
 > Describe la estructura **prevista** por `PLAN.md` y `DESIGN.md`. A 19-11-2026 ya existen las
-> imágenes y el favicon, pero todavía no `index.html` ni `styles.css` (ver [`current-state.md`](current-state.md)).
+> imágenes, el favicon e `index.html`; `styles.css` está vacío (ver [`current-state.md`](current-state.md)).
 
 ## Estructura de archivos
 
