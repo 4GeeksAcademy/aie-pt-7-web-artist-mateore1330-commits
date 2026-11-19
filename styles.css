@@ -1987,3 +1987,148 @@ html:has(#menu:target) {
     opacity: 0;
   }
 }
+
+/* --- Ligadas al scroll (DESIGN.md §7). Sin soporte, todo se ve quieto y
+   completo: los estados iniciales "ocultos" solo existen aquí dentro. ----- */
+
+@supports (animation-timeline: view()) {
+  /* Deslizamiento de los títulos de sección */
+  .section__title,
+  .site-footer__title {
+    animation: iw-slide linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+
+  /* Aparición al bajar: bloques, hitos, discos y entradas */
+  .polaroid,
+  .about__text,
+  .milestone,
+  .release,
+  .ticket {
+    animation: iw-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 25%;
+  }
+
+  /* Relleno de los años al cruzar el centro de la pantalla */
+  .milestone__year {
+    animation: iw-fill linear both;
+    animation-timeline: view();
+    animation-range: cover 35% cover 55%;
+  }
+
+  /* Caída del sello "SOLD OUT" */
+  .stamp {
+    animation: iw-stamp linear both;
+    animation-timeline: view();
+    animation-range: entry 60% cover 40%;
+  }
+
+  /* Cortina negra que se retira de las fotos de la galería */
+  .shot__curtain {
+    animation: iw-curtain linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 45%;
+  }
+
+  /* Profundidad de las fotos de la galería */
+  .shot__img {
+    animation: iw-parallax linear both;
+    animation-timeline: view();
+    animation-range: cover;
+  }
+
+  /* Deriva horizontal de "LIVE" */
+  .gallery__word {
+    animation: iw-drift linear both;
+    animation-timeline: view();
+    animation-range: cover;
+  }
+}
+
+@keyframes iw-slide {
+  from {
+    opacity: 0.2;
+    transform: translateX(-12%) rotate(-3deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Con "translate" y no "transform": no borra los giros de la foto pegada
+   ni de las entradas */
+@keyframes iw-reveal {
+  from {
+    opacity: 0;
+    translate: 0 60px;
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@keyframes iw-fill {
+  from {
+    color: transparent;
+  }
+
+  to {
+    color: var(--color-accent);
+    -webkit-text-stroke-color: var(--color-accent);
+  }
+}
+
+@keyframes iw-stamp {
+  0% {
+    opacity: 0;
+    transform: rotate(-12deg) scale(2.4);
+  }
+
+  60% {
+    opacity: 1;
+    transform: rotate(-12deg) scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotate(-12deg) scale(1);
+  }
+}
+
+@keyframes iw-curtain {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes iw-parallax {
+  from {
+    scale: 1.25;
+    translate: 0 -6%;
+  }
+
+  to {
+    scale: 1;
+    translate: 0 6%;
+  }
+}
+
+@keyframes iw-drift {
+  from {
+    transform: translateX(18%);
+  }
+
+  to {
+    transform: translateX(-22%);
+  }
+}
