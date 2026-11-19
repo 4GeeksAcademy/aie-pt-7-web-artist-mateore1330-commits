@@ -275,6 +275,29 @@ Clases BEM preparadas para la fase 4:
   - **Prettier:** al guardar en VS Code, reformateaba `index.html` (`/>` en las etiquetas vacías,
     líneas partidas). Mateo eligió descartar ese formato, y el `.prettierignore` lo evita.
 
+- **Cabecera fija y botón "Volver al inicio"** (pedidos por Mateo; lo hablamos antes de
+  implementarlo).
+
+  - **Cabecera fija** (`position: fixed`, alto de 102px):
+    - Transparente sobre la portada; el fondo de tinta aparece en los primeros 120px de scroll,
+      con `animation-timeline: scroll(root)`. Sin soporte, es de tinta desde el principio.
+    - Las secciones llevan `scroll-margin-top: var(--header-height)`. Al saltar a una sección, su
+      borde queda a 102px y el título no se tapa.
+    - "✕ CERRAR" apunta ahora a `#cabecera`, la propia cabecera fija: el menú se cierra sin mover
+      la página. Comprobado en Chrome a 4000px; queda pendiente probarlo en Safari en un iPhone.
+  - **Botón "Volver al inicio"** (aviso del lector de pantalla, añadido a `CONTENT.md`):
+    - Un cuadrado naranja de 52px con una flecha ↑, fijo abajo a la derecha.
+    - Lleva borde de tinta y sombra dura de papel para destacar también sobre la Galería naranja.
+    - Aparece entre el 60 % y el 80 % de la altura de la portada (`scroll(root)`, `60svh 80svh`).
+      Oculto, tiene `visibility: hidden`: no se puede pulsar ni enfocar.
+    - Foco: doble anillo de papel y tinta.
+  - **Desplazamiento suave:** `scroll-behavior: smooth`, solo con
+    `prefers-reduced-motion: no-preference`.
+  - **Se adelantan a la fase 4** dos piezas de la fase 5: el bloque 8 (Animaciones) de
+    `styles.css` empieza con el fondo de la cabecera y la aparición del botón, y el desplazamiento
+    suave va en el bloque Base.
+  - **No se puede sin JavaScript:** esconder la cabecera al bajar y mostrarla al subir.
+
 **Otros ajustes sin cambio de diseño** (`a8870ec`, `49f544a`):
 
 - **Tildes:** la caja de los títulos con tinta gastada se amplía arriba y abajo
@@ -319,3 +342,5 @@ Clases BEM preparadas para la fase 4:
 - El flash blanco de la galería usa `--color-white`, que `DESIGN.md` §2 reserva para el marco de
   la foto. §6 describe el flash blanco, así que se mantiene.
 - En el bloque de movimiento reducido harán falta `!important`; CS-06 lo permite solo ahí.
+- El bloque 8 ya tiene `header-fill` y `to-top-in`. Al apagar las animaciones con movimiento
+  reducido, la cabecera queda de tinta y el botón visible, que es su estado seguro. Comprobarlo.
