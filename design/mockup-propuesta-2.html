@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Iron Wolf · Propuesta 2 (más rock)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Archivo:wght@400;500;700&amp;family=Special+Elite&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0E0E0E}
+a{color:inherit}a:hover{color:inherit}
+.iw{--accent-ink:color-mix(in oklab,var(--accent) 72%,#000)}
+.iw *{box-sizing:border-box}
+.iw a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.skip{position:absolute;left:16px;top:-80px;z-index:60;background:var(--accent);color:#0E0E0E;padding:12px 20px;font-weight:700;text-decoration:none}
+.skip:focus{top:16px}
+.grain{position:fixed;left:-50%;top:-50%;width:200%;height:200%;background:url(/_blob/84615cefa8fe71da6d700578b978c1f3) repeat;background-size:300px 300px;opacity:.16;mix-blend-mode:overlay;pointer-events:none;z-index:50}
+.distress-d{--ink:#F2F0EC;color:transparent;-webkit-background-clip:text;background-clip:text;background-image:url(/_blob/b429c88515770ab88ff2110c527ed906),linear-gradient(var(--ink),var(--ink));background-size:500px 500px,auto}
+.distress-l{--ink:#111111;color:transparent;-webkit-background-clip:text;background-clip:text;background-image:url(/_blob/5deeddd2f0fe5b18e17a4e9cb92a609f),linear-gradient(var(--ink),var(--ink));background-size:500px 500px,auto}
+.typew{font-family:'Special Elite',ui-monospace,monospace}
+.tear{position:absolute;left:0;right:0;bottom:-1px;height:44px;background:var(--tear);clip-path:polygon(0 100%,0 55%,4% 72%,8% 34%,13% 62%,17% 40%,22% 76%,27% 30%,31% 58%,36% 44%,41% 80%,45% 38%,50% 66%,55% 26%,59% 60%,64% 42%,69% 78%,73% 36%,78% 64%,83% 32%,87% 70%,92% 44%,96% 68%,100% 40%,100% 100%);z-index:4;pointer-events:none}
+.nav-link{position:relative;text-decoration:none;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:12px 0;display:inline-block}
+.nav-link::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:3px;background:var(--accent);transform:scaleX(0) skewX(-20deg);transform-origin:left;transition:transform .3s cubic-bezier(.7,0,.2,1)}
+.nav-link:hover::after{transform:scaleX(1) skewX(-20deg)}
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 28px;font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:transform .15s,background-color .2s,color .2s,box-shadow .15s}
+.btn svg{transition:transform .25s}
+.btn:hover svg{transform:translateX(6px)}
+.btn-primary{background:var(--accent);color:#0E0E0E;box-shadow:6px 6px 0 #F2F0EC}
+.btn-primary:hover{transform:translate(3px,3px);box-shadow:3px 3px 0 #F2F0EC}
+.btn-ghost{border:2px solid #F2F0EC;color:#F2F0EC}
+.btn-ghost:hover{background:#F2F0EC;color:#0E0E0E}
+.btn-ink{background:#F2F0EC;color:#0E0E0E}
+.btn-ink:hover{background:var(--accent)}
+.btn-black{background:#0E0E0E;color:#F2F0EC}
+.btn-black:hover{background:#F2F0EC;color:#0E0E0E}
+.hero-bg{filter:grayscale(1) contrast(1.35) brightness(.8)}
+.line{display:block;overflow:hidden;padding-bottom:.04em}
+.line>span{display:block}
+.tape{display:inline-block;background:rgba(242,240,236,.9);color:#111111;font-size:15px;padding:7px 16px;clip-path:polygon(2% 0,98% 6%,100% 48%,97% 100%,3% 94%,0 52%)}
+.tape-piece{position:absolute;width:130px;height:36px;background:rgba(242,240,236,.78);z-index:3;clip-path:polygon(3% 0,97% 8%,100% 50%,96% 100%,4% 92%,0 46%)}
+.stamp{position:absolute;right:-6px;top:-8px;transform:rotate(-12deg);border:4px double var(--accent);color:var(--accent);font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:.08em;padding:4px 10px;text-transform:uppercase;background:rgba(14,14,14,.6)}
+.photo-bw{filter:grayscale(1) contrast(1.3)}
+.yr{color:transparent;-webkit-text-stroke:1.5px #F2F0EC;transition:color .3s}
+.tl li:hover .yr{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
+.shot-img{background-size:cover;background-position:center;filter:grayscale(1) contrast(1.25);transition:filter .3s,transform .6s cubic-bezier(.2,.7,.2,1)}
+.p-live1{background-image:url(/_blob/458c65055f131fa6d16b072de120c486)}
+.p-live2{background-image:url(/_blob/e08956287b6730773691c32920e1209e)}
+.shot-img::before,.shot-img::after{content:"";position:absolute;inset:0;background:inherit;opacity:0;pointer-events:none}
+.shot-img::before{filter:sepia(1) saturate(7) hue-rotate(-18deg) brightness(1.05);mix-blend-mode:screen}
+.shot-img::after{filter:invert(1) contrast(1.4);mix-blend-mode:difference}
+.flash{position:absolute;inset:0;background:#FFFFFF;opacity:0;pointer-events:none}
+.curtain{position:absolute;inset:0;background:#0E0E0E;transform:scaleX(0);transform-origin:right;pointer-events:none}
+.shot:hover .shot-img{filter:grayscale(1) contrast(1.8);transform:scale(1.06) rotate(-.6deg)}
+.shot:hover .shot-img::before{opacity:.95;animation:iw-slice .45s steps(1) infinite}
+.shot:hover .shot-img::after{opacity:.6;animation:iw-slice .45s .12s steps(1) infinite reverse}
+.shot:hover .flash{animation:iw-flash .5s ease-out}
+.ticket{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+.ticket:nth-child(odd){transform:rotate(-.5deg)}
+.ticket:nth-child(even){transform:rotate(.5deg)}
+.ticket:hover{transform:rotate(0) translateY(-6px);box-shadow:0 18px 0 -6px var(--accent)}
+.notch{position:absolute;left:186px;width:28px;height:28px;border-radius:50%;background:#F2F0EC}
+.social a{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border:2px solid #3A3A3A;color:#F2F0EC;transition:border-color .2s,color .2s,transform .2s}
+.social a:hover{border-color:var(--accent);color:var(--accent);transform:rotate(-8deg) scale(1.08)}
+.mail{text-decoration:none;background:linear-gradient(var(--accent),var(--accent)) left bottom/100% 4px no-repeat;padding-bottom:6px;transition:background-size .3s}
+.mail:hover{background-size:100% 100%;color:#0E0E0E}
+@keyframes iw-grain{0%{transform:translate(0,0)}20%{transform:translate(-5%,3%)}40%{transform:translate(4%,-6%)}60%{transform:translate(-3%,7%)}80%{transform:translate(6%,2%)}100%{transform:translate(-2%,-4%)}}
+@keyframes iw-flicker{0%,100%{opacity:1}8%{opacity:.35}9%{opacity:1}42%{opacity:.85}43%{opacity:.2}45%{opacity:.95}70%{opacity:1}71%{opacity:.5}72%{opacity:1}}
+@keyframes iw-rise{from{transform:translateY(105%) skewY(6deg)}to{transform:none}}
+@keyframes iw-fade{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes iw-shake{0%,90%,100%{transform:none}91%{transform:translate(-3px,1px) rotate(-.4deg)}92%{transform:translate(4px,-2px) rotate(.3deg)}93%{transform:translate(-2px,2px)}94%{transform:translate(3px,0) rotate(-.2deg)}95%{transform:none}}
+@keyframes iw-glitch{0%,86%,100%{text-shadow:none}88%{text-shadow:7px 0 var(--accent),-7px 0 #6E6E6E}90%{text-shadow:-9px 0 var(--accent),5px 0 #F2F0EC}92%{text-shadow:4px 0 var(--accent)}94%{text-shadow:none}}
+@keyframes iw-slice{0%{clip-path:inset(8% 0 72% 0);transform:translateX(-14px)}20%{clip-path:inset(55% 0 22% 0);transform:translateX(12px)}40%{clip-path:inset(30% 0 52% 0);transform:translateX(-8px)}60%{clip-path:inset(78% 0 6% 0);transform:translateX(16px)}80%{clip-path:inset(0 0 86% 0);transform:translateX(-10px)}100%{clip-path:inset(44% 0 40% 0);transform:translateX(6px)}}
+@keyframes iw-autoglitch{0%,92%,100%{opacity:0;clip-path:inset(0);transform:none}93%{opacity:.95;clip-path:inset(12% 0 64% 0);transform:translateX(-16px)}95%{opacity:.95;clip-path:inset(58% 0 18% 0);transform:translateX(14px)}97%{opacity:.95;clip-path:inset(34% 0 46% 0);transform:translateX(-8px)}}
+@keyframes iw-flash{0%{opacity:.9}100%{opacity:0}}
+@keyframes iw-curtain{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+@keyframes iw-parallax{from{scale:1.25;translate:0 -6%}to{scale:1;translate:0 6%}}
+@keyframes iw-drift{from{transform:translateX(18%)}to{transform:translateX(-22%)}}
+@keyframes iw-reveal{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+@keyframes iw-slide{from{transform:translateX(-12%) rotate(-3deg);opacity:.2}to{transform:none;opacity:1}}
+@keyframes iw-fill{from{color:transparent}to{color:var(--accent);-webkit-text-stroke-color:var(--accent)}}
+@keyframes iw-stamp{0%{transform:rotate(-12deg) scale(2.4);opacity:0}60%{transform:rotate(-12deg) scale(.92);opacity:1}100%{transform:rotate(-12deg) scale(1);opacity:1}}
+@keyframes iw-zoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+[data-anim="on"] .grain{animation:iw-grain .7s steps(5) infinite}
+[data-anim="on"] .stage-light{animation:iw-flicker 4.5s infinite}
+[data-anim="on"] .hero-bg{animation:iw-zoom 2.4s cubic-bezier(.2,.7,.2,1) both}
+[data-anim="on"] .line>span{animation:iw-rise 1s cubic-bezier(.7,0,.2,1) both}
+[data-anim="on"] .l2>span{animation:iw-rise 1s .12s cubic-bezier(.7,0,.2,1) both}
+[data-anim="on"] .hero-title{animation:iw-shake 5s 1.8s infinite,iw-glitch 5s 1.8s infinite}
+[data-anim="on"] .rise{animation:iw-fade .9s .6s both}
+[data-anim="on"] .rise.d2{animation-delay:.8s}
+[data-anim="on"] .rise.d3{animation-delay:1s}
+[data-anim="on"] .shot .shot-img::before{animation:iw-autoglitch 6s infinite}
+[data-anim="on"] .shot-b .shot-img::before{animation-delay:3s}
+[data-anim="on"] .shot:hover .shot-img::before{animation:iw-slice .45s steps(1) infinite}
+@supports (animation-timeline: view()){
+[data-anim="on"] .reveal{animation:iw-reveal linear both;animation-timeline:view();animation-range:entry 0% cover 25%}
+[data-anim="on"] .reveal-x{animation:iw-slide linear both;animation-timeline:view();animation-range:entry 0% cover 35%}
+[data-anim="on"] .yr{animation:iw-fill linear both;animation-timeline:view();animation-range:cover 35% cover 55%}
+[data-anim="on"] .stamp{animation:iw-stamp linear both;animation-timeline:view();animation-range:entry 60% cover 40%}
+[data-anim="on"] .curtain{animation:iw-curtain linear both;animation-timeline:view();animation-range:entry 10% cover 45%}
+[data-anim="on"] .shot-img{animation:iw-parallax linear both;animation-timeline:view();animation-range:cover}
+[data-anim="on"] .bg-word{animation:iw-drift linear both;animation-timeline:view();animation-range:cover}
+}
+[data-anim="off"] *,[data-anim="off"] *::before,[data-anim="off"] *::after{animation:none !important;transition:none !important}
+@media (prefers-reduced-motion: reduce){.iw *,.iw *::before,.iw *::after{animation:none !important;transition:none !important}}
+@media (max-width: 860px){
+.wrap{padding-left:20px !important;padding-right:20px !important}
+.g{grid-template-columns:minmax(0,1fr) !important}
+.g>*{grid-column:auto !important}
+.hero-pad{padding-top:200px !important}
+.shot-b{margin-top:0 !important}
+.ticket{grid-template-columns:minmax(0,1fr) !important}
+.ticket .stub{border-right:0 !important;border-bottom:2px dashed currentColor;padding-bottom:20px}
+.notch{display:none}
+}
+</style>
+</helmet>
+<div class="iw" data-anim="{{anim}}" style="--accent: {{accent}}; position: relative; background: #0E0E0E; color: #F2F0EC; font-family: 'Archivo', system-ui, sans-serif; overflow: hidden;">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header style="position: absolute; top: 0; left: 0; right: 0; z-index: 10;">
+<div class="wrap" style="max-width: 1440px; margin: 0 auto; padding: 24px 64px; display: flex; flex-wrap: wrap; gap: 8px 40px; align-items: center; justify-content: space-between;">
+<a href="#inicio" style="font-family: 'Archivo Black', sans-serif; font-size: 20px; letter-spacing: .08em; text-transform: uppercase; color: #F2F0EC; text-decoration: none; padding: 12px 0;">Iron Wolf</a>
+<nav aria-label="Navegación principal">
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 32px;">
+<li><a class="nav-link" href="#sobre-mi">Sobre mí</a></li>
+<li><a class="nav-link" href="#trayectoria">Trayectoria</a></li>
+<li><a class="nav-link" href="#presentaciones">Próximas presentaciones</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<main id="contenido">
+
+<section id="inicio" aria-labelledby="hero-title" style="position: relative; min-height: 58rem; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: #0E0E0E;">
+<img class="hero-bg" src="/_blob/2799d71eef9b6ce33ff874e0fd9f622f" alt="Iron Wolf a contraluz tocando la guitarra entre el humo del escenario" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 28%;">
+<div aria-hidden="true" style="position: absolute; inset: 0; background: var(--accent); mix-blend-mode: multiply; opacity: .45;"></div>
+<div class="stage-light" aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(ellipse 45% 38% at 60% 16%, rgba(255, 226, 190, .42), rgba(255, 226, 190, 0) 70%); mix-blend-mode: screen;"></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14, 14, 14, .55) 0%, rgba(14, 14, 14, .1) 30%, rgba(14, 14, 14, .75) 72%, #0E0E0E 100%);"></div>
+<div class="wrap g hero-pad" style="position: relative; z-index: 2; max-width: 1440px; width: 100%; margin: 0 auto; padding: 160px 64px 110px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 40px; align-items: end;">
+<div style="grid-column: span 12;">
+<p class="rise typew" style="margin: 0 0 20px; font-size: 18px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent);">Rock · Madrid</p>
+<h1 id="hero-title" class="hero-title" style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(4.5rem, 15vw, 15rem); line-height: .82; letter-spacing: -.03em; text-transform: uppercase; transform: rotate(-2deg); transform-origin: left bottom;"><span class="line l1"><span class="distress-d">Iron</span></span><span class="line l2"><span class="distress-d">Wolf</span></span></h1>
+</div>
+<p class="rise d2" style="grid-column: span 6; margin: 0; font-size: clamp(1.4rem, 2.4vw, 2.1rem); line-height: 1.2; font-weight: 700; max-width: 22ch;">El rock no ha muerto. <span style="color: var(--accent);">Aquí sigue aullando.</span></p>
+<div class="rise d3" style="grid-column: 7 / span 6; display: flex; flex-wrap: wrap; gap: 20px; justify-content: flex-end;">
+<a class="btn btn-primary" href="#presentaciones">Ver próximos conciertos <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+<a class="btn btn-ghost" href="#sobre-mi">Conóceme</a>
+</div>
+</div>
+<p class="typew" style="position: absolute; right: 20px; bottom: 64px; z-index: 3; margin: 0; font-size: 12px; color: #BDBAB4; writing-mode: vertical-rl;">Foto: Daniel Sturgess / Unsplash</p>
+<div class="tear" aria-hidden="true" style="--tear: #F2F0EC;"></div>
+</section>
+
+<section id="sobre-mi" aria-labelledby="sobre-title" style="position: relative; background: #F2F0EC; color: #111111; min-height: 56rem;">
+<div class="wrap" style="max-width: 1440px; margin: 0 auto; padding: 112px 64px 140px;">
+<p aria-hidden="true" class="typew" style="margin: 0 0 8px; font-size: 18px; color: var(--accent-ink);">01 /</p>
+<h2 id="sobre-title" class="reveal-x" style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(3.25rem, 8vw, 7.5rem); line-height: .88; letter-spacing: -.02em; text-transform: uppercase;"><span class="distress-l">Sobre mí</span></h2>
+<div class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 48px; margin-top: 64px; align-items: start;">
+<figure class="reveal" style="grid-column: span 5; margin: 0; position: relative; transform: rotate(-2.5deg); background: #FFFFFF; padding: 14px 14px 56px; box-shadow: 0 20px 40px -18px rgba(0, 0, 0, .45);">
+<span class="tape-piece" aria-hidden="true" style="left: -30px; top: 6px; transform: rotate(-38deg);"></span>
+<span class="tape-piece" aria-hidden="true" style="right: -30px; top: 6px; transform: rotate(36deg);"></span>
+<img class="photo-bw" src="/_blob/fd51dfa4f73154a40b96ac62de4f285a" alt="Iron Wolf con la melena al aire tocando la guitarra eléctrica" style="display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 40% center;">
+<figcaption class="typew" style="position: absolute; left: 18px; right: 18px; bottom: 16px; display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: #3D3B38;"><span>Vallecas, Madrid</span><span>Foto: Hector Bermudez / Unsplash</span></figcaption>
+</figure>
+<div class="reveal" style="grid-column: 7 / span 6; display: flex; flex-direction: column; gap: 24px; font-size: 20px; line-height: 1.6;">
+<p style="margin: 0;">Me crié en Vallecas. Con 14 años cogí la guitarra de mi padre en un garaje del barrio y ya no la solté. Aprendí a base de poner discos una y otra vez y de tocar hasta que se quejaban los vecinos.</p>
+<p style="margin: 0;">En 2022 nació Iron Wolf. Empecé tocando en los garitos de Malasaña, noche tras noche, para quien quisiera escuchar. Lo mío es el rock de siempre: los riffs directos de AC/DC, la épica de Led Zeppelin y la actitud de Guns N' Roses. Canto en inglés, toco con las guitarras al frente y hago estribillos para cantarlos a gritos.</p>
+<p style="margin: 0;">Hoy salgo al escenario con mi banda: guitarra solista, bajo y batería. Y una sola regla: <strong style="background: #111111; color: #F2F0EC; padding: 0 6px;">que nadie se quede quieto.</strong></p>
+<dl class="g" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 24px 0 0; padding-top: 32px; border-top: 4px solid #111111;">
+<div><dt class="typew" style="font-size: 15px; text-transform: uppercase; color: #55534F;">Desde</dt><dd style="margin: 8px 0 0; font-family: 'Archivo Black', sans-serif; font-size: 30px; line-height: 1.1;">2022</dd></div>
+<div><dt class="typew" style="font-size: 15px; text-transform: uppercase; color: #55534F;">De</dt><dd style="margin: 8px 0 0; font-family: 'Archivo Black', sans-serif; font-size: 30px; line-height: 1.1;">Vallecas, Madrid</dd></div>
+<div><dt class="typew" style="font-size: 15px; text-transform: uppercase; color: #55534F;">Suena a</dt><dd style="margin: 8px 0 0; font-size: 18px; font-weight: 700; line-height: 1.35;">AC/DC · Led Zeppelin · Guns N' Roses</dd></div>
+</dl>
+</div>
+</div>
+</div>
+<div class="tear" aria-hidden="true" style="--tear: {{accent}};"></div>
+</section>
+
+<section id="galeria" aria-labelledby="galeria-title" style="position: relative; background: var(--accent); color: #0E0E0E; min-height: 56rem; overflow: hidden;">
+<p class="bg-word" aria-hidden="true" style="position: absolute; right: -2vw; top: 64px; margin: 0; font-family: 'Archivo Black', sans-serif; font-size: 26vw; line-height: .8; text-transform: uppercase; color: transparent; -webkit-text-stroke: 2px rgba(14, 14, 14, .35); white-space: nowrap; pointer-events: none; z-index: 0;">Live</p>
+<div class="wrap" style="position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; padding: 112px 64px 150px;">
+<p aria-hidden="true" class="typew" style="margin: 0 0 8px; font-size: 18px;">02 /</p>
+<h2 id="galeria-title" class="reveal-x" style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(3.25rem, 8vw, 7.5rem); line-height: .88; letter-spacing: -.02em; text-transform: uppercase;"><span class="distress-l" style="--ink: #0E0E0E;">Galería</span></h2>
+<div class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px 32px; margin-top: 64px; align-items: start;">
+<figure class="shot" style="grid-column: span 6; margin: 0;">
+<div style="position: relative; overflow: hidden; aspect-ratio: 4 / 5; background: #0E0E0E;">
+<div class="shot-img p-live2" role="img" aria-label="Iron Wolf en silueta tocando la guitarra bajo un foco" style="position: absolute; inset: 0;"></div>
+<span class="flash" aria-hidden="true"></span>
+<span class="curtain" aria-hidden="true"></span>
+</div>
+<figcaption style="display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 18px;"><span class="tape typew" style="transform: rotate(-2deg);">01 · En directo</span><span class="typew" style="font-size: 13px;">Foto: Diane Picchiottino / Unsplash</span></figcaption>
+</figure>
+<figure class="shot shot-b" style="grid-column: 7 / span 6; margin: 220px 0 0;">
+<div style="position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: #0E0E0E;">
+<div class="shot-img p-live1" role="img" aria-label="Iron Wolf de rodillas con la guitarra bajo los focos del escenario" style="position: absolute; inset: 0;"></div>
+<span class="flash" aria-hidden="true"></span>
+<span class="curtain" aria-hidden="true"></span>
+</div>
+<figcaption style="display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 18px;"><span class="tape typew" style="transform: rotate(1.5deg);">02 · Sobre las tablas</span><span class="typew" style="font-size: 13px;">Foto: Greyson Joralemon / Unsplash</span></figcaption>
+</figure>
+</div>
+</div>
+<div class="tear" aria-hidden="true" style="--tear: #0E0E0E;"></div>
+</section>
+
+<section id="trayectoria" aria-labelledby="tray-title" style="position: relative; background: #0E0E0E; min-height: 56rem;">
+<div class="wrap" style="max-width: 1440px; margin: 0 auto; padding: 112px 64px 140px;">
+<p aria-hidden="true" class="typew" style="margin: 0 0 8px; font-size: 18px; color: var(--accent);">03 /</p>
+<div class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px 40px; align-items: end;">
+<h2 id="tray-title" class="reveal-x" style="grid-column: span 8; margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(3.25rem, 8vw, 7.5rem); line-height: .88; letter-spacing: -.02em; text-transform: uppercase;"><span class="distress-d">Trayectoria</span></h2>
+<p class="typew" style="grid-column: span 4; margin: 0; font-size: 20px; line-height: 1.5; color: #BDBAB4;">Del garaje a cabeza de cartel. Así ha sido el camino.</p>
+</div>
+<ol class="g tl" style="list-style: none; margin: 72px 0 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 40px 24px;">
+<li class="reveal" style="position: relative; display: flex; flex-direction: column; gap: 12px; padding-top: 28px; border-top: 3px solid #2E2E2E;"><span aria-hidden="true" style="position: absolute; top: -9px; left: 0; width: 14px; height: 14px; background: var(--accent); transform: rotate(45deg);"></span><time class="yr" datetime="2015" style="font-family: 'Archivo Black', sans-serif; font-size: 56px; line-height: 1;">2015</time><h3 style="margin: 0; font-size: 20px; font-weight: 700; line-height: 1.2;">El garaje</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: #BDBAB4;">Con 14 años empieza a tocar la guitarra de su padre en un garaje de Vallecas.</p></li>
+<li class="reveal" style="position: relative; display: flex; flex-direction: column; gap: 12px; padding-top: 28px; border-top: 3px solid #2E2E2E;"><span aria-hidden="true" style="position: absolute; top: -9px; left: 0; width: 14px; height: 14px; background: var(--accent); transform: rotate(45deg);"></span><time class="yr" datetime="2022" style="font-family: 'Archivo Black', sans-serif; font-size: 56px; line-height: 1;">2022</time><h3 style="margin: 0; font-size: 20px; font-weight: 700; line-height: 1.2;">Nace Iron Wolf</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: #BDBAB4;">Primeros conciertos en los garitos de Malasaña y primer single: <cite>Silver Fang</cite>.</p></li>
+<li class="reveal" style="position: relative; display: flex; flex-direction: column; gap: 12px; padding-top: 28px; border-top: 3px solid #2E2E2E;"><span aria-hidden="true" style="position: absolute; top: -9px; left: 0; width: 14px; height: 14px; background: var(--accent); transform: rotate(45deg);"></span><time class="yr" datetime="2023" style="font-family: 'Archivo Black', sans-serif; font-size: 56px; line-height: 1;">2023</time><h3 style="margin: 0; font-size: 20px; font-weight: 700; line-height: 1.2;">Se da a conocer</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: #BDBAB4;">Salen <cite>Midnight Engine</cite> y <cite>Rust</cite>, y forma su banda de directo.</p></li>
+<li class="reveal" style="position: relative; display: flex; flex-direction: column; gap: 12px; padding-top: 28px; border-top: 3px solid #2E2E2E;"><span aria-hidden="true" style="position: absolute; top: -9px; left: 0; width: 14px; height: 14px; background: var(--accent); transform: rotate(45deg);"></span><span class="stamp" aria-hidden="true">Sold out</span><time class="yr" datetime="2024" style="font-family: 'Archivo Black', sans-serif; font-size: 56px; line-height: 1;">2024</time><h3 style="margin: 0; font-size: 20px; font-weight: 700; line-height: 1.2;"><cite style="font-style: normal;">Howl</cite> y el primer sold out</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: #BDBAB4;">Presenta su EP <cite>Howl</cite> en La Riviera (Madrid) y cuelga el cartel de entradas agotadas.</p></li>
+<li class="reveal" style="position: relative; display: flex; flex-direction: column; gap: 12px; padding-top: 28px; border-top: 3px solid #2E2E2E;"><span aria-hidden="true" style="position: absolute; top: -9px; left: 0; width: 14px; height: 14px; background: var(--accent); transform: rotate(45deg);"></span><time class="yr" datetime="2025" style="font-family: 'Archivo Black', sans-serif; font-size: 56px; line-height: 1;">2025</time><h3 style="margin: 0; font-size: 20px; font-weight: 700; line-height: 1.2;">Telonero de The Black Highway</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: #BDBAB4;">Abre en Madrid el concierto de la leyenda estadounidense del rock. Esa noche le abre las puertas de los grandes escenarios.</p></li>
+<li class="reveal" style="position: relative; display: flex; flex-direction: column; gap: 12px; padding-top: 28px; border-top: 3px solid #2E2E2E;"><span aria-hidden="true" style="position: absolute; top: -9px; left: 0; width: 14px; height: 14px; background: var(--accent); transform: rotate(45deg);"></span><time class="yr" datetime="2026" style="font-family: 'Archivo Black', sans-serif; font-size: 56px; line-height: 1;">2026</time><h3 style="margin: 0; font-size: 20px; font-weight: 700; line-height: 1.2;">Cabeza de cartel</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: #BDBAB4;">Se anuncia como cabeza de cartel del Meseta Rock Festival 2027.</p></li>
+</ol>
+<h3 style="margin: 88px 0 28px; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 30px; text-transform: uppercase;"><span class="distress-d">Discografía</span></h3>
+<ul class="g" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px;">
+<li class="reveal" style="display: flex; gap: 18px; align-items: center;"><div aria-hidden="true" style="flex: 0 0 108px; height: 108px; background: var(--accent); color: #0E0E0E; display: flex; align-items: flex-end; padding: 10px; font-family: 'Archivo Black', sans-serif; font-size: 26px; text-transform: uppercase; line-height: 1; transform: rotate(-3deg); box-shadow: 6px 6px 0 #F2F0EC;">Howl</div><div><p class="typew" style="margin: 0; font-size: 14px; text-transform: uppercase; color: #BDBAB4;">EP · 2024</p><p style="margin: 6px 0 0; font-family: 'Archivo Black', sans-serif; font-size: 22px;"><cite style="font-style: normal;">Howl</cite></p></div></li>
+<li class="reveal" style="display: flex; gap: 18px; align-items: center;"><div aria-hidden="true" style="flex: 0 0 108px; height: 108px; background: #1C1C1C; border: 2px solid #3A3A3A; color: #8C8983; display: flex; align-items: flex-end; padding: 10px; font-family: 'Archivo Black', sans-serif; font-size: 16px; text-transform: uppercase; line-height: 1; transform: rotate(2deg);">Rust</div><div><p class="typew" style="margin: 0; font-size: 14px; text-transform: uppercase; color: #BDBAB4;">Single · 2023</p><p style="margin: 6px 0 0; font-family: 'Archivo Black', sans-serif; font-size: 22px;"><cite style="font-style: normal;">Rust</cite></p></div></li>
+<li class="reveal" style="display: flex; gap: 18px; align-items: center;"><div aria-hidden="true" style="flex: 0 0 108px; height: 108px; background: #1C1C1C; border: 2px solid #3A3A3A; color: #8C8983; display: flex; align-items: flex-end; padding: 10px; font-family: 'Archivo Black', sans-serif; font-size: 16px; text-transform: uppercase; line-height: 1; transform: rotate(-2deg);">Midnight Engine</div><div><p class="typew" style="margin: 0; font-size: 14px; text-transform: uppercase; color: #BDBAB4;">Single · 2023</p><p style="margin: 6px 0 0; font-family: 'Archivo Black', sans-serif; font-size: 22px;"><cite style="font-style: normal;">Midnight Engine</cite></p></div></li>
+<li class="reveal" style="display: flex; gap: 18px; align-items: center;"><div aria-hidden="true" style="flex: 0 0 108px; height: 108px; background: #1C1C1C; border: 2px solid #3A3A3A; color: #8C8983; display: flex; align-items: flex-end; padding: 10px; font-family: 'Archivo Black', sans-serif; font-size: 16px; text-transform: uppercase; line-height: 1; transform: rotate(3deg);">Silver Fang</div><div><p class="typew" style="margin: 0; font-size: 14px; text-transform: uppercase; color: #BDBAB4;">Single · 2022</p><p style="margin: 6px 0 0; font-family: 'Archivo Black', sans-serif; font-size: 22px;"><cite style="font-style: normal;">Silver Fang</cite></p></div></li>
+</ul>
+</div>
+<div class="tear" aria-hidden="true" style="--tear: #F2F0EC;"></div>
+</section>
+
+<section id="presentaciones" aria-labelledby="gira-title" style="position: relative; background: #F2F0EC; color: #111111; min-height: 56rem;">
+<div class="wrap" style="max-width: 1440px; margin: 0 auto; padding: 112px 64px 140px;">
+<p aria-hidden="true" class="typew" style="margin: 0 0 8px; font-size: 18px; color: var(--accent-ink);">04 /</p>
+<div class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px 40px; align-items: end;">
+<h2 id="gira-title" class="reveal-x" style="grid-column: span 8; margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(3rem, 7vw, 6.5rem); line-height: .88; letter-spacing: -.02em; text-transform: uppercase;"><span class="distress-l">Próximas presentaciones</span></h2>
+<p class="typew" style="grid-column: span 4; margin: 0; font-size: 20px; line-height: 1.5; color: #3D3B38;">Gira 2027. Cuatro noches para subir el volumen. La última, en lo más alto del cartel.</p>
+</div>
+<ol style="list-style: none; margin: 64px 0 0; padding: 0; display: flex; flex-direction: column; gap: 28px;">
+<li class="ticket reveal" style="position: relative; display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 0; align-items: stretch; background: #161616; color: #F2F0EC;">
+<span class="notch" aria-hidden="true" style="top: -14px;"></span><span class="notch" aria-hidden="true" style="bottom: -14px;"></span>
+<time class="stub" datetime="2027-04-17" style="display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 28px 32px; border-right: 2px dashed #4A4A4A;"><span style="font-family: 'Archivo Black', sans-serif; font-size: 68px; line-height: .9;">17</span><span class="typew" style="font-size: 15px; text-transform: uppercase; color: #BDBAB4;">Sáb · Abr 2027</span></time>
+<div style="display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 28px 36px;"><p class="typew" style="margin: 0; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: #8C8983;">Iron Wolf · Gira 2027 · Admite uno</p><h3 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 44px; line-height: 1; text-transform: uppercase;">Barcelona</h3><p style="margin: 0; font-size: 18px; color: #BDBAB4;">Razzmatazz</p></div>
+<div style="display: flex; align-items: center; padding: 28px 32px;"><a class="btn btn-ink" href="#" aria-label="Entradas para Barcelona, Razzmatazz, 17 de abril de 2027">Entradas <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15"></path><path d="M13 6l6 6-6 6"></path></svg></a></div>
+</li>
+<li class="ticket reveal" style="position: relative; display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 0; align-items: stretch; background: #161616; color: #F2F0EC;">
+<span class="notch" aria-hidden="true" style="top: -14px;"></span><span class="notch" aria-hidden="true" style="bottom: -14px;"></span>
+<time class="stub" datetime="2027-05-15" style="display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 28px 32px; border-right: 2px dashed #4A4A4A;"><span style="font-family: 'Archivo Black', sans-serif; font-size: 68px; line-height: .9;">15</span><span class="typew" style="font-size: 15px; text-transform: uppercase; color: #BDBAB4;">Sáb · May 2027</span></time>
+<div style="display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 28px 36px;"><p class="typew" style="margin: 0; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: #8C8983;">Iron Wolf · Gira 2027 · Admite uno</p><h3 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 44px; line-height: 1; text-transform: uppercase;">Valencia</h3><p style="margin: 0; font-size: 18px; color: #BDBAB4;">Moon</p></div>
+<div style="display: flex; align-items: center; padding: 28px 32px;"><a class="btn btn-ink" href="#" aria-label="Entradas para Valencia, Moon, 15 de mayo de 2027">Entradas <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15"></path><path d="M13 6l6 6-6 6"></path></svg></a></div>
+</li>
+<li class="ticket reveal" style="position: relative; display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 0; align-items: stretch; background: #161616; color: #F2F0EC;">
+<span class="notch" aria-hidden="true" style="top: -14px;"></span><span class="notch" aria-hidden="true" style="bottom: -14px;"></span>
+<time class="stub" datetime="2027-06-12" style="display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 28px 32px; border-right: 2px dashed #4A4A4A;"><span style="font-family: 'Archivo Black', sans-serif; font-size: 68px; line-height: .9;">12</span><span class="typew" style="font-size: 15px; text-transform: uppercase; color: #BDBAB4;">Sáb · Jun 2027</span></time>
+<div style="display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 28px 36px;"><p class="typew" style="margin: 0; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: #8C8983;">Iron Wolf · Gira 2027 · Admite uno</p><h3 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 44px; line-height: 1; text-transform: uppercase;">Bilbao</h3><p style="margin: 0; font-size: 18px; color: #BDBAB4;">Kafe Antzokia</p></div>
+<div style="display: flex; align-items: center; padding: 28px 32px;"><a class="btn btn-ink" href="#" aria-label="Entradas para Bilbao, Kafe Antzokia, 12 de junio de 2027">Entradas <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15"></path><path d="M13 6l6 6-6 6"></path></svg></a></div>
+</li>
+<li class="ticket reveal" style="position: relative; display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 0; align-items: stretch; background: var(--accent); color: #0E0E0E;">
+<span class="notch" aria-hidden="true" style="top: -14px;"></span><span class="notch" aria-hidden="true" style="bottom: -14px;"></span>
+<time class="stub" datetime="2027-07-10" style="display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 36px 32px; border-right: 2px dashed rgba(14, 14, 14, .5);"><span style="font-family: 'Archivo Black', sans-serif; font-size: 68px; line-height: .9;">10</span><span class="typew" style="font-size: 15px; text-transform: uppercase;">Sáb · Jul 2027</span></time>
+<div style="display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 36px 36px;"><p style="margin: 0;"><span class="tape typew" style="transform: rotate(-2deg); background: #0E0E0E; color: #F2F0EC;">Cabeza de cartel</span></p><h3 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 44px; line-height: 1; text-transform: uppercase;">Valladolid</h3><p style="margin: 0; font-size: 18px; font-weight: 700;">Meseta Rock Festival</p></div>
+<div style="display: flex; align-items: center; padding: 36px 32px;"><a class="btn btn-black" href="#" aria-label="Entradas para Valladolid, Meseta Rock Festival, 10 de julio de 2027">Entradas <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15"></path><path d="M13 6l6 6-6 6"></path></svg></a></div>
+</li>
+</ol>
+</div>
+<div class="tear" aria-hidden="true" style="--tear: #0E0E0E;"></div>
+</section>
+
+</main>
+
+<footer style="background: #0E0E0E; position: relative;">
+<div class="wrap" style="max-width: 1440px; margin: 0 auto; padding: 120px 64px 40px; position: relative; z-index: 1;">
+<h2 class="reveal-x" style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 5.75rem); line-height: .92; text-transform: uppercase; max-width: 16ch;"><span class="distress-d">¿Sala, festival o prensa?</span> <span style="color: var(--accent);">Hablemos.</span></h2>
+<div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between; margin-top: 56px;">
+<a class="mail" href="mailto:booking@ironwolf.example" style="font-size: clamp(1.25rem, 2.4vw, 2rem); font-weight: 700;">booking@ironwolf.example</a>
+<ul class="social" style="list-style: none; margin: 0; padding: 0; display: flex; gap: 12px;">
+<li><a href="#" aria-label="Iron Wolf en Instagram"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6"></circle></svg></a></li>
+<li><a href="#" aria-label="Iron Wolf en YouTube"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"></rect><path d="M10 9l5 3-5 3z"></path></svg></a></li>
+<li><a href="#" aria-label="Iron Wolf en Spotify"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7 9.5c3.5-1 7-.6 10 1"></path><path d="M7.5 12.8c3-.8 5.8-.4 8.3.9"></path><path d="M8 15.8c2.3-.6 4.5-.3 6.4.7"></path></svg></a></li>
+</ul>
+</div>
+<p class="typew" style="margin: 72px 0 0; padding-top: 24px; border-top: 1px solid #2E2E2E; font-size: 14px; color: #8C8983;">© 2026 Iron Wolf. Hecho con ruido en Madrid.</p>
+</div>
+<p aria-hidden="true" style="margin: 0; padding: 0 0 8px; text-align: center; font-family: 'Archivo Black', sans-serif; font-size: 17vw; line-height: .8; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1.5px #2A2A2A; white-space: nowrap;">Iron Wolf</p>
+</footer>
+
+<div class="grain" aria-hidden="true"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#E0692F","options":["#E0692F","#E8833A","#D9542B"]},"animaciones":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":6000}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+accent: this.props.accent ?? '#E0692F',
+anim: this.props.animaciones === false ? 'off' : 'on'
+};
+}
+}
+</script>
+</body>
+</html>

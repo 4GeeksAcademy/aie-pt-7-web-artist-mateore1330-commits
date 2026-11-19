@@ -1,0 +1,8 @@
+#!/bin/sh
+# Bloquea el commit si gitleaks encuentra un posible secreto en lo preparado.
+gitleaks git --pre-commit --staged --redact --no-banner
+status=$?
+if [ $status -ne 0 ]; then
+  echo "gitleaks: posible secreto detectado. Commit cancelado."
+  exit $status
+fi
