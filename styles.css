@@ -39,6 +39,8 @@
   --section-pad-top: 112px;
   --section-pad-bottom: 140px;
   --tear-height: 44px;
+  /* Alto de la cabecera fija: 24px + fila de 54px + 24px */
+  --header-height: 102px;
   /* Dientes del borde rasgado (DESIGN.md §5.3) */
   --tear-shape: polygon(0 100%, 0 55%, 4% 72%, 8% 34%, 13% 62%, 17% 40%, 22% 76%, 27% 30%, 31% 58%, 36% 44%, 41% 80%, 45% 38%, 50% 66%, 55% 26%, 59% 60%, 64% 42%, 69% 78%, 73% 36%, 78% 64%, 83% 32%, 87% 70%, 92% 44%, 96% 68%, 100% 40%, 100% 100%);
 
@@ -60,6 +62,14 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+/* Desplazamiento suave en los enlaces internos, salvo si se ha pedido
+   reducir el movimiento (DESIGN.md §7 y §12) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -129,9 +139,9 @@ address {
 .section {
   position: relative;
   min-height: 100svh;
-  /* La cabecera no es fija, así que no tapa nada al saltar a una sección:
-     el título ya queda separado por el relleno superior de 112px. */
-  scroll-margin-top: 0;
+  /* La cabecera es fija: al saltar a una sección, el título queda debajo de
+     ella y no tapado */
+  scroll-margin-top: var(--header-height);
 }
 
 
@@ -599,6 +609,38 @@ address {
   transform: rotate(-8deg) scale(1.08);
 }
 
+/* Botón "Volver al inicio": cuadrado naranja fijo abajo a la derecha. Queda
+   por debajo de la cabecera, así que el menú abierto lo tapa. */
+.to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  /* Borde de tinta y sombra dura de papel: destaca sobre tinta, papel y
+     también sobre el naranja de la Galería */
+  border: 2px solid var(--color-ink);
+  background: var(--color-accent);
+  color: var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-paper);
+}
+
+.to-top:hover {
+  background: var(--color-paper);
+}
+
+/* Doble anillo de tinta y papel: se ve sobre cualquier fondo, también
+   sobre el naranja de la Galería */
+.to-top:focus-visible {
+  outline: 3px solid var(--color-paper);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--color-ink);
+}
+
 /* Email: subrayado naranja que rellena el fondo al pasar el ratón */
 .mail {
   padding-bottom: 6px;
@@ -617,13 +659,16 @@ address {
 
 /* 6. Secciones ============================================================ */
 
-/* Cabecera: encima de la portada, transparente */
+/* Cabecera fija (DESIGN.md §6). El fondo de tinta es la opción segura; si
+   el navegador admite las animaciones de scroll, el bloque 8 lo hace
+   transparente sobre la portada. */
 .site-header {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
   z-index: 10;
+  background-color: var(--color-ink);
 }
 
 .site-header__inner {
@@ -1326,6 +1371,11 @@ html:has(#menu:target) {
     column-gap: 40px;
   }
 
+  .to-top {
+    right: 32px;
+    bottom: 32px;
+  }
+
   /* Escritorio: el menú se ve siempre en línea y sin botones, aunque la
      dirección termine en #menu */
   .nav__toggle {
@@ -1511,5 +1561,53 @@ html:has(#menu:target) {
 
   .ticket__action {
     padding: 28px 32px;
+  }
+}
+
+
+/* 8. Animaciones ========================================================== */
+/* Adelantadas a la fase 4 a petición de Mateo: el fondo de la cabecera y la
+   aparición del botón "Volver al inicio", ligados al scroll (DESIGN.md §7).
+   Sin soporte, la cabecera es de tinta y el botón se ve siempre. El resto de
+   animaciones llega en la fase 5. */
+
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    animation: header-fill linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 120px;
+  }
+}
+
+@keyframes header-fill {
+  from {
+    background-color: transparent;
+  }
+
+  to {
+    background-color: var(--color-ink);
+  }
+}
+
+/* La portada mide 100svh: el botón aparece entre el 60 % y el 80 % de su
+   altura, cuando ya se está entrando en Sobre mí */
+@supports (animation-timeline: scroll()) {
+  .to-top {
+    animation: to-top-in linear both;
+    animation-timeline: scroll(root);
+    animation-range: 60svh 80svh;
+  }
+}
+
+/* Oculto (visibility: hidden) no se puede pulsar ni alcanzar con Tab */
+@keyframes to-top-in {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  to {
+    opacity: 1;
+    visibility: visible;
   }
 }
