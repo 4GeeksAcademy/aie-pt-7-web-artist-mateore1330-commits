@@ -1679,3 +1679,66 @@ html:has(#menu:target) {
 .to-top {
   transition: background-color 0.2s;
 }
+
+/* --- Al cargar (DESIGN.md §7). Fotogramas de la maqueta. ----------------- */
+
+/* Zoom de entrada de la foto de portada */
+.hero__photo {
+  animation: iw-zoom 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Subida del nombre por líneas, desde debajo de la máscara */
+.hero__line-inner {
+  animation: iw-rise 1s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+
+.hero__line + .hero__line .hero__line-inner {
+  animation-delay: 0.12s;
+}
+
+/* Aparición del antetítulo, el lema y los botones */
+.hero__kicker,
+.hero__tagline,
+.hero__actions {
+  animation: iw-fade 0.9s 0.6s both;
+}
+
+.hero__tagline {
+  animation-delay: 0.8s;
+}
+
+.hero__actions {
+  animation-delay: 1s;
+}
+
+@keyframes iw-zoom {
+  from {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes iw-rise {
+  from {
+    transform: translateY(105%) skewY(6deg);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes iw-fade {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
