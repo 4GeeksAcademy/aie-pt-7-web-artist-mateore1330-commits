@@ -1916,3 +1916,74 @@ html:has(#menu:target) {
     transform: translateX(-8px);
   }
 }
+
+/* --- Galería al pasar el ratón (DESIGN.md §7) ---------------------------- */
+
+/* La foto usa "transform" para el zoom con giro; la profundidad del scroll
+   usa "scale" y "translate", así que no se pisan */
+.shot__img {
+  transition: filter 0.3s, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.shot:hover .shot__img {
+  filter: grayscale(1) contrast(1.8);
+  transform: scale(1.06) rotate(-0.6deg);
+}
+
+/* Franjas cortadas continuas: la copia naranja y la copia en negativo */
+.shot:hover .shot__img::before {
+  opacity: 0.95;
+  animation: iw-slice 0.45s steps(1) infinite;
+}
+
+.shot:hover .shot__img::after {
+  opacity: 0.6;
+  animation: iw-slice 0.45s 0.12s steps(1) infinite reverse;
+}
+
+/* Flash blanco */
+.shot:hover .shot__flash {
+  animation: iw-flash 0.5s ease-out;
+}
+
+@keyframes iw-slice {
+  0% {
+    clip-path: inset(8% 0 72% 0);
+    transform: translateX(-14px);
+  }
+
+  20% {
+    clip-path: inset(55% 0 22% 0);
+    transform: translateX(12px);
+  }
+
+  40% {
+    clip-path: inset(30% 0 52% 0);
+    transform: translateX(-8px);
+  }
+
+  60% {
+    clip-path: inset(78% 0 6% 0);
+    transform: translateX(16px);
+  }
+
+  80% {
+    clip-path: inset(0 0 86% 0);
+    transform: translateX(-10px);
+  }
+
+  100% {
+    clip-path: inset(44% 0 40% 0);
+    transform: translateX(6px);
+  }
+}
+
+@keyframes iw-flash {
+  0% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
