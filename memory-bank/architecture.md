@@ -1,13 +1,13 @@
 ---
 name: architecture
 description: Estructura de archivos, las 6 partes de la página con su ID y fondo, los bloques de styles.css y cómo se usan texturas y fotos
-last_verified: 2026-11-19 (sobre el commit 748bb32, cierre de la fase 3)
+last_verified: 2026-11-19 (sobre el commit c3eaf17, cierre de la fase 4)
 ---
 
 # Arquitectura
 
-> Describe la estructura **prevista** por `PLAN.md` y `DESIGN.md`. A 19-11-2026 ya existen las
-> imágenes, el favicon e `index.html`; `styles.css` está vacío (ver [`current-state.md`](current-state.md)).
+> Describe la estructura **prevista** por `PLAN.md` y `DESIGN.md`. A 19-11-2026 existen las
+> imágenes, el favicon, `index.html` y `styles.css` (bloques 1 a 7; las animaciones llegan en la fase 5) (ver [`current-state.md`](current-state.md)).
 
 ## Estructura de archivos
 
@@ -22,7 +22,7 @@ last_verified: 2026-11-19 (sobre el commit 748bb32, cierre de la fase 3)
 │   │   ├── originals/          ← JPEG originales (se conservan para regenerar)
 │   │   └── CREDITS.md
 │   └── textures/               ← noise.svg, wear-dark.svg, wear-light.svg
-├── design/                     ← maqueta aprobada (solo referencia, no se publica)
+├── design/                     ← maqueta aprobada (solo referencia, no se publica) y capturas de cada fase (screenshots/)
 ├── BRIEFING.md, CONTENT.md, DESIGN.md, PLAN.md, plans/
 ├── AGENTS.md, CLAUDE.md, .agents/ (rules, skills), memory-bank/
 ├── .githooks/pre-commit        ← gitleaks
