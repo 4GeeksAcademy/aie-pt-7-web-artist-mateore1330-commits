@@ -190,7 +190,7 @@ address {
 /* Tinta gastada dentro de las letras (DESIGN.md §5.2). Dos capas de fondo:
    la textura encima y el color del texto debajo. Si la textura no carga, el
    título se ve en su color liso. El texto sigue siendo texto real. */
-.hero__line,
+.hero__line-inner,
 .career .section__title,
 .discography__title,
 .site-footer__title,
@@ -208,7 +208,7 @@ address {
 }
 
 /* Títulos claros sobre fondo oscuro: arañazos oscuros */
-.hero__line,
+.hero__line-inner,
 .career .section__title,
 .discography__title,
 .site-footer__title {
@@ -488,16 +488,19 @@ address {
   color: var(--color-paper);
 }
 
+/* Giro con la propiedad "rotate" (no "transform"), para que la animación de
+   aparición de la fase 5 no lo borre */
 .ticket:nth-child(odd) {
-  transform: rotate(-0.5deg);
+  rotate: -0.5deg;
 }
 
 .ticket:nth-child(even) {
-  transform: rotate(0.5deg);
+  rotate: 0.5deg;
 }
 
 .ticket:hover {
-  transform: rotate(0) translateY(-6px);
+  rotate: 0deg;
+  transform: translateY(-6px);
   box-shadow: 0 18px 0 -6px var(--color-accent);
 }
 
@@ -907,13 +910,22 @@ html:has(#menu:target) {
   line-height: 0.82;
   letter-spacing: -0.03em;
   text-transform: uppercase;
-  transform: rotate(-2deg);
+  /* "rotate" y no "transform": el temblor de la fase 5 anima "transform"
+     y, si no, borraría el giro */
+  rotate: -2deg;
   transform-origin: left bottom;
 }
 
 .hero__line {
   display: block;
+  /* Máscara para la subida del nombre (fase 5): la línea recorta lo que
+     sobresale y el span interior sube desde abajo */
+  overflow: hidden;
   padding-bottom: 0.04em;
+}
+
+.hero__line-inner {
+  display: block;
 }
 
 .hero__tagline {
