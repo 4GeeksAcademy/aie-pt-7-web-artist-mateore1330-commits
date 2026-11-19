@@ -2132,3 +2132,23 @@ html:has(#menu:target) {
     transform: translateX(-22%);
   }
 }
+
+
+/* 9. Movimiento reducido ================================================== */
+/* Si la persona pide reducir el movimiento, no se mueve nada (DESIGN.md §1 y
+   §7): se apagan todas las animaciones y transiciones, y cada elemento se ve
+   en su estado final (visible y quieto). Es el único sitio con !important
+   (CS-06). Excepción aprobada por Mateo: el fondo de la cabecera y la
+   aparición del botón "Volver al inicio" siguen, porque solo cambian el
+   color y la opacidad, no mueven nada, y sin ellas el botón taparía el texto
+   en móvil. El desplazamiento suave ya solo se activa sin esta preferencia
+   (bloque 2). */
+
+@media (prefers-reduced-motion: reduce) {
+  *:not(.site-header, .to-top),
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
